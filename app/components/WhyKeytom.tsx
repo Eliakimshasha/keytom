@@ -11,14 +11,14 @@ const reasons = [
     description: 'We onboard users from 126+ countries — whether you hold a passport or a residence permit — we\'ve got you covered.'
   },
   {
-    stat: 'Low',
-    label: 'service fees',
+    stat: 'Low service',
+    label: 'fees',
     description: 'Beneficial rates for exchanges and transfers, with full transparency and no hidden charges.',
     links: ['Fees for individuals', 'Fees for businesses']
   },
   {
-    stat: '100%',
-    label: 'online account opening',
+    stat: '100% online',
+    label: 'account opening',
     description: 'Sign up and open your account completely remote. All you need is your phone or computer. No trips to the office, no lines, no delays.'
   },
   {
@@ -62,7 +62,7 @@ export default function WhyKeytom() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden py-24 bg-[linear-gradient(100deg,#f3e6c9_0%,#efd7c7_45%,#d6a6bf_100%)]">
+    <section ref={sectionRef} className="relative overflow-hidden py-24 min-h-[100vh] lg:min-h-[110vh] bg-[linear-gradient(100deg,#f3e6c9_0%,#efd7c7_45%,#d6a6bf_100%)]">
       <div className="absolute inset-0 pointer-events-none">
         <img src="/assets/images/star1.svg" alt="" className="absolute w-5 h-5 opacity-60 left-[4%] top-[12%]" />
         <img src="/assets/images/star1.svg" alt="" className="absolute w-5 h-5 opacity-60 left-[22%] top-[10%]" />
@@ -71,23 +71,20 @@ export default function WhyKeytom() {
         <img src="/assets/images/star1.svg" alt="" className="absolute w-5 h-5 opacity-60 left-[94%] top-[13%]" />
       </div>
 
-      <div className="absolute left-[14%] top-[18%] text-[clamp(3rem,11vw,10rem)] font-semibold tracking-[-0.02em] text-white/35 pointer-events-none select-none">
-        WhyKeytom?
+      <div className="text-center text-[clamp(3rem,11vw,10rem)] font-semibold tracking-[-0.02em] text-white/35 pointer-events-none select-none">
+        Why Keytom?
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div ref={titleRef}>
-          <h2 className="sr-only">Why Keytom</h2>
-        </div>
+      <div className=" mx-auto px-6 w-full  z-50">
 
-        <div ref={cardsRef} className="grid gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-[1100px] mx-auto">
+        <div ref={cardsRef} className="grid left-1/2 -translate-x-1/2 w-full absolute -bottom-36  gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-[1100px] mx-auto">
           {reasons.map((reason, index) => (
             <div
               key={index}
-              className="reason-card bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[18px] p-6 min-h-[320px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)]"
+              className="reason-card bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)]"
             >
               <div>
-                <h3 className="text-[clamp(2.2rem,3.4vw,3.5rem)] font-semibold text-[#b07f8d] leading-none mb-1">
+                <h3 className="text-[30px] font-bold text-[#b07f8d] leading-none mb-1">
                   {reason.stat}
                 </h3>
                 <p className="text-[1.1rem] font-semibold text-[#b07f8d]">{reason.label}</p>

@@ -82,17 +82,14 @@ export default function Services() {
   return (
     <section ref={sectionRef} className="bg-[#3c56ab] text-white py-28">
       <div className="container mx-auto px-6">
-        <h2 ref={titleRef} className="text-center font-semibold leading-[1.1] text-[clamp(2.4rem,4.6vw,4.6rem)] mb-12">
+        <h2 ref={titleRef} className="text-center font-semibold leading-[1.1] text-5xl mb-12">
           <span className="block">Manage your fiat and crypto</span>
-          <span className="block w-[72px] h-1 bg-white rounded-full mx-auto my-3" />
-          <span className="block">all in one app</span>
+          <span className="block">-all in one app</span>
         </h2>
 
         <div className="flex justify-center mb-11 relative">
           <div ref={cardRef} className="relative w-full max-w-[780px] bg-[#3d57b0] border border-white/20 rounded-[14px] px-7 py-6">
-            <span className="pointer-events-none absolute inset-0 border border-white/15 rounded-[14px] translate-x-4" />
-            <span className="pointer-events-none absolute inset-0 border border-white/10 rounded-[14px] translate-x-8" />
-
+       
             <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-white/45 text-[0.9rem] lowercase">
               <span className="w-2 h-2 rounded-full bg-[#ffefac]" />
               services
