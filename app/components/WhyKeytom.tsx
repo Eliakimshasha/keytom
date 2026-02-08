@@ -61,7 +61,8 @@ export default function WhyKeytom() {
           y: -300, // ≈ bottom-36 → bottom-20
           opacity: 1,
           stagger: 0.15,
-          ease: 'power3.out'
+          ease: 'power3.out',
+          duration: 1.5
         }
       )
 
