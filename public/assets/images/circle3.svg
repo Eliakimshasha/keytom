@@ -1,0 +1,36 @@
+<svg width="143" height="143" viewBox="0 0 143 143" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_3379_43327)">
+<rect width="142" height="141.999" rx="70.9997" transform="matrix(1 0 0 -1 0.812134 142.836)" fill="#FFFDF8"/>
+<g filter="url(#filter0_f_3379_43327)">
+<ellipse cx="70.9998" cy="70.9997" rx="70.9998" ry="70.9997" transform="matrix(1 0 0 -1 0.812134 142.836)" fill="url(#paint0_radial_3379_43327)"/>
+</g>
+<g filter="url(#filter1_f_3379_43327)">
+<ellipse cx="70.9998" cy="70.9997" rx="70.9998" ry="70.9997" transform="matrix(1 0 0 -1 0.812134 142.836)" fill="url(#paint1_radial_3379_43327)"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_3379_43327" x="-55.2879" y="-55.2631" width="254.2" height="254.2" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="28.05" result="effect1_foregroundBlur_3379_43327"/>
+</filter>
+<filter id="filter1_f_3379_43327" x="-49.1879" y="-49.1631" width="242" height="242" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="25" result="effect1_foregroundBlur_3379_43327"/>
+</filter>
+<radialGradient id="paint0_radial_3379_43327" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(58.9443 45.8529) rotate(72.1278) scale(101.021 101.022)">
+<stop offset="0.149038" stop-color="#F1CF8F"/>
+<stop offset="0.701923" stop-color="#CA949F"/>
+<stop offset="1" stop-color="#CA7D64"/>
+</radialGradient>
+<radialGradient id="paint1_radial_3379_43327" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(58.9443 45.8529) rotate(72.1278) scale(101.021 101.022)">
+<stop offset="0.149038" stop-color="#F1CF8F"/>
+<stop offset="0.701923" stop-color="#CA949F"/>
+<stop offset="1" stop-color="#CA7D64"/>
+</radialGradient>
+<clipPath id="clip0_3379_43327">
+<rect width="142" height="141.999" rx="70.9997" transform="matrix(1 0 0 -1 0.812134 142.836)" fill="white"/>
+</clipPath>
+</defs>
+</svg>
