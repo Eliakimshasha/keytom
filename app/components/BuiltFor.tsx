@@ -68,6 +68,7 @@ export default function BuiltFor() {
         </div>
 
         {activeTab === "individuals" ? (
+          //gsap animation for individual cards
           <div className="grid grid-cols-2 gap-2 max-w-[1100px] mx-auto max-[900px]:grid-cols-1">
             <div className="flex flex-col gap-[8px]">
               <div className={`${cardBase} min-h-[400px]`}>
