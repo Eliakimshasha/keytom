@@ -20,8 +20,25 @@ if (typeof window !== 'undefined') {
 
 export default function Home() {
   const mainRef = useRef<HTMLDivElement>(null)
+  const heroPinRef = useRef<HTMLDivElement>(null)
+  const introRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
+    const heroPinEl = heroPinRef.current
+    const introEl = introRef.current
+
+    if (heroPinEl && introEl) {
+      ScrollTrigger.create({
+        trigger: heroPinEl,
+        start: 'top top',
+        endTrigger: introEl,
+        end: 'bottom top',
+        pin: heroPinEl,
+        pinSpacing: false,
+        anticipatePin: 1,
+      })
+    }
+
     // Initialize GSAP ScrollTrigger
     ScrollTrigger.refresh()
 
@@ -33,8 +50,14 @@ export default function Home() {
   return (
     <main ref={mainRef} className="overflow-x-hidden">
       <Header />
-      <Hero />
-      <Intro />
+      <div className="hero-intro-wrap">
+        <div ref={heroPinRef}>
+          <Hero />
+        </div>
+        <div ref={introRef}>
+          <Intro />
+        </div>
+      </div>
       <Services />
       <VirtualCard />
       <WhyKeytom />

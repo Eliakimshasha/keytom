@@ -11,18 +11,20 @@ const cityData = {
   Jiangsu: ["Nanjing", "Suzhou", "Zhenjiang"],
 };
 
-const provinceData = ["Zhejiangu", "Jiangsu"];
+const provinceData = ["Zhejiang", "Jiangsu"];
 
 export default function NavBar() {
   const headerRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [cities, setCities] = useState(cityData[provinceData[0]]);
-  const [secondCity, setSecondCity] = useState(cityData[provinceData[0]][0]);
+  const [cities, setCities] = useState(cityData[provinceData[0]] ?? []);
+  const [secondCity, setSecondCity] = useState(
+    cityData[provinceData[0]]?.[0] ?? "",
+  );
 
   const handleProvinceChange = (value) => {
-    setCities(cityData[value]);
-    setSecondCity(cityData[value][0]);
+    setCities(cityData[value] ?? []);
+    setSecondCity(cityData[value]?.[0] ?? "");
   };
 
   const onSecondCityChange = (value) => {
@@ -88,13 +90,13 @@ export default function NavBar() {
         {/* Desktop Navigation */}
         <div
           className="hidden rounded-full px-7 py-3 tracking-tight 
-   md:flex items-center space-x-8 dg"
+   md:flex items-center space-x-2 dg"
         >
           {navItems.map((item, index) => (
             <a
               key={item}
               href={`#${item.toLowerCase()}`}
-              className="text-sm hover:text-gray-700 bg-white/10 backdrop-blur-md   text-[#38488B] transition-colors duration-200 font-medium tracking-wide"
+              className="text-sm hover:text-gray-700 bg-white/10 rounded-xs px-4 py-2 backdrop-blur-md   text-[#38488B] transition-colors duration-200 font-medium tracking-wide"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {item}
@@ -107,7 +109,8 @@ export default function NavBar() {
           <Space wrap>
             <Select
               defaultValue={provinceData[0]}
-              style={{ width: 120 }}
+              // it should have a transparent background 
+              style={{ width: 120, background: "transparent", borderColor: "#000000" }}
               onChange={handleProvinceChange}
               options={provinceData.map((province) => ({
                 label: province,
@@ -115,7 +118,7 @@ export default function NavBar() {
               }))}
             />
             <Select
-              style={{ width: 120 }}
+              style={{ width: 120, Color: "#ffffff" }}
               value={secondCity}
               onChange={onSecondCityChange}
               options={cities.map((city) => ({

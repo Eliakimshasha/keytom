@@ -3,6 +3,8 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ArrowRight } from 'lucide-react'
+import start from '../../public/assets/images/star1.svg'
+import Image from 'next/image'
 
 export default function Hero() {
   const heroRef = useRef(null)
@@ -11,44 +13,77 @@ export default function Hero() {
   const descRef = useRef(null)
   const ctaRef = useRef(null)
   const visualRef = useRef(null)
+  const starRef = useRef(null)
+  const redLineRef = useRef(null)
+  const blueLineRef = useRef(null)
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Stagger animation for hero elements
-      const tl = gsap.timeline({ delay: 0.5 })
+      // Master timeline for sequential animations
+      const masterTl = gsap.timeline({ delay: 0.3 })
 
-      tl.from(titleRef.current, {
-        y: 100,
-        opacity: 0,
-        duration: 1,
-        ease: 'power3.out'
+      // Step 1: Rotate star image 90 degrees
+      masterTl.from(starRef.current, {
+        rotation: 0,
+        duration: 0.8,
+        ease: 'power2.inOut'
       })
-      .from(subtitleRef.current, {
+      .to(starRef.current, {
+        rotation: 180,
+        duration: 0.8,
+        ease: 'power2.inOut'
+      }, '-=0.8')
+
+      // Step 2: Expand the lines from 20px to full width
+      masterTl.to([redLineRef.current, blueLineRef.current], {
+        width: '100%',
+        duration: 1.2,
+        ease: 'power3.inOut',
+        stagger: 0.1
+      }, '+=0.2')
+
+      // Step 3: Animate content elements together after lines expand
+      // H1 comes from top
+      masterTl.from(titleRef.current, {
+        y: -100,
+        opacity: 0,
+        duration: 1,
+        ease: 'power3.out'
+      }, '-=0.3')
+
+      // H2 comes from bottom (same time as h1)
+      masterTl.from(subtitleRef.current, {
         y: 100,
         opacity: 0,
         duration: 1,
         ease: 'power3.out'
-      }, '-=0.7')
-      .from(descRef.current, {
+      }, '<')
+
+      // Paragraph comes from top (same time as h1 and h2)
+      masterTl.from(descRef.current, {
+        y: -50,
+        opacity: 0,
+        duration: 0.9,
+        ease: 'power2.out'
+      }, '<')
+
+      // Button comes from bottom (same time as others)
+      masterTl.from(ctaRef.current, {
         y: 50,
         opacity: 0,
-        duration: 0.8,
-        ease: 'power2.out'
-      }, '-=0.5')
-      .from(ctaRef.current, {
-        y: 30,
-        opacity: 0,
-        duration: 0.6,
+        duration: 0.9,
         ease: 'back.out(1.7)'
-      }, '-=0.3')
-      .from(visualRef.current, {
+      }, '<')
+
+      // Visual element fades in
+      masterTl.from(visualRef.current, {
         scale: 0.8,
         opacity: 0,
-        duration: 1.2,
+        duration: 1,
         ease: 'power2.out'
-      }, '-=1')
+      }, '<')
 
-      // Floating animation for visual elements
+      // Floating animation for visual elements (continuous)
       gsap.to(visualRef.current, {
         y: -20,
         duration: 2,
@@ -62,46 +97,58 @@ export default function Hero() {
   }, [])
 
   return (
-    <section ref={heroRef} className="relative min-h-screen mesh-gradient overflow-hidden pt-16">
+    <section ref={heroRef} className="hero-pin min-h-screen mesh-gradient overflow-hidden pt-16">
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-64 h-64 bg-keytom-purple/20 rounded-full blur-3xl" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-keytom-peach/30 rounded-full blur-3xl" />
       
       <div className="lg:pl-14 mx-auto px-6 pb-20 relative z-10 pt-16">
-        <div className="grid relative lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start min-h-[50vh] ">
+        <div className="grid relative lg:grid-cols-[1.1fr_0.9fr] items-start min-h-[45vh] ">
           <div>
             <div ref={titleRef} className="overflow-hidden">
-              <h1 className="text-[clamp(1.2rem,8vw,6rem)] font-bolder text-[#38488B]  leading-[0.9] tracking-[-0.02em]">
+              <h1 className="text-[clamp(1.2rem,8vw,5rem)] font-bolder text-[#38488B]  leading-[0.9] tracking-[-0.02em]">
                 Financial<br />Institution
               </h1>
             </div>
           </div>
           <div ref={subtitleRef} className="text-right absolute bottom-0 right-0">
-            <h2 className="text-[clamp(2.8rem,6vw,6.2rem)] font-semibold text-[#38488B] leading-[0.9] tracking-[-0.01em]">
+            <h2 className="text-[clamp(2.8rem,6vw,5rem)] font-semibold text-[#38488B] leading-[0.9] tracking-[-0.01em]">
               Imagine<br />more
             </h2>
           </div>
         </div>
 
-        <div className="mt-4">
-          <div className="relative h-px bg-white">
-            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block h-3 w-[1px] bg-white/90" />
-            <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block h-[1px] w-3 bg-white/90" />
+        <div className="">
+          <div className="relative">
+            <span 
+              ref={redLineRef}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block h-[2px] w-[20px] bg-white" 
+            />
+            <span 
+              ref={blueLineRef}
+              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block h-[2px] w-[20px] bg-white" 
+            />
+            <Image 
+              ref={starRef}
+              src={start} 
+              alt="Start" 
+              className="mx-auto w-12 h-12" 
+            />
           </div>
         </div>
 
-        <div className="mt-8 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
+        <div className=" grid lg:grid-cols-[1.1fr_0.9fr]  items-start">
           <div>
-            <p ref={descRef} className="text-sm sm:text-base text-white max-w-md leading-relaxed">
+            <p ref={descRef} className="text-sm intro-headline2 sm:text-base  max-w-md leading-relaxed">
               Combine your crypto and fiat into one intuitive platform. Instantly send, receive, 
               and hold funds across currencies, with smart tools and global reach.
             </p>
 
             <button 
               ref={ctaRef}
-              className="group mt-8 w-full sm:w-72 px-8 py-5 bg-keytom-blue text-white rounded-2xl font-semibold text-[0.72rem] 
-                tracking-[0.2em] uppercase flex items-center justify-between shadow-[0_14px_30px_rgba(47,107,255,0.35)]
-                transition-all duration-300 hover:translate-y-0.5 hover:shadow-[0_18px_36px_rgba(47,107,255,0.45)]"
+              className="group w-full sm:w-72 px-8 py-5 bg-[#38488B] text-white  font-semibold text-[0.72rem] 
+                tracking-[0.2em] uppercase flex items-center justify-between
+                transition-all duration-300 hover:translate-y-0.5"
             >
               Open account
               <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center">

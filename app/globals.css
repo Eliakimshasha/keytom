@@ -88,7 +88,7 @@ body {
   font-optical-sizing: auto;
   font-style: normal;
 }
-h1, h2, h3, h4, h5, h6, p, span, a {
+h1, h2, h3, h4, h5, h6, p, span, a, button {
   font-weight: 600;
 }
 
@@ -189,7 +189,17 @@ h1, h2, h3, h4, h5, h6, p, span, a {
   background:
     radial-gradient(circle at 15% 20%, rgba(47, 107, 255, 0.18), transparent 55%),
     radial-gradient(circle at 85% 15%, rgba(122, 92, 255, 0.16), transparent 50%),
-    linear-gradient(135deg, #ffffff 0%, #f7f9ff 45%, #ffffff 100%);
+    linear-gradient(135deg, #f9d1d1 0%, #f7f9ff 45%, #c9c9c9 100%);
+}
+
+.hero-intro-wrap {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-pin {
+  position: relative;
+  z-index: 0;
 }
 
 .mesh-gradient-blue {
@@ -308,6 +318,7 @@ h1, h2, h3, h4, h5, h6, p, span, a {
   position: relative;
   background: #fdfbf8;
   overflow: hidden;
+  z-index: 10;
 }
 
 .intro-noise {
@@ -349,18 +360,23 @@ h1, h2, h3, h4, h5, h6, p, span, a {
 }
 
 .intro-headline {
-  max-width: 1080px;
+  max-width: 1000px;
   margin: 0 auto;
   text-align: center;
   font-weight: 600;
   line-height: 1.1;
-  font-size: clamp(2rem, 4vw + 1rem, 4.5rem);
+  font-size: clamp(2rem, 4vw + 1rem, 3rem);
   background: linear-gradient(110deg, rgba(47, 107, 255, 0.8), rgba(247, 169, 137, 0.85) 45%, rgba(122, 92, 255, 0.75) 85%);
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
 }
-
+.intro-headline2 {
+  background: linear-gradient(110deg, rgba(47, 107, 255, 0.8), rgba(247, 169, 137, 0.85) 45%, rgba(122, 92, 255, 0.75) 85%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
 .footer-lower {
   background: #3c56ab;
   color: #ffffff;

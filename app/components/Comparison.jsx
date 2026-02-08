@@ -19,7 +19,7 @@ const comparison = [
 export default function Comparison() {
   return (
     <section className="w-full border-t border-subtle">
-      <div className="mx-auto w-full max-w-6xl px-6 py-14">
+      <div className="mx-auto w-full max-w-8xl px-6 py-14">
         <h2 className="text-2xl font-semibold text-base-color">Comparison</h2>
         <div className="mt-6 grid gap-4">
           <div className="grid grid-cols-[1.2fr_1fr_1fr] text-xs font-semibold uppercase tracking-[0.2em] text-subtle">
