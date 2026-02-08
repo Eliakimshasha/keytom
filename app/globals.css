@@ -79,6 +79,21 @@
 * {
   box-sizing: border-box;
 }
+/* Hide scrollbar for Chrome, Safari and Edge */
+::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+
+/* Hide scrollbar for Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar for IE & old Edge */
+body {
+  -ms-overflow-style: none;
+}
 
 body {
   background: var(--bg);
@@ -87,6 +102,15 @@ body {
   overflow-x: hidden;
   font-optical-sizing: auto;
   font-style: normal;
+}
+
+/* Hide scroll indicators (scrollbars) */
+body {
+  scrollbar-width: none; /* Firefox */
+}
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
 }
 h1, h2, h3, h4, h5, h6, p, span, a, button {
   font-weight: 600;

@@ -3,6 +3,10 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
+import { FaCcVisa, FaBitcoin, FaEuroSign } from "react-icons/fa";
+
+
+import { TbChartInfographic } from 'react-icons/tb'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -123,40 +127,28 @@ export default function Intro() {
 
           const cardData = [
             { 
-              bg: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)', 
-              icon: '💳',
-              title: 'Virtual Cards',
-              subtitle: 'Instant creation'
+              type: 'virtual-cards',
+              bg: 'linear-gradient(135deg, #3b5998 0%, #2d4373 100%)',
             },
             { 
-              bg: 'linear-gradient(135deg, #10b981 0%, #059669 100%)', 
-              icon: '🌍',
-              title: 'Global Transfers',
-              subtitle: 'Zero fees'
+              type: 'euro-account',
+              bg: 'linear-gradient(135deg, #4a6fa5 0%, #345a8c 100%)',
             },
             { 
-              bg: 'linear-gradient(135deg, #3b82f6 0%, #2563eb 100%)', 
-              icon: '⚡',
-              title: 'Instant Payments',
-              subtitle: 'Real-time'
+              type: 'deposits',
+              bg: 'linear-gradient(135deg, #f4d5a6 0%, #e6c28b 100%)',
             },
             { 
-              bg: 'linear-gradient(135deg, #a855f7 0%, #9333ea 100%)', 
-              icon: '🔒',
-              title: 'Secure Vault',
-              subtitle: 'Bank-grade security'
+              type: 'euro-balance',
+              bg: 'linear-gradient(135deg, #5273a8 0%, #3d5a8f 100%)',
             },
             { 
-              bg: 'linear-gradient(135deg, #ec4899 0%, #db2777 100%)', 
-              icon: '📊',
-              title: 'Smart Analytics',
-              subtitle: 'AI-powered insights'
+              type: 'crypto',
+              bg: 'linear-gradient(135deg, #c99ca6 0%, #b08593 100%)',
             },
             { 
-              bg: 'linear-gradient(135deg, #eab308 0%, #ca8a04 100%)', 
-              icon: '💰',
-              title: 'Multi-Currency',
-              subtitle: '150+ currencies'
+              type: 'transactions',
+              bg: 'linear-gradient(135deg, #e8c98f 0%, #d4b47a 100%)',
             },
           ]
 
@@ -166,16 +158,130 @@ export default function Intro() {
             <div
               key={i}
               ref={(el) => (cardsRef.current[i] = el)}
-              className="absolute w-52 h-64  rounded-xs flex flex-col items-center justify-center text-white p-6"
+              className="absolute w-52 h-64 rounded-2xl overflow-hidden shadow-2xl"
               style={{
                 ...initialPositions[i],
                 zIndex: zIndex,
                 background: cardData[i].bg,
               }}
             >
-              <div className="text-5xl mb-4">{cardData[i].icon}</div>
-              <h3 className="text-xl font-bold text-center mb-2">{cardData[i].title}</h3>
-              <p className="text-sm opacity-90 text-center">{cardData[i].subtitle}</p>
+              {/* Card Content */}
+              {cardData[i].type === 'virtual-cards' && (
+                <div className="relative w-full h-full p-6 flex flex-col justify-between text-white">
+                  {/* Decorative card images */}
+                  <div className="absolute inset-0 flex items-center justify-center opacity-60">
+                    <div className="relative w-32 h-44">
+                      <div 
+                        className="absolute w-28 h-40 rounded-lg transform -rotate-12 translate-x-2"
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%)',
+                          backdropFilter: 'blur(10px)',
+                        }}
+                      />
+                      <div 
+                        className="absolute w-28 h-40 rounded-lg transform rotate-12 -translate-x-2"
+                        style={{
+                          background: 'linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.08) 100%)',
+                          backdropFilter: 'blur(10px)',
+                        }}
+                      />
+                    </div>
+                  </div>
+                  <div className="relative z-10">
+                    <div className="text-sm font-medium opacity-90"></div>
+                  </div>
+                  <div className="relative z-10">
+                    <h3 className="text-xl font-semibold">Virtual cards</h3>
+                  </div>
+                </div>
+              )}
+
+              {cardData[i].type === 'euro-account' && (
+                <div className="relative w-full h-full p-5 flex flex-col justify-between text-white">
+                  <div>
+                    <h3 className="text-base font-medium mb-8">Euro Account</h3>
+                    <div className="space-y-1.5">
+                      <p className="text-xs opacity-80">GB44 1234 1234 1234 5678 90</p>
+                      <p className="text-xs opacity-80">Balance: €7,367</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {cardData[i].type === 'deposits' && (
+                <div className="relative w-full h-full p-6 flex flex-col justify-end text-[#4a6fa5]">
+                  <div className="absolute top-6 left-6">
+                    <div className="text-xl font-bold mb-1">EUR</div>
+                  </div>
+                  <div className="mb-4">
+                    <div className="text-3xl font-bold mb-1">+ €2,890</div>
+                  </div>
+                  <div>
+                    <h3 className="text-base font-semibold mb-0.5">Deposits</h3>
+                    <p className="text-sm opacity-80">and withdrawals</p>
+                  </div>
+                </div>
+              )}
+
+              {cardData[i].type === 'euro-balance' && (
+                <div className="relative w-full h-full p-5 flex flex-col justify-between text-white">
+                  <div className="flex items-center gap-2">
+                    <div className="w-9 h-9 rounded-full bg-[#4169b8] flex items-center justify-center">
+                      <FaEuroSign className="text-xl" />
+                    </div>
+                    <span className="text-2xl font-semibold flex items-center gap-1">
+                      EUR
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
+                      </svg>
+                    </span>
+                  </div>
+                  <div>
+                    <div className="text-5xl font-bold mb-1">€4</div>
+                    <p className="text-sm opacity-80">Balance</p>
+                  </div>
+                </div>
+              )}
+
+              {cardData[i].type === 'crypto' && (
+                <div className="relative w-full h-full p-5 flex flex-col justify-between text-white">
+                  <div className="flex items-center gap-2">
+                    <div className="w-9 h-9 rounded-full bg-[#b08593] flex items-center justify-center">
+                      <FaEuroSign className="text-xl" />
+                    </div>
+                    <span className="text-2xl font-semibold">EUR</span>
+                  </div>
+                  <div>
+                    <div className="text-5xl font-bold mb-3">€4</div>
+                    <div className="flex items-center gap-2 mb-4">
+                      <div className="w-8 h-8 rounded-md bg-white/90 flex items-center justify-center text-[#c99ca6] font-bold text-sm">
+                        1L
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-9 h-9 rounded-full bg-[#f7931a] flex items-center justify-center">
+                        <FaBitcoin className="text-xl text-white" />
+                      </div>
+                      <span className="text-xl font-semibold">BTC</span>
+                    </div>
+                    <div className="text-2xl font-bold mt-2">0.000011</div>
+                  </div>
+                </div>
+              )}
+
+              {cardData[i].type === 'transactions' && (
+                <div className="relative w-full h-full p-6 flex flex-col justify-between text-[#4a6fa5]">
+                  <div className="flex items-center gap-2 mb-4">
+                    <div className="w-9 h-9 rounded-full bg-[#5a7fa8] flex items-center justify-center">
+                      <TbChartInfographic className="text-xl text-white" />
+                    </div>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold mb-1">Transactions</h3>
+                    <p className="text-sm opacity-80">Track all activity</p>
+                  </div>
+                </div>
+              )}
             </div>
           )
         })}
