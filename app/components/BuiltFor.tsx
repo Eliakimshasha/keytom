@@ -49,7 +49,7 @@ export default function BuiltFor() {
                   : "bg-white text-[#3a59b8] border-[#7e8fe0]"
               }`}
             >
-              <span className="w-2 h-2 rounded-full bg-transparent border border-blue/70" />
+              <span className="w-2 h-2 rounded-full bg-transparent border border-[]/70" />
               Individuals
             </button>
             <button
@@ -61,7 +61,7 @@ export default function BuiltFor() {
                   : "bg-white text-[#3a59b8] border-[#7e8fe0]"
               }`}
             >
-              <span className="w-2 h-2 rounded-full bg-transparent border border-blue/70" />
+              <span className="w-2 h-2 rounded-full bg-transparent border border-[]/70" />
               Businesses
             </button>
           </div>

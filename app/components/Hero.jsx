@@ -67,24 +67,24 @@ export default function Hero() {
       <div className="absolute top-20 left-10 w-64 h-64 bg-keytom-purple/20 rounded-full blur-3xl" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-keytom-peach/30 rounded-full blur-3xl" />
       
-      <div className="container mx-auto px-6 pb-20 relative z-10 pt-16">
-        <div className="grid relative lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start min-h-[62vh] ">
+      <div className="lg:pl-14 mx-auto px-6 pb-20 relative z-10 pt-16">
+        <div className="grid relative lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start min-h-[50vh] ">
           <div>
             <div ref={titleRef} className="overflow-hidden">
-              <h1 className="text-[clamp(3.6rem,8vw,7.6rem)] font-semibold text-keytom-blue leading-[0.9] tracking-[-0.02em]">
+              <h1 className="text-[clamp(1.2rem,8vw,6rem)] font-bolder text-[#38488B]  leading-[0.9] tracking-[-0.02em]">
                 Financial<br />Institution
               </h1>
             </div>
           </div>
           <div ref={subtitleRef} className="text-right absolute bottom-0 right-0">
-            <h2 className="text-[clamp(2.8rem,6vw,6.2rem)] font-semibold text-keytom-blue leading-[0.9] tracking-[-0.01em]">
+            <h2 className="text-[clamp(2.8rem,6vw,6.2rem)] font-semibold text-[#38488B] leading-[0.9] tracking-[-0.01em]">
               Imagine<br />more
             </h2>
           </div>
         </div>
 
-        <div className="mt-8">
-          <div className="relative h-px bg-white/70">
+        <div className="mt-4">
+          <div className="relative h-px bg-white">
             <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block h-3 w-[1px] bg-white/90" />
             <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 block h-[1px] w-3 bg-white/90" />
           </div>
@@ -115,12 +115,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="w-6 h-10 border-2 border-keytom-blue rounded-full flex justify-center pt-2">
-          <div className="w-1 h-3 bg-keytom-blue rounded-full" />
-        </div>
-      </div>
+
     </section>
   )
 }
