@@ -40,6 +40,7 @@ export default function VirtualCard() {
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger)
+    const mm = gsap.matchMedia()
 
     const ctx = gsap.context(() => {
       if (!sectionRef.current || !featuresRef.current) return
@@ -83,71 +84,91 @@ export default function VirtualCard() {
       }
 
       const items = gsap.utils.toArray<HTMLElement>('.vc-item', featuresRef.current)
-      
-      // Set all items to start far below, hidden
-      items.forEach((item) => {
-        gsap.set(item, { y: 500, opacity: 0 })
-      })
 
-      // Calculate total animation duration
-      const scrollDistance = features.length * 600 // 600px scroll per item
-      
-      // Pin the entire section while items animate
-      ScrollTrigger.create({
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: `+=${scrollDistance}`,
-        pin: true,
-        pinSpacing: true,
-        markers: false // Set to true for debugging
-      })
-
-      // Animate each item
-      items.forEach((item, index) => {
-        const desc = item.querySelector<HTMLElement>('.vc-desc')
-
-        // Item comes up from below
-        gsap.to(item, {
-          y: 0,
-          opacity: 1,
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: `top+=${index * 600} top`,
-            end: `top+=${index * 600 + 300} top`,
-            scrub: 1
-          }
+      mm.add('(min-width: 901px)', () => {
+        // Set all items to start far below, hidden
+        items.forEach((item) => {
+          gsap.set(item, { y: 500, opacity: 0 })
         })
 
-        // Hide description when next item starts coming
-        if (desc) {
-          gsap.to(desc, {
-            height: 0,
-            opacity: 0,
-            marginTop: 0,
+        // Calculate total animation duration
+        const scrollDistance = features.length * 600 // 600px scroll per item
+
+        // Pin the entire section while items animate
+        ScrollTrigger.create({
+          trigger: sectionRef.current,
+          start: 'top top',
+          end: `+=${scrollDistance}`,
+          pin: true,
+          pinSpacing: true
+        })
+
+        // Animate each item
+        items.forEach((item, index) => {
+          const desc = item.querySelector<HTMLElement>('.vc-desc')
+
+          // Item comes up from below
+          gsap.to(item, {
+            y: 0,
+            opacity: 1,
             scrollTrigger: {
               trigger: sectionRef.current,
-              start: `top+=${index * 600 + 300} top`,
-              end: `top+=${index * 600 + 450} top`,
+              start: `top+=${index * 600} top`,
+              end: `top+=${index * 600 + 300} top`,
               scrub: 1
             }
           })
-        }
+
+          // Hide description when next item starts coming
+          if (desc) {
+            gsap.to(desc, {
+              height: 0,
+              opacity: 0,
+              marginTop: 0,
+              scrollTrigger: {
+                trigger: sectionRef.current,
+                start: `top+=${index * 600 + 300} top`,
+                end: `top+=${index * 600 + 450} top`,
+                scrub: 1
+              }
+            })
+          }
+        })
+      })
+
+      mm.add('(max-width: 900px)', () => {
+        items.forEach((item) => {
+          gsap.set(item, { y: 0, opacity: 1 })
+          gsap.from(item, {
+            y: 30,
+            opacity: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 90%'
+            }
+          })
+        })
       })
     }, sectionRef)
 
-    return () => ctx.revert()
+    return () => {
+      ctx.revert()
+      mm.revert()
+    }
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-white py-28 min-h-screen">
+    <section ref={sectionRef} className="bg-white py-28 min-h-screen max-[900px]:py-20">
       <div className="container mx-auto px-6">
         <h2 ref={titleRef} className="text-[#3a57b5] font-semibold text-[clamp(2.6rem,4.6vw,4.8rem)] mb-8">
           Keytom Virtual
         </h2>
 
-        <div className="grid grid-cols-[1.05fr_1fr] gap-12 items-start">
-          <div className="flex items-center justify-center min-h-[420px] sticky top-20">
-            <div ref={cardStackRef} className="relative w-[min(90%,460px)] h-[320px] [transform-style:preserve-3d]">
+        <div className="grid grid-cols-[1.05fr_1fr] gap-12 items-start max-[900px]:grid-cols-1 max-[900px]:gap-8">
+          <div className="flex items-center justify-center min-h-[420px] sticky top-20 max-[900px]:static max-[900px]:min-h-[260px] max-[900px]:mb-4">
+            <div ref={cardStackRef} className="relative w-[min(90%,460px)] h-[320px] [transform-style:preserve-3d] max-[900px]:w-[min(100%,340px)] max-[900px]:h-[240px]">
               <img
                 src="/assets/images/card1.jpeg"
                 alt=""
@@ -161,7 +182,7 @@ export default function VirtualCard() {
             </div>
           </div>
 
-          <div ref={featuresRef} className="border-t border-[#b9c4ff] overflow-hidden relative">
+          <div ref={featuresRef} className="border-t border-[#b9c4ff] overflow-hidden relative max-[900px]:overflow-visible">
             {features.map((feature, index) => (
               <div key={index} className="vc-item py-4 border-b border-[#b9c4ff]">
                 <div className="vc-header flex items-center gap-4">

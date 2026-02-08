@@ -27,15 +27,19 @@ export default function Home() {
     const heroPinEl = heroPinRef.current
     const introEl = introRef.current
 
+    const mm = gsap.matchMedia()
+
     if (heroPinEl && introEl) {
-      ScrollTrigger.create({
-        trigger: heroPinEl,
-        start: 'top top',
-        endTrigger: introEl,
-        end: 'bottom top',
-        pin: heroPinEl,
-        pinSpacing: false,
-        anticipatePin: 1,
+      mm.add('(min-width: 901px)', () => {
+        ScrollTrigger.create({
+          trigger: heroPinEl,
+          start: 'top top',
+          endTrigger: introEl,
+          end: 'bottom top',
+          pin: heroPinEl,
+          pinSpacing: false,
+          anticipatePin: 1,
+        })
       })
     }
 
@@ -43,6 +47,7 @@ export default function Home() {
     ScrollTrigger.refresh()
 
     return () => {
+      mm.revert()
       ScrollTrigger.getAll().forEach(trigger => trigger.kill())
     }
   }, [])

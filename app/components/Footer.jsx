@@ -26,9 +26,9 @@ export default function Footer() {
   }, [])
 
   return (
-    <footer ref={footerRef} className="bg-[#3c56ab] text-white py-7 pb-10">
+    <footer ref={footerRef} className="bg-[#3c56ab] text-white py-7 pb-10 max-[900px]:py-6">
       <div className="container mx-auto px-6">
-        <div className="flex items-center justify-between gap-6 pb-6 border-b border-white/35 flex-wrap">
+        <div className="flex items-center justify-between gap-6 pb-6 border-b border-white/35 flex-wrap max-[900px]:flex-col max-[900px]:items-start">
           <div className="flex items-center gap-3">
             <button className="inline-flex items-center gap-2 bg-white text-[#3c56ab] px-4 py-2 rounded-md font-semibold text-[0.95rem]">
               EN
@@ -48,7 +48,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-5 text-white/80 text-[0.9rem] leading-relaxed space-y-4">
+        <div className="mt-5 text-white/80 text-[0.9rem] leading-relaxed space-y-4 max-[900px]:text-[0.85rem]">
           <p>
             Not all products and services are available in all geographic areas and remain subject to applicable laws,
             regulatory requirements, and internal compliance policies.

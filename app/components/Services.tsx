@@ -96,12 +96,12 @@ export default function Services() {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#3c56ab] relative  z-50 text-white py-28"
+      className="bg-[#3c56ab] relative  z-50 text-white py-28 max-[900px]:py-20"
     >
       <div className="container mx-auto px-6">
         <h2
           ref={titleRef}
-          className="text-center font-semibold leading-[1.1] text-5xl mb-12"
+          className="text-center font-semibold leading-[1.1] text-5xl mb-12 max-[768px]:text-3xl"
         >
           <span className="block">Manage your fiat and crypto</span>
           <span className="block">-all in one app</span>
@@ -110,9 +110,9 @@ export default function Services() {
         <div className="flex justify-center mb-11 relative">
           <div
             ref={cardRef}
-            className="relative w-full max-w-[54rem] min-w-[53rem] bg-[#3d57b0] border border-white/20 rounded-[14px] px-7 py-6"
+            className="relative w-full max-w-[54rem] min-w-[53rem] bg-[#3d57b0] border border-white/20 rounded-[14px] px-7 py-6 max-[900px]:min-w-0 max-[900px]:max-w-full max-[768px]:px-5 max-[768px]:py-5"
           >
-            <div className="flex items-start gap-10">
+            <div className="flex items-start gap-10 max-[900px]:flex-col max-[900px]:gap-6">
               {/* Left side: Badge and Text */}
               <div className="flex-1">
                 <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-white/45 text-[0.9rem] lowercase">
@@ -131,7 +131,7 @@ export default function Services() {
               </div>
 
               {/* Right side: Image */}
-              <div className="relative w-[300px] lg:w-[350px] h-[300px] lg:h-[250px] flex-shrink-0">
+              <div className="relative w-[300px] lg:w-[350px] h-[300px] lg:h-[250px] flex-shrink-0 max-[900px]:w-full max-[900px]:h-[200px]">
                 <Image
                   src={image}
                   alt="Swahi"

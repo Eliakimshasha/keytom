@@ -97,13 +97,13 @@ export default function Hero() {
   }, [])
 
   return (
-    <section ref={heroRef} className="hero-pin min-h-screen mesh-gradient overflow-hidden pt-16">
+    <section ref={heroRef} className="hero-pin min-h-screen mesh-gradient overflow-hidden pt-16 max-[768px]:pt-12">
       {/* Decorative elements */}
-      <div className="absolute top-20 left-10 w-64 h-64 bg-keytom-purple/20 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-keytom-peach/30 rounded-full blur-3xl" />
+      <div className="absolute top-20 left-10 w-64 h-64 bg-keytom-purple/20 rounded-full blur-3xl max-[768px]:hidden" />
+      <div className="absolute bottom-20 right-10 w-96 h-96 bg-keytom-peach/30 rounded-full blur-3xl max-[768px]:hidden" />
       
-      <div className="lg:pl-14 mx-auto px-6 pb-20 relative z-10 pt-16">
-        <div className="grid relative lg:grid-cols-[1.1fr_0.9fr] items-start min-h-[45vh] ">
+      <div className="lg:pl-14 mx-auto px-6 pb-20 relative z-10 pt-16 max-[768px]:pt-10 max-[768px]:pb-12">
+        <div className="grid relative lg:grid-cols-[1.1fr_0.9fr] items-start min-h-[45vh] max-[768px]:min-h-[28vh] max-[768px]:gap-6">
           <div>
             <div ref={titleRef} className="overflow-hidden">
               <h1 className="text-[clamp(1.2rem,8vw,5rem)] font-bolder text-[#38488B]  leading-[0.9] tracking-[-0.02em]">
@@ -111,7 +111,7 @@ export default function Hero() {
               </h1>
             </div>
           </div>
-          <div ref={subtitleRef} className="text-right absolute bottom-0 right-0">
+          <div ref={subtitleRef} className="text-right absolute bottom-0 right-0 max-[768px]:static max-[768px]:text-left max-[768px]:mt-4">
             <h2 className="text-[clamp(2.8rem,6vw,5rem)] font-semibold text-[#38488B] leading-[0.9] tracking-[-0.01em]">
               Imagine<br />more
             </h2>
@@ -137,7 +137,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className=" grid lg:grid-cols-[1.1fr_0.9fr]  items-start">
+        <div className=" grid lg:grid-cols-[1.1fr_0.9fr] items-start max-[768px]:gap-6">
           <div>
             <p ref={descRef} className="text-sm intro-headline2 sm:text-base  max-w-md leading-relaxed">
               Combine your crypto and fiat into one intuitive platform. Instantly send, receive, 

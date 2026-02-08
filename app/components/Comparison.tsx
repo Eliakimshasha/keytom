@@ -121,48 +121,50 @@ export default function Comparison() {
   return (
     <section ref={sectionRef} className="bg-white text-[#1f1f1f] py-[120px] pb-[100px]">
       <div className="container mx-auto px-6">
-        <h2 ref={titleRef} className="text-center font-semibold text-[clamp(2.6rem,4.6vw,4.8rem)] text-[#4a4a4a] mb-10">
+        <h2 ref={titleRef} className="text-center font-semibold text-[clamp(2.6rem,4.6vw,4.8rem)] text-[#4a4a4a] mb-10 max-[768px]:text-3xl">
           <span className="text-[#3657ba]">Keytom</span> vs others
         </h2>
 
-        <div ref={tableRef} className="max-w-[1160px] mx-auto">
-          <div className="grid grid-cols-[1.25fr_1.2fr_1.35fr_0.8fr] items-center border-b border-[#b9c4ff]">
-            <div className="px-5 py-4 font-semibold text-[#3c3c3c]">Feature</div>
-            <div className="px-5 py-4 font-semibold text-[#3657ba] bg-[#e1e5f4] rounded-t-[10px]">Keytom</div>
-            <div className="px-5 py-4 font-semibold text-[#3c3c3c]">Other financial institutions</div>
-            <div className="px-5 py-4 font-semibold text-[#3c3c3c]">OTC</div>
-          </div>
-
-          {features.map((feature, index) => (
-            <div key={index} className="comparison-row grid grid-cols-[1.25fr_1.2fr_1.35fr_0.8fr] border-b border-[#b9c4ff]">
-              <div className="px-5 py-5 flex flex-col gap-2">
-                <span className="text-[1.15rem] font-semibold text-[#3a57b5] leading-tight">{feature.name}</span>
-                {feature.sub && <span className="text-[1.1rem] font-semibold text-[#3a57b5]">{feature.sub}</span>}
-                {feature.subMuted && (
-                  <span className="text-[1.05rem] font-semibold text-[#3a57b5]/35">{feature.subMuted}</span>
-                )}
-              </div>
-
-              <div className="px-5 py-4 flex items-center gap-3 bg-[#e1e5f4]">
-                {getIcon(feature.keytom.status)}
-                <span className="text-[0.98rem] text-[#4a4a4a] leading-snug">{feature.keytom.note}</span>
-              </div>
-
-              <div className="px-5 py-4 flex items-center gap-3">
-                {getIcon(feature.others.status)}
-                <span className="text-[0.98rem] text-[#4a4a4a] leading-snug">{feature.others.note}</span>
-              </div>
-
-              <div className="px-5 py-4 flex items-center gap-3">
-                {getIcon(feature.otc.status)}
-                <span className="text-[0.98rem] text-[#4a4a4a] leading-snug">{feature.otc.note}</span>
-              </div>
+        <div ref={tableRef} className="max-w-[1160px] mx-auto max-[900px]:max-w-none max-[900px]:-mx-6 max-[900px]:px-6 max-[900px]:overflow-x-auto">
+          <div className="min-w-[880px]">
+            <div className="grid grid-cols-[1.25fr_1.2fr_1.35fr_0.8fr] items-center border-b border-[#b9c4ff]">
+              <div className="px-5 py-4 font-semibold text-[#3c3c3c]">Feature</div>
+              <div className="px-5 py-4 font-semibold text-[#3657ba] bg-[#e1e5f4] rounded-t-[10px]">Keytom</div>
+              <div className="px-5 py-4 font-semibold text-[#3c3c3c]">Other financial institutions</div>
+              <div className="px-5 py-4 font-semibold text-[#3c3c3c]">OTC</div>
             </div>
-          ))}
+
+            {features.map((feature, index) => (
+              <div key={index} className="comparison-row grid grid-cols-[1.25fr_1.2fr_1.35fr_0.8fr] border-b border-[#b9c4ff]">
+                <div className="px-5 py-5 flex flex-col gap-2">
+                  <span className="text-[1.15rem] font-semibold text-[#3a57b5] leading-tight">{feature.name}</span>
+                  {feature.sub && <span className="text-[1.1rem] font-semibold text-[#3a57b5]">{feature.sub}</span>}
+                  {feature.subMuted && (
+                    <span className="text-[1.05rem] font-semibold text-[#3a57b5]/35">{feature.subMuted}</span>
+                  )}
+                </div>
+
+                <div className="px-5 py-4 flex items-center gap-3 bg-[#e1e5f4]">
+                  {getIcon(feature.keytom.status)}
+                  <span className="text-[0.98rem] text-[#4a4a4a] leading-snug">{feature.keytom.note}</span>
+                </div>
+
+                <div className="px-5 py-4 flex items-center gap-3">
+                  {getIcon(feature.others.status)}
+                  <span className="text-[0.98rem] text-[#4a4a4a] leading-snug">{feature.others.note}</span>
+                </div>
+
+                <div className="px-5 py-4 flex items-center gap-3">
+                  {getIcon(feature.otc.status)}
+                  <span className="text-[0.98rem] text-[#4a4a4a] leading-snug">{feature.otc.note}</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
 
         <div className="max-w-[1160px] mx-auto mt-5">
-          <button className="inline-flex items-center gap-3 bg-[linear-gradient(90deg,#3a3752_0%,#2f458b_100%)] text-white px-5 py-3 rounded-md uppercase font-semibold text-[0.9rem]">
+          <button className="inline-flex items-center gap-3 bg-[linear-gradient(90deg,#3a3752_0%,#2f458b_100%)] text-white px-5 py-3 rounded-md uppercase font-semibold text-[0.9rem] max-[900px]:w-full max-[900px]:justify-between">
             Open account
             <span className="w-[22px] h-[22px] rounded-full bg-white text-[#2f458b] inline-flex items-center justify-center text-[14px]">
               <IoArrowForward />

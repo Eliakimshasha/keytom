@@ -29,21 +29,21 @@ export default function BuiltFor() {
   }, [activeTab]);
 
   const cardBase =
-    "builtfor-card relative overflow-hidden rounded-[3px] p-6 text-white shadow-[0_20px_40px_rgba(148,109,132,0.25)] " +
+    "builtfor-card relative overflow-hidden rounded-[3px] p-6 text-white shadow-[0_20px_40px_rgba(148,109,132,0.25)] max-[900px]:p-5 " +
     "bg-[linear-gradient(180deg,#9d7ba3_0%,#b58cab_45%,#d4a9a1_100%)]";
 
   return (
-    <section ref={sectionRef} className="bg-white text-[#1f1f1f] py-[120px]">
+    <section ref={sectionRef} className="bg-white text-[#1f1f1f] py-[120px] max-[900px]:py-16">
       <div className="container mx-auto px-6">
         <div className="text-center mb-10">
           <h2 className="text-[clamp(2.4rem,4vw,4.2rem)] font-semibold text-[#404040] mb-4">
             Built for
           </h2>
-          <div className="inline-flex items-center gap-2">
+          <div className="inline-flex items-center gap-2 max-[900px]:flex-wrap max-[900px]:justify-center">
             <button
               type="button"
               onClick={() => setActiveTab("individuals")}
-              className={`inline-flex items-center gap-2 px-6 py-2 rounded-full border text-[1rem] font-semibold transition-all ${
+              className={`inline-flex items-center gap-2 px-6 py-2 rounded-full border text-[1rem] font-semibold transition-all max-[900px]:px-4 max-[900px]:text-[0.95rem] ${
                 activeTab === "individuals"
                   ? "bg-[#9c7aa0] text-white border-transparent"
                   : "bg-white text-[#3a59b8] border-[#7e8fe0]"
@@ -55,7 +55,7 @@ export default function BuiltFor() {
             <button
               type="button"
               onClick={() => setActiveTab("businesses")}
-              className={`inline-flex items-center gap-2 px-6 py-2 rounded-full border text-[1rem] font-semibold transition-all ${
+              className={`inline-flex items-center gap-2 px-6 py-2 rounded-full border text-[1rem] font-semibold transition-all max-[900px]:px-4 max-[900px]:text-[0.95rem] ${
                 activeTab === "businesses"
                   ? "bg-[#9c7aa0] text-white border-transparent"
                   : "bg-white text-[#3a59b8] border-[#7e8fe0]"
@@ -69,7 +69,7 @@ export default function BuiltFor() {
 
         {activeTab === "individuals" ? (
           //gsap animation for individual cards
-          <div className="grid grid-cols-2 gap-2 max-w-[1100px] mx-auto max-[900px]:grid-cols-1">
+          <div className="grid grid-cols-2 gap-2 max-w-[1100px] mx-auto max-[900px]:grid-cols-1 max-[900px]:gap-4">
             <div className="flex flex-col gap-[8px]">
               <div className={`${cardBase} min-h-[400px]`}>
                 <div>
@@ -81,7 +81,7 @@ export default function BuiltFor() {
                     transfers to and from over 100 countries.
                   </p>
                 </div>
-                <div className="absolute right-[26px] bottom-[18px] w-[220px] h-[160px] pointer-events-none">
+                <div className="absolute right-[26px] bottom-[18px] w-[220px] h-[160px] pointer-events-none max-[900px]:hidden">
                   <img
                     src="/assets/images/circle3.svg"
                     alt=""
@@ -174,7 +174,7 @@ export default function BuiltFor() {
             </div>
           </div>
         ) : (
-          <div className="grid grid-cols-2 gap-6 max-w-[980px] mx-auto max-[900px]:grid-cols-1">
+          <div className="grid grid-cols-2 gap-6 max-w-[980px] mx-auto max-[900px]:grid-cols-1 max-[900px]:gap-4">
             <div className="flex flex-col gap-[8px]">
               <div className={`${cardBase} min-h-[320px]`}>
                 <div>

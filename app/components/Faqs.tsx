@@ -101,18 +101,18 @@ export default function FAQ() {
   const currentQuestions = activeData[activeCategory] || []
 
   return (
-    <section ref={sectionRef} className="bg-[#f4f6ff] py-28">
+    <section ref={sectionRef} className="bg-[#f4f6ff] py-28 max-[900px]:py-16">
       <div className="container mx-auto px-6">
-        <h2 className="faq-title text-center font-semibold text-[clamp(2.6rem,4.4vw,4.6rem)] text-[#3a57b5] mb-7">
+        <h2 className="faq-title text-center font-semibold text-[clamp(2.6rem,4.4vw,4.6rem)] text-[#3a57b5] mb-7 max-[768px]:text-3xl">
           FAQ
         </h2>
 
         <div className="flex justify-center mb-9">
-          <div className="inline-flex items-center gap-2">
+          <div className="inline-flex items-center gap-2 max-[900px]:flex-wrap max-[900px]:justify-center">
             <button
               type="button"
               onClick={() => setActiveTab('individuals')}
-              className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border text-[1rem] font-semibold ${
+              className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border text-[1rem] font-semibold max-[900px]:px-4 max-[900px]:text-[0.95rem] ${
                 activeTab === 'individuals'
                   ? 'bg-[#e1e5f4] text-[#3a57b5] border-transparent'
                   : 'bg-white text-[#5b66b0] border-[#b9c4ff]'
@@ -124,7 +124,7 @@ export default function FAQ() {
             <button
               type="button"
               onClick={() => setActiveTab('businesses')}
-              className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border text-[1rem] font-semibold ${
+              className={`inline-flex items-center gap-2 px-5 py-2 rounded-full border text-[1rem] font-semibold max-[900px]:px-4 max-[900px]:text-[0.95rem] ${
                 activeTab === 'businesses'
                   ? 'bg-[#e1e5f4] text-[#3a57b5] border-transparent'
                   : 'bg-white text-[#5b66b0] border-[#b9c4ff]'
@@ -136,7 +136,7 @@ export default function FAQ() {
           </div>
         </div>
 
-        <div className="max-w-[1160px] mx-auto grid grid-cols-[0.9fr_2.1fr] gap-9">
+        <div className="max-w-[1160px] mx-auto grid grid-cols-[0.9fr_2.1fr] gap-9 max-[900px]:grid-cols-1 max-[900px]:gap-6">
           <div className="border-t border-[#b9c4ff]">
             <div className="flex flex-col gap-2 pt-5">
               {categories.map(category => (
