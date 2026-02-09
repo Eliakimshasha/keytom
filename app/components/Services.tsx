@@ -96,7 +96,8 @@ export default function Services() {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#3c56ab]  relative  z-50 text-white py-28 max-[900px]:py-20"
+      data-nav-theme="light"
+      className="bg-[#3c56ab]  relative  z-40 text-white py-28 max-[900px]:py-20"
     >
       <div className="container mx-auto px-6">
         <h2

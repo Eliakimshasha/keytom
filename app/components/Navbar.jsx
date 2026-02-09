@@ -19,14 +19,26 @@ export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [language, setLanguage] = useState(languageOptions[0].value);
+  const [isLogoLight, setIsLogoLight] = useState(false);
 
   useEffect(() => {
-    // Handle scroll
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    const updateLogoTone = () => {
+      const headerHeight = headerRef.current?.getBoundingClientRect().height ?? 0;
+      const probeY = Math.min(window.innerHeight - 1, headerHeight + 1);
+      const probeX = Math.min(window.innerWidth - 1, 40);
+      const el = document.elementFromPoint(probeX, probeY);
+      const section = el?.closest?.("[data-nav-theme]");
+      setIsLogoLight(section?.getAttribute("data-nav-theme") === "light");
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+      updateLogoTone();
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", updateLogoTone);
+    updateLogoTone();
 
     const headerEl = headerRef.current;
     let tween;
@@ -55,6 +67,7 @@ export default function NavBar() {
         tween.kill();
       }
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateLogoTone);
     };
   }, []);
 
@@ -68,10 +81,12 @@ export default function NavBar() {
       <nav className=" mx-auto px-6 max-[768px]:px-2 py-4 flex items-center justify-between">
         {/* Logo */}
         <div
-          className="text-2xl font-bold text-[#374992] 
+          className={`text-2xl font-bold ${
+            isLogoLight ? "text-white" : "text-[#374992]"
+          } 
   rounded-full max-[768px]:px-3 px-7 py-1 tracking-tight
   bg-white/5 backdrop-blur-md
- "
+ `}
         >
           keytom
         </div>

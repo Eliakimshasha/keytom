@@ -229,7 +229,7 @@ export default function Intro() {
             <div
               key={i}
               ref={(el) => (cardsRef.current[i] = el)}
-              className={`intro-card absolute w-36 h-42 rounded-lg overflow-hidden shadow-sm ${i === 1 ? 'max-[768px]:hidden' : ''}`}
+              className={`intro-card absolute w-36 h-42 rounded-none overflow-hidden shadow-sm ${i === 1 ? 'max-[768px]:hidden' : ''}`}
               style={{
                 ...initialPositions[i],
                 zIndex: zIndex,

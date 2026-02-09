@@ -106,7 +106,7 @@ export default function FAQ() {
   const currentQuestions = activeData[activeCategory] || [];
 
   return (
-    <section ref={sectionRef} className="bg-[#3c56ab] py-24 max-[900px]:py-16">
+    <section ref={sectionRef} data-nav-theme="light" className="bg-[#3c56ab] py-24 max-[900px]:py-16">
       <div className="mx-auto max-w-[1200px] px-6">
         <div className="flex items-start gap-20 max-[900px]:flex-col max-[900px]:gap-12">
           <div className="w-[260px] max-[900px]:w-full">
