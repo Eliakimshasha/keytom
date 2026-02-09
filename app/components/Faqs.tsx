@@ -113,7 +113,7 @@ export default function FAQ() {
             <h1 className="text-[3.5rem] leading-none text-white font-semibold">
               FAQ
             </h1>
-            <div className="flex flex-col gap-2 pt-6">
+            <div className="flex flex-col max-[900px]:grid grid-cols gap-2 pt-6">
               {categories.map((category) => (
                 <button
                   key={category}

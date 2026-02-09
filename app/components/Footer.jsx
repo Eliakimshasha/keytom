@@ -37,10 +37,10 @@ export default function Footer() {
       ref={footerRef}
       className="bg-[#3c56ab] text-white py-7 pb-10 max-[900px]:py-6"
     >
-      <div className=" mx-auto px-16">
+      <div className=" mx-auto lg:px-16 px-6">
         {/* here should go the footer 1 */}
         <div className="pt-6">
-          <div className="grid grid-cols-4 gap-16 text-white max-[900px]:grid-cols-2 max-[600px]:grid-cols-1">
+          <div className="grid grid-cols-4 gap-16 text-white max-[900px]:grid-cols-2 max-[600px]:grid-cols-2">
             <div className="space-y-4">
               <div className="flex items-center gap-2 text-[#f6e2a3] font-semibold uppercase text-[0.95rem] tracking-wide">
                 <span className="w-2 h-2 rounded-full bg-[#f6e2a3]" />
@@ -62,11 +62,8 @@ export default function Footer() {
               <ul className="space-y-3 text-[1rem]">
                 <li>Terms and Conditions</li>
                 <li>AML Policy</li>
-                <li>Customer Acceptance Policy</li>
                 <li>Privacy Policy</li>
-                <li>IP Rights</li>
-                <li>Cookies Policy</li>
-                <li>Deletion Policy</li>
+             
               </ul>
             </div>
 

@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
-import { FaCcVisa, FaBitcoin, FaEuroSign } from "react-icons/fa";
+import { FaCcVisa, FaBitcoin, FaEuroSign, FaPaperPlane, FaInbox, FaCreditCard, FaPiggyBank, FaPlusCircle, FaExchangeAlt } from "react-icons/fa";
 import { TbChartInfographic } from 'react-icons/tb'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -13,6 +13,8 @@ export default function Intro() {
   const cardsRef = useRef([])
   const containerRef = useRef(null)
   const headlineRef = useRef(null)
+  const circleRef = useRef(null)
+  const circleTextRef = useRef(null)
 
   useEffect(() => {
     const cards = cardsRef.current
@@ -26,6 +28,8 @@ export default function Intro() {
     const buildTimeline = (endValue) => {
       // Start with cards visible at their initial positions
       gsap.set(cards, { autoAlpha: 1 })
+      gsap.set(circleRef.current, { width: 0, height: 0, opacity: 0 })
+      gsap.set(circleTextRef.current, { opacity: 0, y: 20 })
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -83,13 +87,36 @@ export default function Intro() {
       })
 
       // Hold Card 4 at center for a moment
-      tl.to({}, { duration: 1 })
+      tl.to({}, { duration: 0.6 })
 
-      // Finally fade out Card 4
-      tl.to(cards[3], {
-        autoAlpha: 0,
-        duration: 0.1,
-      })
+      // Grow reveal circle from center to full screen
+      if (circleRef.current) {
+        tl.to(circleRef.current, {
+          width: '1100px',
+          height: '1100px',
+          opacity: 1,
+          duration: 1.2,
+          ease: 'power2.inOut'
+        }, '+=0.1')
+      }
+
+      // Fade out Card 4 as the circle expands
+      if (cards[3]) {
+        tl.to(cards[3], {
+          autoAlpha: 0,
+          duration: 0.2,
+        }, '<')
+      }
+
+      // Reveal text inside the circle
+      if (circleTextRef.current) {
+        tl.to(circleTextRef.current, {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          ease: 'power2.out'
+        }, '-=0.3')
+      }
 
       return () => {
         tl.scrollTrigger?.kill()
@@ -113,6 +140,39 @@ export default function Intro() {
       <div className="intro-glow intro-glow-primary" />
       <div className="intro-glow intro-glow-secondary" />
       <div className="intro-noise" />
+      <div
+        ref={circleRef}
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3c56ab] z-30 flex items-center justify-center text-white overflow-hidden pointer-events-none"
+      >
+        <div ref={circleTextRef} className="text-center px-6">
+          <div className="flex flex-col  gap-4 text-[clamp(1.4rem,3.2vw,2.6rem)] font-semibold">
+            <div className="flex items-center gap-3 border-b border-white/10 pb-2">
+              <FaPaperPlane className="text-[1.3em]" />
+              <span>Send</span>
+            </div>
+            <div className="flex items-center gap-3  border-b border-white/10 pb-2">
+              <FaInbox className="text-[1.3em]" />
+              <span>Receive</span>
+            </div>
+            <div className="flex items-center gap-3  border-b border-white/10 pb-2">
+              <FaCreditCard className="text-[1.3em]" />
+              <span>Pay</span>
+            </div>
+            <div className="flex items-center gap-3  border-b border-white/10 pb-2">
+              <FaPiggyBank className="text-[1.3em]" />
+              <span>Deposit</span>
+            </div>
+            <div className="flex items-center gap-3  border-b border-white/10 pb-2">
+              <FaPlusCircle className="text-[1.3em]" />
+              <span>Top-up</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <FaExchangeAlt className="text-[1.3em]" />
+              <span>Convert</span>
+            </div>
+          </div>
+        </div>
+      </div>
       <div 
         ref={containerRef}
         className="container mx-auto px-6 min-h-screen flex items-center justify-center py-28 "
