@@ -71,7 +71,7 @@ export default function BuiltFor() {
           //gsap animation for individual cards
           <div className="grid grid-cols-2 gap-2 max-w-[1100px] mx-auto max-[900px]:grid-cols-1 max-[900px]:gap-4">
             <div className="flex flex-col gap-[8px]">
-              <div className={`${cardBase} min-h-[400px]`}>
+              <div className={`${cardBase} min-h-[400px]  max-[900px]:min-h-[300px]`}>
                 <div>
                   <h3 className="text-[1.4rem] font-semibold mb-2">
                     Global fund transfer
@@ -81,21 +81,21 @@ export default function BuiltFor() {
                     transfers to and from over 100 countries.
                   </p>
                 </div>
-                <div className="absolute right-[26px] bottom-[18px] w-[220px] h-[160px] pointer-events-none max-[900px]:hidden">
+                <div className="absolute right-[26px]  max-[900px]:right-[8px] bottom-[18px] w-[220px] h-[160px] pointer-events-none">
                   <img
                     src="/assets/images/circle3.svg"
                     alt=""
-                    className="absolute w-[130px] h-[130px] object-contain opacity-95 right-20 bottom-0 z-[3]"
+                    className="absolute w-[130px] h-[130px]  max-[900px]:w-[100px]  max-[900px]:h-[100px] object-contain opacity-95 right-20 bottom-0 z-[3]"
                   />
                   <img
                     src="/assets/images/circle5.svg"
                     alt=""
-                    className="absolute w-[130px] h-[130px] object-contain opacity-70 right-9 bottom-0 z-[2]"
+                    className="absolute w-[130px] h-[130px]  max-[900px]:w-[100px]  max-[900px]:h-[100px] object-contain opacity-70 right-9 bottom-0 z-[2]"
                   />
                   <img
                     src="/assets/images/circle6.svg"
                     alt=""
-                    className="absolute w-[130px] h-[130px] object-contain opacity-50 right-0 bottom-0 z-[1] blur-[0.6px]"
+                    className="absolute w-[130px] h-[130px]  max-[900px]:w-[100px]  max-[900px]:h-[100px] object-contain opacity-50 right-0 bottom-0 z-[1] blur-[0.6px]"
                   />
                 </div>
               </div>

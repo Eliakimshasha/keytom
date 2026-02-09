@@ -120,7 +120,7 @@ export default function Services() {
                   services
                 </div>
 
-                <div className="mt-9">
+                <div className="mt-24">
                   <h3 className="text-[1.7rem] font-semibold text-[#ffefac] mb-3">
                     {activeService.title}
                   </h3>
@@ -131,7 +131,7 @@ export default function Services() {
               </div>
 
               {/* Right side: Image */}
-              <div className="relative w-[300px] lg:w-[300px] h-[300px] lg:h-[300px] flex-shrink-0 max-[900px]:w-full max-[900px]:h-[200px]">
+              <div className="relative w-75 lg:w-75 h-75 lg:h-75 shrink-0 max-[900px]:w-full max-[900px]:h-[200px]">
                 <Image
                   src={image}
                   alt="Swahi"

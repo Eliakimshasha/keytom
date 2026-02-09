@@ -4,32 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Menu, X } from "lucide-react";
 
-import { Select, Space } from "antd";
+import { Select } from "antd";
 
-const cityData = {
-  Zhejiang: ["Hangzhou", "Ningbo", "Wenzhou"],
-  Jiangsu: ["Nanjing", "Suzhou", "Zhenjiang"],
-};
-
-const provinceData = ["Zhejiang", "Jiangsu"];
+const languageOptions = [
+  { label: "EN", value: "en" },
+  { label: "FR", value: "fr" },
+  { label: "ES", value: "es" },
+];
 
 export default function NavBar() {
   const headerRef = useRef(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [cities, setCities] = useState(cityData[provinceData[0]] ?? []);
-  const [secondCity, setSecondCity] = useState(
-    cityData[provinceData[0]]?.[0] ?? "",
-  );
-
-  const handleProvinceChange = (value) => {
-    setCities(cityData[value] ?? []);
-    setSecondCity(cityData[value]?.[0] ?? "");
-  };
-
-  const onSecondCityChange = (value) => {
-    setSecondCity(value);
-  };
+  const [language, setLanguage] = useState(languageOptions[0].value);
 
   useEffect(() => {
     // Handle scroll
@@ -106,27 +93,13 @@ export default function NavBar() {
 
         {/* CTA Buttons */}
         <div className="hidden md:flex items-center space-x-4">
-          <Space wrap>
-            <Select
-              defaultValue={provinceData[0]}
-              // it should have a transparent background 
-              style={{ width: 120, background: "transparent", borderColor: "#000000" }}
-              onChange={handleProvinceChange}
-              options={provinceData.map((province) => ({
-                label: province,
-                value: province,
-              }))}
-            />
-            <Select
-              style={{ width: 120, Color: "#ffffff" }}
-              value={secondCity}
-              onChange={onSecondCityChange}
-              options={cities.map((city) => ({
-                label: city,
-                value: city,
-              }))}
-            />
-          </Space>
+          <Select
+            value={language}
+            onChange={setLanguage}
+            aria-label="Language"
+            style={{ width: 120, background: "transparent" }}
+            options={languageOptions}
+          />
           <button className="px-6 py-2 bg-[#38488B] text-white rounded-md font-medium text-sm hover:bg-opacity-90 transition-all duration-200 hover:scale-105">
             OPEN ACCOUNT
           </button>

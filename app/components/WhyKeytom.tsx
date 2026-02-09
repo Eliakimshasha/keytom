@@ -11,7 +11,7 @@ const reasons = [
     stat: '126+',
     label: 'countries supported',
     description:
-      "We onboard users from 126+ countries — whether you hold a passport or a residence permit — we've got you covered."
+      "We onboard users from 126+ countries, whether you hold a passport or a residence permit we've got you covered."
   },
   {
     stat: 'Low service',
@@ -36,11 +36,10 @@ const reasons = [
 ]
 
 export default function WhyKeytom() {
-  const sectionRef = useRef(null)
-  const titleRef = useRef(null)
-  const cardsRef = useRef(null)
-  const trackRef = useRef(null)
-  const sliderRef = useRef(null)
+  const sectionRef = useRef<HTMLElement | null>(null)
+  const titleRef = useRef<HTMLDivElement | null>(null)
+  const trackRef = useRef<HTMLDivElement | null>(null)
+  const sliderRef = useRef<HTMLDivElement | null>(null)
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
@@ -86,7 +85,7 @@ export default function WhyKeytom() {
       mm.add('(max-width: 767px)', () => {
         const section = sectionRef.current
         const track = trackRef.current
-        const slider = sliderRef.current || (track ? track.parentElement : null)
+        const slider = sliderRef.current ?? track?.parentElement
         if (!section || !track || !slider) return
 
         const getScrollAmount = () => {
@@ -151,7 +150,7 @@ export default function WhyKeytom() {
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-24 min-h-[100vh] lg:min-h-[110vh] bg-[linear-gradient(100deg,#f3e6c9_0%,#efd7c7_45%,#d6a6bf_100%)] max-[767px]:min-h-screen max-[767px]:py-20"
+      className="relative overflow-hidden py-24  lg:min-h-[110vh] bg-[linear-gradient(100deg,#f3e6c9_0%,#efd7c7_45%,#d6a6bf_100%)] max-[767px]:min-h-[100vh] max-[767px]:pt-36 max-[767px]:pb-0"
     >
       <div className="absolute inset-0 pointer-events-none">
         <img src="/assets/images/star1.svg" alt="" className="absolute w-5 h-5 opacity-60 left-[4%] top-[12%]" />
@@ -168,16 +167,16 @@ export default function WhyKeytom() {
         Why Keytom?
       </div>
 
-      <div className="mx-auto px-6 w-full z-50">
+      <div className="mx-auto  w-full z-50">
         <div ref={sliderRef} className="max-[767px]:overflow-hidden">
           <div
             ref={trackRef}
-            className="left-1/2 -translate-x-1/2 w-full md:absolute md:-bottom-36 max-w-[1100px] mx-auto md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 max-[767px]:static max-[767px]:translate-x-0 max-[767px]:mt-8 max-[767px]:flex max-[767px]:flex-row max-[767px]:flex-nowrap max-[767px]:gap-4 max-[767px]:pr-6"
+            className="left-1/2  -translate-x-1/2 w-full md:absolute md:-bottom-36 max-w-[1200px] mx-auto md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 max-[767px]:static max-[767px]:translate-x-0 max-[767px]:mt-8 max-[767px]:flex max-[767px]:flex-row max-[767px]:flex-nowrap max-[767px]:gap-4 max-[767px]:pr-6"
           >
           {reasons.map((reason, index) => (
             <div
               key={index}
-              className="reason-card bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)] max-[767px]:flex-none max-[767px]:w-[76vw] sm:max-[767px]:w-[60vw] md:w-auto"
+              className="reason-card bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px] flex flex-col gap-4  shadow-[0_20px_50px_rgba(159,118,129,0.2)] max-[767px]:flex-none max-[767px]:w-[76vw] sm:max-[767px]:w-[60vw] md:w-auto"
             >
               <div>
                 <h3 className="text-[30px] font-bold text-[#b07f8d] leading-none mb-1">

@@ -4,6 +4,13 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { FaChevronDown, FaArrowRight } from "react-icons/fa";
+import { FaApple, FaGooglePlay } from "react-icons/fa";
+import { MdOutlineLogout } from "react-icons/md";
+import { FaLinkedinIn } from "react-icons/fa";
+import { PiTelegramLogoFill } from "react-icons/pi";
+import { FaInstagram } from "react-icons/fa6";
+import { FaXTwitter } from "react-icons/fa6";
+
 
 export default function Footer() {
   const footerRef = useRef(null);
@@ -30,10 +37,96 @@ export default function Footer() {
       ref={footerRef}
       className="bg-[#3c56ab] text-white py-7 pb-10 max-[900px]:py-6"
     >
-      <div className="container mx-auto px-6">
+      <div className=" mx-auto px-16">
         {/* here should go the footer 1 */}
-        <div className="flex items-center justify-between gap-6 pt-6 ">
-        
+        <div className="pt-6">
+          <div className="grid grid-cols-4 gap-16 text-white max-[900px]:grid-cols-2 max-[600px]:grid-cols-1">
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 text-[#f6e2a3] font-semibold uppercase text-[0.95rem] tracking-wide">
+                <span className="w-2 h-2 rounded-full bg-[#f6e2a3]" />
+                Discover
+              </div>
+              <ul className="space-y-3 text-[1rem]">
+                <li>Personal</li>
+                <li>Business</li>
+                <li>Cards</li>
+                <li>FAQ</li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 text-[#f6e2a3] font-semibold uppercase text-[0.95rem] tracking-wide">
+                <span className="w-2 h-2 rounded-full bg-[#f6e2a3]" />
+                Legal
+              </div>
+              <ul className="space-y-3 text-[1rem]">
+                <li>Terms and Conditions</li>
+                <li>AML Policy</li>
+                <li>Customer Acceptance Policy</li>
+                <li>Privacy Policy</li>
+                <li>IP Rights</li>
+                <li>Cookies Policy</li>
+                <li>Deletion Policy</li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 text-[#f6e2a3] font-semibold uppercase text-[0.95rem] tracking-wide">
+                <span className="w-2 h-2 rounded-full bg-[#f6e2a3]" />
+                Company
+              </div>
+              <ul className="space-y-3 text-[1rem]">
+                <li>Blog</li>
+              </ul>
+            </div>
+
+            <div className="space-y-4">
+              <div className="flex items-center gap-2 text-[#f6e2a3] font-semibold uppercase text-[0.95rem] tracking-wide">
+                <span className="w-2 h-2 rounded-full bg-[#f6e2a3]" />
+                Contact
+              </div>
+              <ul className="space-y-3 text-[1rem]">
+                <li>Email</li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="mt-12 flex items-center justify-between gap-6 flex-wrap">
+            <div className="flex flex-wrap gap-2">
+              <button className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start">
+                <span className="absolute left-[4px] top-1/2 -translate-y-1/2 text-[1.15rem] opacity-95">
+                  <FaApple />
+                </span>
+                <span className="text-[0.5rem] font-medium opacity-80">
+                  Download on the
+                </span>
+                App Store
+              </button>
+              <button className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start">
+                <span className="absolute left-[4px] top-1/2 -translate-y-1/2 text-[1.15rem] opacity-95">
+                  <FaGooglePlay />
+                </span>
+                <span className="text-[0.5rem] font-medium opacity-80">
+                  Get it on
+                </span>
+                Google Play
+              </button>
+            </div>
+            <div className="flex items-center gap-3 mb-3">
+              <span className="w-9 h-9 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem]">
+                <FaLinkedinIn />
+              </span>
+              <span className="w-9 h-9 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem]">
+                <PiTelegramLogoFill />
+              </span>
+              <span className="w-9 h-9 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem]">
+                <FaXTwitter />
+              </span>
+              <span className="w-9 h-9 rounded-xs border border-white/70 flex items-center justify-center text-[1.1rem]">
+                <FaInstagram />
+              </span>
+            </div>
+          </div>
         </div>
 
         {/* this is the second footer  */}
@@ -50,10 +143,10 @@ export default function Footer() {
               <FaChevronDown className="text-[0.8rem]" />
             </button>
             <button
-              className="w-9 h-9 rounded-xs border-2 border-white text-white flex items-center justify-center"
+              className="w-9 h-9 rounded-xs border-1 border-white text-white flex items-center justify-center"
               aria-label="Next"
             >
-              <FaArrowRight />
+              <MdOutlineLogout />
             </button>
             <button className="bg-[#f6e2a3] text-[#3c56ab] px-4 py-2 rounded-xs font-bold text-[0.95rem] uppercase">
               Open account
