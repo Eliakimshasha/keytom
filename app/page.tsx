@@ -68,7 +68,7 @@ export default function Home() {
       <Services />
      
        <VirtualCard />
-      <WhyKeytom />
+      {/* <WhyKeytom /> */}
       <BuiltFor />
       <Comparison />
       <FAQ />

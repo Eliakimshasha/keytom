@@ -92,8 +92,8 @@ export default function Intro() {
       // Grow reveal circle from center to full screen
       if (circleRef.current) {
         tl.to(circleRef.current, {
-          width: '1100px',
-          height: '1100px',
+          width: '200vmax',
+          height: '200vmax',
           opacity: 1,
           duration: 1.2,
           ease: 'power2.inOut'
@@ -104,7 +104,7 @@ export default function Intro() {
       if (cards[3]) {
         tl.to(cards[3], {
           autoAlpha: 0,
-          duration: 0.2,
+          duration: 0.3,
         }, '<')
       }
 
@@ -142,7 +142,7 @@ export default function Intro() {
       <div className="intro-noise" />
       <div
         ref={circleRef}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3c56ab] z-30 flex items-center justify-center text-white overflow-hidden pointer-events-none"
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3c56ab] z-[120] flex items-center justify-center text-white overflow-hidden pointer-events-none"
       >
         <div ref={circleTextRef} className="text-center px-6">
           <div className="flex flex-col  gap-4 text-[clamp(1.4rem,3.2vw,2.6rem)] font-semibold">
@@ -229,7 +229,7 @@ export default function Intro() {
             <div
               key={i}
               ref={(el) => (cardsRef.current[i] = el)}
-              className={`intro-card absolute w-36 h-42 rounded-2xl overflow-hidden shadow-sm ${i === 1 ? 'max-[768px]:hidden' : ''}`}
+              className={`intro-card absolute w-36 h-42 rounded-lg overflow-hidden shadow-sm ${i === 1 ? 'max-[768px]:hidden' : ''}`}
               style={{
                 ...initialPositions[i],
                 zIndex: zIndex,
