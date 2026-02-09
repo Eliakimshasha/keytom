@@ -64,8 +64,10 @@ export default function Home() {
         </div>
       </div>
       <Services />
-      <VirtualCard />
+     <div className='bg-fuchsia-500'>
+       <VirtualCard />
       <WhyKeytom />
+     </div>
       <BuiltFor />
       <Comparison />
       <FAQ />

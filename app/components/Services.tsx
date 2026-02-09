@@ -96,7 +96,7 @@ export default function Services() {
   return (
     <section
       ref={sectionRef}
-      className="bg-[#3c56ab] relative  z-50 text-white py-28 max-[900px]:py-20"
+      className="bg-[#3c56ab]  relative  z-50 text-white py-28 max-[900px]:py-20"
     >
       <div className="container mx-auto px-6">
         <h2
@@ -131,7 +131,7 @@ export default function Services() {
               </div>
 
               {/* Right side: Image */}
-              <div className="relative w-[300px] lg:w-[350px] h-[300px] lg:h-[250px] flex-shrink-0 max-[900px]:w-full max-[900px]:h-[200px]">
+              <div className="relative w-[300px] lg:w-[300px] h-[300px] lg:h-[300px] flex-shrink-0 max-[900px]:w-full max-[900px]:h-[200px]">
                 <Image
                   src={image}
                   alt="Swahi"

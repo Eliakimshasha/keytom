@@ -77,8 +77,12 @@ export default function VirtualCard() {
       const items = gsap.utils.toArray<HTMLElement>('.vc-item', featuresRef.current)
 
       mm.add('(min-width: 901px)', () => {
-        const flipSteps = 2 // front -> back -> front
-        const scrollDistance = Math.max(items.length, flipSteps) * 600 // 600px per step
+        const itemStep = 1
+        const itemInDuration = 0.6
+        const descInDuration = 0.4
+        const totalDuration = (items.length - 1) * itemStep + itemInDuration
+        const stepPx = 420
+        const scrollDistance = totalDuration * stepPx
 
         const timeline = gsap.timeline({
           scrollTrigger: {
@@ -95,20 +99,11 @@ export default function VirtualCard() {
           timeline.to(
             cardFlipRef.current,
             {
-              rotateY: 180,
-              ease: 'none',
-              duration: 0.9
-            },
-            0
-          )
-          timeline.to(
-            cardFlipRef.current,
-            {
               rotateY: 360,
               ease: 'none',
-              duration: 0.9
+              duration: totalDuration
             },
-            0.9
+            0
           )
         }
 
@@ -116,14 +111,14 @@ export default function VirtualCard() {
 
         items.forEach((item, index) => {
           const desc = item.querySelector<HTMLElement>('.vc-desc')
-          const startAt = index
+          const startAt = index * itemStep
 
           timeline.to(
             item,
             {
               opacity: 1,
               y: 0,
-              duration: 0.6,
+              duration: itemInDuration,
               ease: 'power3.out'
             },
             startAt
@@ -139,7 +134,7 @@ export default function VirtualCard() {
                 height: descHeight,
                 opacity: 1,
                 marginTop: 8,
-                duration: 0.4,
+                duration: descInDuration,
                 ease: 'power2.out'
               },
               startAt + 0.1
@@ -197,7 +192,7 @@ export default function VirtualCard() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="bg-white py-28 min-h-screen max-[900px]:py-20">
+    <section ref={sectionRef} className="bg-red-600 py-28 min-h-screen max-[900px]:py-20">
       <div className="container mx-auto px-6">
         <h2 ref={titleRef} className="text-[#3a57b5] font-semibold text-[clamp(2.6rem,4.6vw,4.8rem)] mb-8">
           Keytom Virtual
@@ -237,21 +232,28 @@ export default function VirtualCard() {
           </div>
 
           <div ref={featuresRef} className="overflow-hidden relative max-[900px]:overflow-visible">
-            {features.map((feature, index) => (
-              <div key={index} className="vc-item py-4 border-b border-[#b9c4ff]">
-                <div className="vc-header flex items-center gap-4">
-                  <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-[#b9c4ff] text-[#3a57b5] font-semibold text-[0.95rem] min-w-[56px] justify-center">
-                    <span className="w-2 h-2 rounded-full bg-[#3a57b5]" />
-                    <span>{feature.number}</span>
-                  </div>
-                  <h3 className="text-[1.2rem] font-semibold text-[#3a57b5]">{feature.title}</h3>
-                </div>
-                <p className="vc-desc ml-[72px] mt-2 text-[0.98rem] leading-snug text-[#4b5fc0]">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
+  {features.map((feature, index) => (
+    <div
+      key={index}
+      className="vc-item py-4 border-b border-[#b9c4ff] last:border-b-0"
+    >
+      <div className="vc-header flex items-center gap-4">
+        <div className="inline-flex items-center gap-2 px-4 py-1 rounded-full border border-[#b9c4ff] text-[#3a57b5] font-semibold text-[0.95rem] min-w-[56px] justify-center">
+          <span className="w-2 h-2 rounded-full bg-[#3a57b5]" />
+          <span>{feature.number}</span>
+        </div>
+        <h3 className="text-[1.2rem] font-semibold text-[#3a57b5]">
+          {feature.title}
+        </h3>
+      </div>
+
+      <p className="vc-desc ml-[72px] mt-2 text-[0.98rem] leading-snug text-[#4b5fc0]">
+        {feature.description}
+      </p>
+    </div>
+  ))}
+</div>
+
         </div>
       </div>
     </section>

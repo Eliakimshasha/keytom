@@ -67,7 +67,7 @@ export default function Intro() {
     // Fade out headline as cards move to center
     tl.to(headline, {
       autoAlpha: 0,
-      duration: 0.5,
+      duration: 1,
     }, 1)
 
     // Fade out all cards EXCEPT Card 4 as they reach center
@@ -81,12 +81,12 @@ export default function Intro() {
     })
 
     // Hold Card 4 at center for a moment
-    tl.to({}, { duration: 0.2 })
+    tl.to({}, { duration: 1 })
 
     // Finally fade out Card 4
     tl.to(cards[3], {
       autoAlpha: 0,
-      duration: 1,
+      duration: 0.01,
     })
 
     return () => {
