@@ -85,12 +85,11 @@ export default function VirtualCard() {
         featuresRef.current,
       );
 
-      mm.add("(min-width: 901px)", () => {
+      const buildTimeline = (stepPx: number) => {
         const itemStep = 1;
         const itemInDuration = 0.6;
         const descInDuration = 0.4;
         const totalDuration = (items.length - 1) * itemStep + itemInDuration;
-        const stepPx = 420;
         const scrollDistance = totalDuration * stepPx;
 
         const timeline = gsap.timeline({
@@ -173,31 +172,16 @@ export default function VirtualCard() {
             }
           }
         });
-      });
 
-      mm.add("(max-width: 900px)", () => {
-        items.forEach((item, index) => {
-          const desc = item.querySelector<HTMLElement>(".vc-desc");
+        return () => {
+          timeline.scrollTrigger?.kill();
+          timeline.kill();
+        };
+      };
 
-          gsap.set(item, { opacity: 1, y: 0 });
-          if (desc) {
-            gsap.set(desc, { height: "auto", opacity: 1 });
-          }
+      mm.add("(min-width: 901px)", () => buildTimeline(420));
 
-          // Stagger animation on mobile - each item comes one by one from bottom
-          gsap.from(item, {
-            y: 100,
-            opacity: 0,
-            duration: 0.6,
-            delay: index * 0.2, // 200ms delay between each item
-            ease: "power2.out",
-            scrollTrigger: {
-              trigger: item,
-              start: "top 90%",
-            },
-          });
-        });
-      });
+      mm.add("(max-width: 900px)", () => buildTimeline(360));
     }, sectionRef);
 
     return () => {
@@ -211,13 +195,13 @@ export default function VirtualCard() {
       <div className="container mx-auto px-6">
         <h2
           ref={titleRef}
-          className="text-[#3a57b5] font-semibold text-[clamp(2.6rem,4.6vw,4.8rem)] mb-8"
+          className="text-[#3a57b5] font-semibold max-[900px]:text-[clamp(2rem,4vw,3.2rem)] text-[clamp(2.6rem,4.6vw,4.8rem)] mb-8"
         >
           Keytom Virtual
         </h2>
 
-        <div className="grid grid-cols-[1.05fr_1fr] gap-12 items-start max-[900px]:grid-cols-1 max-[900px]:gap-8">
-          <div className="flex items-center justify-center min-h-[420px] sticky top-20 max-[900px]:static max-[900px]:min-h-[260px] max-[900px]:mb-4">
+        <div className="grid grid-cols-[1.05fr_1fr] gap-12 items-start max-[900px]:grid-cols-1 max-[900px]:gap-0">
+          <div className="flex items-center justify-center  min-h-[420px] sticky top-20 max-[900px]:static max-[900px]:min-h-[180px] max-[900px]:max-h-[200px] max-[900px]:mb-0">
             <div
               ref={cardStackRef}
               className="relative w-[min(90%,460px)] h-[320px] max-[900px]:w-[min(100%,340px)] max-[900px]:h-[240px]"
@@ -225,7 +209,7 @@ export default function VirtualCard() {
             >
               <div
                 ref={cardFlipRef}
-                className="relative w-full bg-red-900 lg:h-full md:h-full h-fit"
+                className="relative w-full 0 lg:h-full md:h-full h-fit"
                 style={{
                   transformStyle: "preserve-3d",
                   willChange: "transform",
@@ -266,7 +250,7 @@ export default function VirtualCard() {
                     <span className="lg:w-2 lg:h-2 w-1 h-1 rounded-full bg-[#3a57b5]" />
                     <span>{feature.number}</span>
                   </div>
-                  <h3 className="text-[1.4rem] font-semibold text-[#3a57b5]">
+                  <h3 className="text-[1.4rem] max-[900px]:text-[1.2rem] font-semibold text-[#3a57b5]">
                     {feature.title}
                   </h3>
                 </div>

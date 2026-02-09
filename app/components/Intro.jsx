@@ -158,7 +158,7 @@ export default function Intro() {
             <div
               key={i}
               ref={(el) => (cardsRef.current[i] = el)}
-              className="intro-card absolute w-52 h-64 rounded-2xl overflow-hidden shadow-2xl"
+              className="intro-card absolute w-52 h-64 rounded-2xl overflow-hidden shadow-sm"
               style={{
                 ...initialPositions[i],
                 zIndex: zIndex,

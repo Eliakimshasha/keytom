@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Menu, X } from "lucide-react";
+import { HiOutlineBars2 } from "react-icons/hi2";
 
 import { Select } from "antd";
 
@@ -63,12 +64,12 @@ export default function NavBar() {
       ref={headerRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 `}
     >
-      <nav className=" mx-auto px-6 py-4 flex items-center justify-between">
+      <nav className=" mx-auto px-6 max-[768px]:px-2 py-4 flex items-center justify-between">
         {/* Logo */}
         <div
-          className="text-2xl font-bold text-[#38488B] 
-  rounded-full px-7 py-1 tracking-tight
-  bg-white/10 backdrop-blur-md
+          className="text-2xl font-bold text-[#374992] 
+  rounded-full max-[768px]:px-3 px-7 py-1 tracking-tight
+  bg-white/5 backdrop-blur-md
  "
         >
           keytom
@@ -97,12 +98,17 @@ export default function NavBar() {
             value={language}
             onChange={setLanguage}
             aria-label="Language"
-            style={{ width: 120, background: "transparent" }}
+            className="glass-select"
+            style={{ width: 70, background: "transparent", marginRight: 8 }}
             options={languageOptions}
           />
-          <button className="px-6 py-2 bg-[#38488B] text-white rounded-md font-medium text-sm hover:bg-opacity-90 transition-all duration-200 hover:scale-105">
+
+          <button className="px-6 py-2 bg-[#474747] text-white rounded-xs font-medium text-sm hover:bg-opacity-90 transition-all duration-200 hover:scale-105">
             OPEN ACCOUNT
           </button>
+          <div className="px-3 py-2 bg-[#474747] rounded-xs">
+            <HiOutlineBars2 className="text-white" />
+          </div>
         </div>
 
         {/* Mobile Menu Button */}
@@ -128,7 +134,7 @@ export default function NavBar() {
                 {item}
               </a>
             ))}
-            <button className="px-6 py-2 bg-[#38488B] text-white rounded-md font-medium text-sm w-full">
+            <button className="px-6 py-2 bg-[#6f7179] text-white rounded-xs font-medium text-sm w-full">
               OPEN ACCOUNT
             </button>
           </div>

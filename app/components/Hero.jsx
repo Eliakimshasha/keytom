@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ArrowRight } from 'lucide-react'
 import start from '../../public/assets/images/star1.svg'
@@ -17,7 +17,7 @@ export default function Hero() {
   const redLineRef = useRef(null)
   const blueLineRef = useRef(null)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
       // Master timeline for sequential animations
       const masterTl = gsap.timeline({ delay: 0.3 })
@@ -72,7 +72,8 @@ export default function Hero() {
         y: 50,
         opacity: 0,
         duration: 0.9,
-        ease: 'back.out(1.7)'
+        ease: 'back.out(1.7)',
+        clearProps: 'transform'
       }, '<')
 
       // Visual element fades in
@@ -97,13 +98,13 @@ export default function Hero() {
   }, [])
 
   return (
-    <section ref={heroRef} className="hero-pin min-h-screen mesh-gradient overflow-hidden pt-16 max-[768px]:pt-12">
+    <section ref={heroRef} className="hero-pin min-h-screen mesh-gradient overflow-hidden max-[768px]:flex max-[768px]:items-center pt-16 max-[768px]:pt-0">
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-64 h-64 bg-keytom-purple/20 rounded-full blur-3xl max-[768px]:hidden" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-keytom-peach/30 rounded-full blur-3xl max-[768px]:hidden" />
       
-      <div className="lg:pl-14 mx-auto px-6 pb-20 relative z-10 pt-16 max-[768px]:pt-10 max-[768px]:pb-12">
-        <div className="grid relative lg:grid-cols-[1.1fr_0.9fr] items-start min-h-[45vh] max-[768px]:min-h-[28vh] max-[768px]:gap-6">
+      <div className="lg:pl-14  mx-auto px-6 pb-20 relative z-10 pt-16 max-[768px]:pt-0 max-[768px]:pb-12">
+        <div className="grid  relative lg:grid-cols-[1.1fr_0.9fr] items-start min-h-[45vh] max-[768px]:min-h-[28vh] max-[768px]:gap-6">
           <div>
             <div ref={titleRef} className="overflow-hidden">
               <h1 className="text-[clamp(1.2rem,8vw,5rem)] font-bolder text-[#38488B]  leading-[0.9] tracking-[-0.02em]">
@@ -111,8 +112,8 @@ export default function Hero() {
               </h1>
             </div>
           </div>
-          <div ref={subtitleRef} className="text-right absolute bottom-0 right-0 max-[768px]:static max-[768px]:text-left max-[768px]:mt-4">
-            <h2 className="text-[clamp(2.8rem,6vw,5rem)] font-semibold text-[#38488B] leading-[0.9] tracking-[-0.01em]">
+          <div ref={subtitleRef} className="text-right absolute bottom-0 right-0 max-[768px]:static  max-[768px]:mt-4">
+            <h2 className="text-[clamp(2.8rem,6vw,5rem)] max-[768px]:text-3xl font-semibold text-[#38488B] leading-[0.9] tracking-[-0.01em]">
               Imagine<br />more
             </h2>
           </div>
@@ -146,12 +147,12 @@ export default function Hero() {
 
             <button 
               ref={ctaRef}
-              className="group w-full sm:w-72 px-8 py-5 bg-[#38488B] text-white  font-semibold text-[0.72rem] 
+              className="group w-full sm:w-72 mt-6 max-[900]:mt-2 px-8 max-[900]:py-5 py-3 bg-[#38488B] text-white  font-semibold text-[0.72rem] 
                 tracking-[0.2em] uppercase flex items-center justify-between
                 transition-all duration-300 hover:translate-y-0.5"
             >
               Open account
-              <span className="w-7 h-7 rounded-full bg-white/20 flex items-center justify-center">
+              <span className="w-7 h-7 rotate-3 rounded-full bg-white/20 flex items-center justify-center">
                 <ArrowRight className="group-hover:translate-x-1 transition-transform" size={14} />
               </span>
             </button>
