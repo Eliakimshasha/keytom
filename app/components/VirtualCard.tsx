@@ -77,7 +77,8 @@ export default function VirtualCard() {
       const items = gsap.utils.toArray<HTMLElement>('.vc-item', featuresRef.current)
 
       mm.add('(min-width: 901px)', () => {
-        const scrollDistance = (items.length + 1) * 600 // 600px per step, includes card flip
+        const flipSteps = 2 // front -> back -> front
+        const scrollDistance = (items.length + flipSteps) * 600 // 600px per step
 
         const timeline = gsap.timeline({
           scrollTrigger: {
@@ -96,9 +97,18 @@ export default function VirtualCard() {
             {
               rotateY: 180,
               ease: 'none',
-              duration: 1
+              duration: 0.9
             },
             0
+          )
+          timeline.to(
+            cardFlipRef.current,
+            {
+              rotateY: 360,
+              ease: 'none',
+              duration: 0.9
+            },
+            0.9
           )
         }
 
@@ -106,7 +116,7 @@ export default function VirtualCard() {
 
         items.forEach((item, index) => {
           const desc = item.querySelector<HTMLElement>('.vc-desc')
-          const startAt = 1 + index
+          const startAt = flipSteps + index
 
           timeline.to(
             item,
@@ -208,7 +218,7 @@ export default function VirtualCard() {
                 <img
                   src="/assets/images/card1.jpeg"
                   alt="Keytom card front"
-                  className="w-full max-w-[460px] rounded-[18px] absolute top-0 left-0"
+                  className="w-full min-w-[460px] rounded-[18px]  absolute -top-9 -left-9"
                   style={{ 
                     backfaceVisibility: 'hidden'
                   }}
@@ -216,7 +226,7 @@ export default function VirtualCard() {
                 <img
                   src="/assets/images/card2.jpeg"
                   alt="Keytom card back"
-                  className="w-full max-w-[460px] rounded-[18px] absolute top-0 left-0"
+                  className="w-full min-w-[460px] rounded-[18px]  absolute -top-9 -left-9"
                   style={{ 
                     backfaceVisibility: 'hidden',
                     transform: 'rotateY(180deg)'
