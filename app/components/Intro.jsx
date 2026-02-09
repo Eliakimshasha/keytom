@@ -17,11 +17,6 @@ export default function Intro() {
   const headlineRef = useRef(null)
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const isMobile = window.matchMedia('(max-width: 768px)').matches
-      if (isMobile) return
-    }
-
     const cards = cardsRef.current
     const container = containerRef.current
     const headline = headlineRef.current
@@ -102,18 +97,18 @@ export default function Intro() {
   return (
     <section
       ref={sectionRef}
-      className="intro-section relative min-h-screen overflow-hidden max-[768px]:min-h-[auto] max-[768px]:py-16"
+      className="intro-section relative min-h-screen overflow-hidden"
     >
       <div className="intro-glow intro-glow-primary" />
       <div className="intro-glow intro-glow-secondary" />
       <div className="intro-noise" />
       <div 
         ref={containerRef}
-        className="container mx-auto px-6 min-h-screen flex items-center justify-center py-28 max-[768px]:min-h-[auto] max-[768px]:flex-col max-[768px]:items-stretch max-[768px]:gap-6 max-[768px]:py-16"
+        className="container mx-auto px-6 min-h-screen flex items-center justify-center py-28 "
       >
         <p 
           ref={headlineRef}
-          className="intro-headline text-center max-w-2xl z-20 relative max-[768px]:text-left max-[768px]:max-w-none"
+          className="intro-headline text-center max-w-2xl z-20 relative"
         >
           A next-generation digital financial institution built for people and
           businesses who move fast and think global.
@@ -163,7 +158,7 @@ export default function Intro() {
             <div
               key={i}
               ref={(el) => (cardsRef.current[i] = el)}
-              className="intro-card absolute w-52 h-64 rounded-2xl overflow-hidden shadow-2xl max-[768px]:static max-[768px]:w-full max-[768px]:max-w-[320px] max-[768px]:h-auto max-[768px]:min-h-[220px] max-[768px]:mx-auto"
+              className="intro-card absolute w-52 h-64 rounded-2xl overflow-hidden shadow-2xl"
               style={{
                 ...initialPositions[i],
                 zIndex: zIndex,

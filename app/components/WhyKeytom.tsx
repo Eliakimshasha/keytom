@@ -1,6 +1,6 @@
 ﻿'use client'
 
-import { useEffect, useRef } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
@@ -39,11 +39,14 @@ export default function WhyKeytom() {
   const sectionRef = useRef(null)
   const titleRef = useRef(null)
   const cardsRef = useRef(null)
+  const trackRef = useRef(null)
+  const sliderRef = useRef(null)
 
-  useEffect(() => {
-    const mm = gsap.matchMedia()
+  useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      mm.add('(min-width: 901px)', () => {
+      const mm = gsap.matchMedia()
+
+      mm.add('(min-width: 768px)', () => {
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: sectionRef.current,
@@ -80,33 +83,77 @@ export default function WhyKeytom() {
         )
       })
 
-      mm.add('(max-width: 900px)', () => {
-        gsap.from('.reason-card', {
+      mm.add('(max-width: 767px)', () => {
+        const section = sectionRef.current
+        const track = trackRef.current
+        const slider = sliderRef.current || (track ? track.parentElement : null)
+        if (!section || !track || !slider) return
+
+        const getScrollAmount = () => {
+          const currentX = gsap.getProperty(track, 'x')
+          gsap.set(track, { x: 0 })
+
+          const sliderRect = slider.getBoundingClientRect()
+          const base = Math.max(0, track.scrollWidth - sliderRect.width)
+          const tail = Math.max(16, sliderRect.width * 0.38)
+          const amount = base + tail
+
+          gsap.set(track, { x: currentX })
+          return amount
+        }
+
+        if (getScrollAmount() <= 0) return
+
+        const moveTween = gsap.to(track, {
+          x: () => `-${getScrollAmount()}px`,
+          ease: 'none',
           scrollTrigger: {
-            trigger: sectionRef.current,
-            start: 'top 80%'
-          },
-          y: 40,
-          opacity: 0,
-          stagger: 0.12,
-          duration: 0.8,
-          ease: 'power3.out'
+            trigger: section,
+            start: 'top top',
+            end: () => `+=${getScrollAmount()}px`,
+            scrub: true,
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true
+          }
         })
+
+        const handleLoad = () => ScrollTrigger.refresh()
+
+        const resizeObserver = new ResizeObserver(() => {
+          ScrollTrigger.refresh()
+        })
+
+        resizeObserver.observe(track)
+        resizeObserver.observe(slider)
+
+        if (document.readyState === 'complete') {
+          handleLoad()
+        } else {
+          window.addEventListener('load', handleLoad)
+        }
+
+        return () => {
+          window.removeEventListener('load', handleLoad)
+          resizeObserver.disconnect()
+          moveTween.scrollTrigger?.kill()
+          moveTween.kill()
+        }
       })
+
+      return () => mm.revert()
     }, sectionRef)
 
-    return () => {
-      ctx.revert()
-      mm.revert()
-    }
+    return () => ctx.revert()
   }, [])
 
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden py-24 min-h-[100vh] lg:min-h-[110vh] bg-[linear-gradient(100deg,#f3e6c9_0%,#efd7c7_45%,#d6a6bf_100%)] max-[900px]:py-16 max-[900px]:min-h-[auto]"
+      className="relative overflow-hidden py-24 min-h-[100vh] lg:min-h-[110vh] bg-[linear-gradient(100deg,#f3e6c9_0%,#efd7c7_45%,#d6a6bf_100%)] max-[767px]:min-h-screen max-[767px]:py-20"
     >
-      <div className="absolute inset-0 pointer-events-none max-[900px]:hidden">
+      <div className="absolute inset-0 pointer-events-none">
         <img src="/assets/images/star1.svg" alt="" className="absolute w-5 h-5 opacity-60 left-[4%] top-[12%]" />
         <img src="/assets/images/star1.svg" alt="" className="absolute w-5 h-5 opacity-60 left-[22%] top-[10%]" />
         <img src="/assets/images/star1.svg" alt="" className="absolute w-5 h-5 opacity-60 left-[48%] top-[14%]" />
@@ -116,20 +163,21 @@ export default function WhyKeytom() {
 
       <div
         ref={titleRef}
-        className="text-center text-[clamp(3rem,11vw,10rem)] font-semibold tracking-[-0.02em] text-white/35 pointer-events-none select-none max-[900px]:text-[clamp(2.2rem,8vw,4.2rem)]"
+        className="text-center text-[clamp(3rem,11vw,10rem)] font-semibold tracking-[-0.02em] text-white/35 pointer-events-none select-none"
       >
         Why Keytom?
       </div>
 
       <div className="mx-auto px-6 w-full z-50">
-        <div
-          ref={cardsRef}
-          className="grid left-1/2 -translate-x-1/2 w-full absolute -bottom-36 gap-6 lg:gap-8 md:grid-cols-2 lg:grid-cols-4 max-w-[1100px] mx-auto max-[900px]:static max-[900px]:translate-x-0 max-[900px]:mt-8 max-[900px]:grid-cols-1"
-        >
+        <div ref={sliderRef} className="max-[767px]:overflow-hidden">
+          <div
+            ref={trackRef}
+            className="left-1/2 -translate-x-1/2 w-full md:absolute md:-bottom-36 max-w-[1100px] mx-auto md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-8 max-[767px]:static max-[767px]:translate-x-0 max-[767px]:mt-8 max-[767px]:flex max-[767px]:flex-row max-[767px]:flex-nowrap max-[767px]:gap-4 max-[767px]:pr-6"
+          >
           {reasons.map((reason, index) => (
             <div
               key={index}
-              className="reason-card bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)] max-[900px]:min-h-[260px]"
+              className="reason-card bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)] max-[767px]:flex-none max-[767px]:w-[76vw] sm:max-[767px]:w-[60vw] md:w-auto"
             >
               <div>
                 <h3 className="text-[30px] font-bold text-[#b07f8d] leading-none mb-1">
@@ -168,6 +216,7 @@ export default function WhyKeytom() {
               )}
             </div>
           ))}
+          </div>
         </div>
       </div>
     </section>

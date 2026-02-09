@@ -36,6 +36,7 @@ export default function VirtualCard() {
   const sectionRef = useRef<HTMLElement | null>(null)
   const titleRef = useRef<HTMLHeadingElement | null>(null)
   const cardStackRef = useRef<HTMLDivElement | null>(null)
+  const cardFlipRef = useRef<HTMLDivElement | null>(null)
   const featuresRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -59,7 +60,7 @@ export default function VirtualCard() {
         })
       }
 
-      // Card stack animation
+      // Card stack initial animation
       if (cardStackRef.current) {
         gsap.from(cardStackRef.current, {
           scrollTrigger: {
@@ -73,76 +74,102 @@ export default function VirtualCard() {
         })
       }
 
-      // Continuous rotation
-      if (cardStackRef.current) {
-        gsap.to(cardStackRef.current, {
-          rotation: 360,
-          duration: 22,
-          repeat: -1,
-          ease: 'none'
-        })
-      }
-
       const items = gsap.utils.toArray<HTMLElement>('.vc-item', featuresRef.current)
 
       mm.add('(min-width: 901px)', () => {
-        // Set all items to start far below, hidden
-        items.forEach((item) => {
-          gsap.set(item, { y: 500, opacity: 0 })
+        const scrollDistance = (items.length + 1) * 600 // 600px per step, includes card flip
+
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top top',
+            end: `+=${scrollDistance}`,
+            pin: true,
+            pinSpacing: true,
+            scrub: 1
+          }
         })
 
-        // Calculate total animation duration
-        const scrollDistance = features.length * 600 // 600px scroll per item
+        if (cardFlipRef.current) {
+          timeline.to(
+            cardFlipRef.current,
+            {
+              rotateY: 180,
+              ease: 'none',
+              duration: 1
+            },
+            0
+          )
+        }
 
-        // Pin the entire section while items animate
-        ScrollTrigger.create({
-          trigger: sectionRef.current,
-          start: 'top top',
-          end: `+=${scrollDistance}`,
-          pin: true,
-          pinSpacing: true
-        })
+        gsap.set(items, { opacity: 0, y: 300 })
 
-        // Animate each item
         items.forEach((item, index) => {
           const desc = item.querySelector<HTMLElement>('.vc-desc')
+          const startAt = 1 + index
 
-          // Item comes up from below
-          gsap.to(item, {
-            y: 0,
-            opacity: 1,
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: `top+=${index * 600} top`,
-              end: `top+=${index * 600 + 300} top`,
-              scrub: 1
-            }
-          })
+          timeline.to(
+            item,
+            {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: 'power3.out'
+            },
+            startAt
+          )
 
-          // Hide description when next item starts coming
           if (desc) {
-            gsap.to(desc, {
-              height: 0,
-              opacity: 0,
-              marginTop: 0,
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: `top+=${index * 600 + 300} top`,
-                end: `top+=${index * 600 + 450} top`,
-                scrub: 1
+            const descHeight = desc.scrollHeight
+            gsap.set(desc, { height: 0, opacity: 0, marginTop: 0, overflow: 'hidden' })
+
+            timeline.to(
+              desc,
+              {
+                height: descHeight,
+                opacity: 1,
+                marginTop: 8,
+                duration: 0.4,
+                ease: 'power2.out'
+              },
+              startAt + 0.1
+            )
+
+            if (index > 0) {
+              const prevDesc = items[index - 1]?.querySelector<HTMLElement>('.vc-desc')
+              if (prevDesc) {
+                timeline.to(
+                  prevDesc,
+                  {
+                    height: 0,
+                    opacity: 0,
+                    marginTop: 0,
+                    duration: 0.3,
+                    ease: 'power2.out'
+                  },
+                  startAt
+                )
               }
-            })
+            }
           }
         })
       })
 
       mm.add('(max-width: 900px)', () => {
-        items.forEach((item) => {
-          gsap.set(item, { y: 0, opacity: 1 })
+        items.forEach((item, index) => {
+          const desc = item.querySelector<HTMLElement>('.vc-desc')
+          
+          gsap.set(item, { opacity: 1, y: 0 })
+          if (desc) {
+            gsap.set(desc, { height: 'auto', opacity: 1 })
+          }
+
+          // Stagger animation on mobile - each item comes one by one from bottom
           gsap.from(item, {
-            y: 30,
+            y: 100,
             opacity: 0,
-            duration: 0.5,
+            duration: 0.6,
+            delay: index * 0.2, // 200ms delay between each item
             ease: 'power2.out',
             scrollTrigger: {
               trigger: item,
@@ -168,21 +195,38 @@ export default function VirtualCard() {
 
         <div className="grid grid-cols-[1.05fr_1fr] gap-12 items-start max-[900px]:grid-cols-1 max-[900px]:gap-8">
           <div className="flex items-center justify-center min-h-[420px] sticky top-20 max-[900px]:static max-[900px]:min-h-[260px] max-[900px]:mb-4">
-            <div ref={cardStackRef} className="relative w-[min(90%,460px)] h-[320px] [transform-style:preserve-3d] max-[900px]:w-[min(100%,340px)] max-[900px]:h-[240px]">
-              <img
-                src="/assets/images/card1.jpeg"
-                alt=""
-                className="w-full max-w-[460px] rounded-[18px] [transform:rotateY(-8deg)_rotateX(6deg)_rotateZ(-6deg)]"
-              />
-              <img
-                src="/assets/images/card2.jpeg"
-                alt=""
-                className="absolute w-[86%] right-[-8%] top-[18%] rounded-[18px] opacity-85 [transform:rotateY(-8deg)_rotateX(6deg)_rotateZ(6deg)]"
-              />
+            <div 
+              ref={cardStackRef} 
+              className="relative w-[min(90%,460px)] h-[320px] max-[900px]:w-[min(100%,340px)] max-[900px]:h-[240px]"
+              style={{ perspective: '1000px' }}
+            >
+              <div
+                ref={cardFlipRef}
+                className="relative w-full h-full"
+                style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
+              >
+                <img
+                  src="/assets/images/card1.jpeg"
+                  alt="Keytom card front"
+                  className="w-full max-w-[460px] rounded-[18px] absolute top-0 left-0"
+                  style={{ 
+                    backfaceVisibility: 'hidden'
+                  }}
+                />
+                <img
+                  src="/assets/images/card2.jpeg"
+                  alt="Keytom card back"
+                  className="w-full max-w-[460px] rounded-[18px] absolute top-0 left-0"
+                  style={{ 
+                    backfaceVisibility: 'hidden',
+                    transform: 'rotateY(180deg)'
+                  }}
+                />
+              </div>
             </div>
           </div>
 
-          <div ref={featuresRef} className="border-t border-[#b9c4ff] overflow-hidden relative max-[900px]:overflow-visible">
+          <div ref={featuresRef} className="overflow-hidden relative max-[900px]:overflow-visible">
             {features.map((feature, index) => (
               <div key={index} className="vc-item py-4 border-b border-[#b9c4ff]">
                 <div className="vc-header flex items-center gap-4">
