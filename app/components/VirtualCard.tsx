@@ -78,7 +78,7 @@ export default function VirtualCard() {
 
       mm.add('(min-width: 901px)', () => {
         const flipSteps = 2 // front -> back -> front
-        const scrollDistance = (items.length + flipSteps) * 600 // 600px per step
+        const scrollDistance = Math.max(items.length, flipSteps) * 600 // 600px per step
 
         const timeline = gsap.timeline({
           scrollTrigger: {
@@ -116,7 +116,7 @@ export default function VirtualCard() {
 
         items.forEach((item, index) => {
           const desc = item.querySelector<HTMLElement>('.vc-desc')
-          const startAt = flipSteps + index
+          const startAt = index
 
           timeline.to(
             item,
