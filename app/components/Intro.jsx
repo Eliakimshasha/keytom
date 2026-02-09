@@ -15,6 +15,7 @@ export default function Intro() {
   const headlineRef = useRef(null)
   const circleRef = useRef(null)
   const circleTextRef = useRef(null)
+  const circleGradientRef = useRef(null)
 
   useEffect(() => {
     const cards = cardsRef.current
@@ -30,6 +31,7 @@ export default function Intro() {
       gsap.set(cards, { autoAlpha: 1 })
       gsap.set(circleRef.current, { width: 0, height: 0, opacity: 0 })
       gsap.set(circleTextRef.current, { opacity: 0, y: 20 })
+      gsap.set(circleGradientRef.current, { opacity: 0 })
 
       const tl = gsap.timeline({
         scrollTrigger: {
@@ -118,6 +120,14 @@ export default function Intro() {
         }, '-=0.3')
       }
 
+      if (circleGradientRef.current) {
+        tl.to(circleGradientRef.current, {
+          opacity: 1,
+          duration: 1.4,
+          ease: 'power2.out'
+        }, '+=0.2')
+      }
+
       return () => {
         tl.scrollTrigger?.kill()
         tl.kill()
@@ -142,8 +152,12 @@ export default function Intro() {
       <div className="intro-noise" />
       <div
         ref={circleRef}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3c56ab] z-[120] flex items-center justify-center text-white overflow-hidden pointer-events-none"
+        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3c56ab] z-20 flex items-center justify-center text-white overflow-hidden pointer-events-none"
       >
+        <div
+          ref={circleGradientRef}
+          className="absolute inset-0 bg-[linear-gradient(180deg,#9d7ba3_0%,#b58cab_45%,#d4a9a1_100%)]"
+        />
         <div ref={circleTextRef} className="text-center px-6">
           <div className="flex flex-col  gap-4 text-[clamp(1.4rem,3.2vw,2.6rem)] font-semibold">
             <div className="flex items-center gap-3 border-b border-white/10 pb-2">
