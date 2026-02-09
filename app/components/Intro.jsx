@@ -33,6 +33,14 @@ export default function Intro() {
       gsap.set(circleTextRef.current, { opacity: 0, y: 20 })
       gsap.set(circleGradientRef.current, { opacity: 0 })
 
+      const iconEls = circleTextRef.current
+        ? gsap.utils.toArray(circleTextRef.current.querySelectorAll(".circle-text-icon"))
+        : []
+
+      if (iconEls.length) {
+        gsap.set(iconEls, { backgroundColor: "#3c56ab", color: "#ffffff" })
+      }
+
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
@@ -128,6 +136,15 @@ export default function Intro() {
         }, '+=0.2')
       }
 
+      if (iconEls.length) {
+        tl.to(iconEls, {
+          backgroundColor: "#ffffff",
+          color: "#9d7ba3",
+          duration: 0.6,
+          ease: "power2.out"
+        }, "<")
+      }
+
       return () => {
         tl.scrollTrigger?.kill()
         tl.kill()
@@ -152,36 +169,36 @@ export default function Intro() {
       <div className="intro-noise" />
       <div
         ref={circleRef}
-        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3c56ab] z-20 flex items-center justify-center text-white overflow-hidden pointer-events-none"
+        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3c56ab] z-20 flex items-center justify-center text-white overflow-hidden pointer-events-none w-0 h-0 opacity-0"
       >
         <div
           ref={circleGradientRef}
-          className="absolute inset-0 bg-[linear-gradient(180deg,#9d7ba3_0%,#b58cab_45%,#d4a9a1_100%)]"
+          className="absolute inset-0 bg-[linear-gradient(180deg,#9d7ba3_0%,#b58cab_45%,#d4a9a1_100%)] opacity-0"
         />
-        <div ref={circleTextRef} className="text-center px-6">
+        <div ref={circleTextRef} className="text-center px-6 opacity-0">
           <div className="flex flex-col  gap-4 text-[clamp(1.4rem,3.2vw,2.6rem)] font-semibold">
             <div className="flex items-center gap-3 border-b border-white/10 pb-2">
-              <FaPaperPlane className="text-[1.3em]" />
+              <FaPaperPlane className="circle-text-icon text-[1.3em] p-1.5" />
               <span>Send</span>
             </div>
             <div className="flex items-center gap-3  border-b border-white/10 pb-2">
-              <FaInbox className="text-[1.3em]" />
+              <FaInbox className="circle-text-icon text-[1.3em] p-1.5" />
               <span>Receive</span>
             </div>
             <div className="flex items-center gap-3  border-b border-white/10 pb-2">
-              <FaCreditCard className="text-[1.3em]" />
+              <FaCreditCard className="circle-text-icon text-[1.3em] p-1.5" />
               <span>Pay</span>
             </div>
             <div className="flex items-center gap-3  border-b border-white/10 pb-2">
-              <FaPiggyBank className="text-[1.3em]" />
+              <FaPiggyBank className="circle-text-icon text-[1.3em] p-1.5" />
               <span>Deposit</span>
             </div>
             <div className="flex items-center gap-3  border-b border-white/10 pb-2">
-              <FaPlusCircle className="text-[1.3em]" />
+              <FaPlusCircle className="circle-text-icon text-[1.3em] p-1.5" />
               <span>Top-up</span>
             </div>
             <div className="flex items-center gap-3">
-              <FaExchangeAlt className="text-[1.3em]" />
+              <FaExchangeAlt className="circle-text-icon text-[1.3em] p-1.5" />
               <span>Convert</span>
             </div>
           </div>

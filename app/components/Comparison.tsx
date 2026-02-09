@@ -211,7 +211,7 @@ export default function Comparison() {
               {/* Options Stack */}
               <div className="space-y-3">
                 {/* Keytom */}
-                <div className="bg-[#e8ebf7] rounded-xs  p-4 px-2">
+                <div className="bg-[linear-gradient(180deg,#9D7BA328_0%,#B58CAB2A_45%,#D4A8A124_100%)] rounded-xs  p-4 px-2">
                   <div className="flex items-start gap-3">
                     <div className="flex-1 flex gap-5 justify-between">
                       <div className="font-semibold text-[#38488B] text-[12px] mb-1">
