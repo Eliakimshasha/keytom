@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { Menu, X } from "lucide-react";
 import { HiOutlineBars2 } from "react-icons/hi2";
+import { MdOutlineLogout } from "react-icons/md";
 
 import { Select } from "antd";
 
@@ -93,15 +94,16 @@ export default function NavBar() {
         </div>
 
         {/* CTA Buttons */}
-        <div className="hidden md:flex items-center space-x-4">
+        <div className="md:flex hidden items-center space-x-4">
           <Select
             value={language}
             onChange={setLanguage}
             aria-label="Language"
-            className="glass-select"
+            className="glass-select md:flex"
             style={{ width: 70, background: "transparent", marginRight: 8 }}
             options={languageOptions}
           />
+          <MdOutlineLogout className="text-black" size={20} />
 
           <button className="px-6 py-2 bg-[#474747] text-white rounded-xs font-medium text-sm hover:bg-opacity-90 transition-all duration-200 hover:scale-105">
             OPEN ACCOUNT
@@ -111,35 +113,78 @@ export default function NavBar() {
           </div>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden text-gray-700"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="flex items-center gap-2 lg:hidden md:hidden">
+          {/* Mobile Menu Button */}
+          {/* <MdOutlineLogout className="text-black" size={20} /> */}
+
+          <button className="px-6 py-2 bg-[#38488B] text-white rounded-xs font-medium text-sm hover:bg-opacity-90 transition-all duration-200 hover:scale-105">
+            OPEN ACCOUNT
+          </button>
+          <div
+            className="px-3 py-[9px] bg-[#47474784] rounded-xs"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            <HiOutlineBars2 className="text-white" />
+          </div>
+        </div>
       </nav>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-t">
-          <div className="container mx-auto px-6 py-4 flex flex-col space-y-4">
-            {navItems.map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase()}`}
-                className="text-sm text-gray-700 hover:text-[#38488B] transition-colors"
+      <div
+        className={`md:hidden fixed inset-0 z-40 transition-opacity duration-300 ${
+          isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <div
+          className="absolute inset-0 bg-[#0b1020]/70 backdrop-blur-sm"
+          onClick={() => setIsMobileMenuOpen(false)}
+        />
+        <div
+          className={`absolute inset-x-0 top-0 h-screen bg-white text-[#38488B] transform transition-transform duration-500 ${
+            isMobileMenuOpen ? "translate-y-0" : "-translate-y-full"
+          }`}
+        >
+          <div className="px-6 pt-6 pb-10 h-full flex flex-col">
+            <div className="flex items-center justify-between">
+              <div className="text-2xl font-bold tracking-tight">keytom</div>
+              <button
+                className="w-10 h-10 rounded-full border border-[#d7dcf5] flex items-center justify-center"
                 onClick={() => setIsMobileMenuOpen(false)}
+                aria-label="Close menu"
               >
-                {item}
-              </a>
-            ))}
-            <button className="px-6 py-2 bg-[#6f7179] text-white rounded-xs font-medium text-sm w-full">
-              OPEN ACCOUNT
-            </button>
+                <X size={18} />
+              </button>
+            </div>
+
+            <div className="mt-10 flex-1">
+              <div className="text-xs uppercase tracking-[0.3em] text-[#9aa3d8] mb-4">
+                Menu
+              </div>
+              <div className="flex flex-col gap-4">
+                {navItems.map((item) => (
+                  <a
+                    key={item}
+                    href={`#${item.toLowerCase()}`}
+                    className="text-[1.3rem] font-semibold tracking-tight hover:text-[#2f3f8f] transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    {item}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            <div className="pt-6 border-t border-[#e4e8ff]">
+              <button className="w-full px-6 py-3 bg-[#38488B] text-white rounded-md font-semibold text-sm tracking-[0.2em] uppercase">
+                Open account
+              </button>
+              <div className="mt-4 text-xs text-[#9aa3d8]">
+                Secure onboarding • Fully online
+              </div>
+            </div>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

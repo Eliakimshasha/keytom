@@ -30,7 +30,7 @@ export default function Home() {
     const mm = gsap.matchMedia()
 
     if (heroPinEl && introEl) {
-      mm.add('(min-width: 901px)', () => {
+      const createHeroPin = () =>
         ScrollTrigger.create({
           trigger: heroPinEl,
           start: 'top top',
@@ -40,7 +40,9 @@ export default function Home() {
           pinSpacing: false,
           anticipatePin: 1,
         })
-      })
+
+      mm.add('(min-width: 901px)', () => createHeroPin())
+      mm.add('(max-width: 900px)', () => createHeroPin())
     }
 
     // Initialize GSAP ScrollTrigger

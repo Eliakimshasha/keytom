@@ -4,8 +4,6 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger'
 import { FaCcVisa, FaBitcoin, FaEuroSign } from "react-icons/fa";
-
-
 import { TbChartInfographic } from 'react-icons/tb'
 
 gsap.registerPlugin(ScrollTrigger)
@@ -18,79 +16,92 @@ export default function Intro() {
 
   useEffect(() => {
     const cards = cardsRef.current
-    const container = containerRef.current
     const headline = headlineRef.current
     const section = sectionRef.current
-    
-    // Start with cards visible at their initial positions
-    gsap.set(cards, { autoAlpha: 1 })
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: 'top top',
-        end: '+=3000',
-        scrub: 1,
-        pin: true,
-      },
-    })
+    if (!section || !cards.length) return
 
-    // Get the center of the intro-section
-    const sectionRect = section.getBoundingClientRect()
-    const sectionCenterX = sectionRect.left + sectionRect.width / 2
-    const sectionCenterY = sectionRect.top + sectionRect.height / 2
+    const mm = gsap.matchMedia()
 
-    // Move all cards to the exact center of the section
-    cards.forEach((card, i) => {
-      const cardRect = card.getBoundingClientRect()
-      
-      // Calculate the center of the card
-      const cardCenterX = cardRect.left + cardRect.width / 2
-      const cardCenterY = cardRect.top + cardRect.height / 2
-      
-      // Calculate how much to move the card center to align with section center
-      const translateX = sectionCenterX - cardCenterX
-      const translateY = sectionCenterY - cardCenterY
+    const buildTimeline = (endValue) => {
+      // Start with cards visible at their initial positions
+      gsap.set(cards, { autoAlpha: 1 })
 
-      const zIndexValue = i === 3 ? 100 : 1
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: endValue,
+          scrub: 1,
+          pin: true,
+        },
+      })
 
-      tl.to(card, {
-        x: translateX,
-        y: translateY,
-        scale: 1,
-        zIndex: zIndexValue,
-        duration: 2,
-        ease: 'power2.inOut'
-      }, 0)
-    })
+      // Get the center of the intro-section
+      const sectionRect = section.getBoundingClientRect()
+      const sectionCenterX = sectionRect.left + sectionRect.width / 2
+      const sectionCenterY = sectionRect.top + sectionRect.height / 2
 
-    // Fade out headline as cards move to center
-    tl.to(headline, {
-      autoAlpha: 0,
-      duration: 1,
-    }, 1)
+      // Move all cards to the exact center of the section
+      cards.forEach((card, i) => {
+        const cardRect = card.getBoundingClientRect()
 
-    // Fade out all cards EXCEPT Card 4 as they reach center
-    cards.forEach((card, i) => {
-      if (i !== 3) { // Skip Card 4
+        // Calculate the center of the card
+        const cardCenterX = cardRect.left + cardRect.width / 2
+        const cardCenterY = cardRect.top + cardRect.height / 2
+
+        // Calculate how much to move the card center to align with section center
+        const translateX = sectionCenterX - cardCenterX
+        const translateY = sectionCenterY - cardCenterY
+
+        const zIndexValue = i === 3 ? 100 : 1
+
         tl.to(card, {
-          autoAlpha: 0,
-          duration: 1,
-        }, 1)
+          x: translateX,
+          y: translateY,
+          scale: 1,
+          zIndex: zIndexValue,
+          duration: 2,
+          ease: 'power2.inOut'
+        }, 0)
+      })
+
+      // Fade out headline as cards move to center
+      tl.to(headline, {
+        autoAlpha: 0,
+        duration: 1,
+      }, 1)
+
+      // Fade out all cards EXCEPT Card 4 as they reach center
+      cards.forEach((card, i) => {
+        if (i !== 3) { // Skip Card 4
+          tl.to(card, {
+            autoAlpha: 0,
+            duration: 1,
+          }, 1)
+        }
+      })
+
+      // Hold Card 4 at center for a moment
+      tl.to({}, { duration: 1 })
+
+      // Finally fade out Card 4
+      tl.to(cards[3], {
+        autoAlpha: 0,
+        duration: 0.1,
+      })
+
+      return () => {
+        tl.scrollTrigger?.kill()
+        tl.kill()
       }
-    })
+    }
 
-    // Hold Card 4 at center for a moment
-    tl.to({}, { duration: 1 })
-
-    // Finally fade out Card 4
-    tl.to(cards[3], {
-      autoAlpha: 0,
-      duration: 0.01,
-    })
+    mm.add('(min-width: 901px)', () => buildTimeline('+=3000'))
+    mm.add('(max-width: 900px)', () => buildTimeline('+=1800'))
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      mm.revert()
     }
   }, [])
 
@@ -158,7 +169,7 @@ export default function Intro() {
             <div
               key={i}
               ref={(el) => (cardsRef.current[i] = el)}
-              className="intro-card absolute w-52 h-64 rounded-2xl overflow-hidden shadow-sm"
+              className={`intro-card absolute w-36 h-42 rounded-2xl overflow-hidden shadow-sm ${i === 1 ? 'max-[768px]:hidden' : ''}`}
               style={{
                 ...initialPositions[i],
                 zIndex: zIndex,
@@ -171,27 +182,15 @@ export default function Intro() {
                   {/* Decorative card images */}
                   <div className="absolute inset-0 flex items-center justify-center opacity-60">
                     <div className="relative w-32 h-44">
-                      <div 
-                        className="absolute w-28 h-40 rounded-lg transform -rotate-12 translate-x-2"
-                        style={{
-                          background: 'linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%)',
-                          backdropFilter: 'blur(10px)',
-                        }}
-                      />
-                      <div 
-                        className="absolute w-28 h-40 rounded-lg transform rotate-12 -translate-x-2"
-                        style={{
-                          background: 'linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.08) 100%)',
-                          backdropFilter: 'blur(10px)',
-                        }}
-                      />
+                      
+                     
                     </div>
                   </div>
                   <div className="relative z-10">
                     <div className="text-sm font-medium opacity-90"></div>
                   </div>
                   <div className="relative z-10">
-                    <h3 className="text-xl font-semibold">Virtual cards</h3>
+                    <h3 className="text- font-semibold">Virtual cards</h3>
                   </div>
                 </div>
               )}
@@ -210,14 +209,12 @@ export default function Intro() {
 
               {cardData[i].type === 'deposits' && (
                 <div className="relative w-full h-full p-6 flex flex-col justify-end text-[#4a6fa5]">
-                  <div className="absolute top-6 left-6">
-                    <div className="text-xl font-bold mb-1">EUR</div>
-                  </div>
+                 
                   <div className="mb-4">
-                    <div className="text-3xl font-bold mb-1">+ €2,890</div>
+                    <div className="text-3xl font-bold mb-1">€2,890</div>
                   </div>
                   <div>
-                    <h3 className="text-base font-semibold mb-0.5">Deposits</h3>
+                    <h3 className="text-base text-sm font-semibold mb-0.5">Deposits</h3>
                     <p className="text-sm opacity-80">and withdrawals</p>
                   </div>
                 </div>

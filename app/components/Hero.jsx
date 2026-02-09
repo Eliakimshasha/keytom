@@ -68,13 +68,16 @@ export default function Hero() {
       }, '<')
 
       // Button comes from bottom (same time as others)
-      masterTl.from(ctaRef.current, {
-        y: 50,
-        opacity: 0,
-        duration: 0.9,
-        ease: 'back.out(1.7)',
-        clearProps: 'transform'
-      }, '<')
+      if (ctaRef.current) {
+        gsap.set(ctaRef.current, { y: 50, opacity: 0 })
+        masterTl.to(ctaRef.current, {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          ease: 'back.out(1.7)',
+          clearProps: 'transform'
+        }, '<')
+      }
 
       // Visual element fades in
       masterTl.from(visualRef.current, {
@@ -102,6 +105,7 @@ export default function Hero() {
       {/* Decorative elements */}
       <div className="absolute top-20 left-10 w-64 h-64 bg-keytom-purple/20 rounded-full blur-3xl max-[768px]:hidden" />
       <div className="absolute bottom-20 right-10 w-96 h-96 bg-keytom-peach/30 rounded-full blur-3xl max-[768px]:hidden" />
+      <div className="absolute bottom-20 left-10 w-96 h-96 bg-yellow-300/25 rounded-full blur-3xl max-[768px]:hidden" />
       
       <div className="lg:pl-14  mx-auto px-6 pb-20 relative z-10 pt-16 max-[768px]:pt-0 max-[768px]:pb-12">
         <div className="grid  relative lg:grid-cols-[1.1fr_0.9fr] items-start min-h-[45vh] max-[768px]:min-h-[28vh] max-[768px]:gap-6">
