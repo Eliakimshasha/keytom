@@ -175,12 +175,10 @@ export default function NavBar() {
             </div>
 
             <div className="pt-6 border-t border-[#e4e8ff]">
-              <button className="w-full px-6 py-3 bg-[#38488B] text-white rounded-md font-semibold text-sm tracking-[0.2em] uppercase">
+              <button className="w-full px-6 py-3 bg-[#38488B] text-white rounded-xs font-semibold text-sm tracking-[0.2em] ">
                 Open account
               </button>
-              <div className="mt-4 text-xs text-[#9aa3d8]">
-                Secure onboarding • Fully online
-              </div>
+              
             </div>
           </div>
         </div>
