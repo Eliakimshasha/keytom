@@ -62,8 +62,15 @@ export default function Intro() {
           )
         : [];
 
+      const iconBgInitial = "#00000028";
+      const iconBgFinal = "#ffffff";
+
       if (iconEls.length) {
-        gsap.set(iconEls, { backgroundColor: "#3c56ab", color: "#ffffff" });
+        gsap.set(iconEls, { backgroundColor: iconBgInitial, color: "#ffffff" });
+      }
+
+      if (circularRef.current) {
+        gsap.set(circularRef.current, { borderColor: iconBgInitial });
       }
 
       const tl = gsap.timeline({
@@ -126,7 +133,7 @@ export default function Intro() {
           tl.to(
             card,
             {
-              autoAlpha: 0,
+              autoAlpha: 1,
               duration: 1,
             },
             1,
@@ -194,13 +201,24 @@ export default function Intro() {
         tl.to(
           iconEls,
           {
-            backgroundColor: "#ffffff",
+            backgroundColor: iconBgFinal,
             color: "#9d7ba3",
             duration: 0.6,
             ease: "power2.out",
           },
           "<",
         );
+        if (circularRef.current) {
+          tl.to(
+            circularRef.current,
+            {
+              borderColor: iconBgFinal,
+              duration: 0.6,
+              ease: "power2.out",
+            },
+            "<",
+          );
+        }
       }
 
       // Fade out circular class after gradient color change
@@ -247,20 +265,20 @@ export default function Intro() {
         // Define final positions for desktop and mobile
         const finalPositions = isDesktop
           ? [
-              { top: "50%", left: "-9rem" },      // First image
-              { top: "20%", left: "-16rem" },     // Second image
-              { top: "80%", left: "-16rem" }, // Third image
-              { top: "80%", right: "-16rem" },  // Fourth image
-              { top: "20%", right: "-16rem" },    // Fifth image
-              { bottom: "-1rem", right: "-9rem" }, // Sixth image
+              { top: "50%", left: "-8rem" },      // First image
+              { top: "20%", left: "-15rem" },     // Second image
+              { top: "80%", left: "-15rem" }, // Third image
+              { top: "80%", right: "-15rem" },  // Fourth image
+              { top: "20%", right: "-15rem" },    // Fifth image
+              { bottom: "-1rem", right: "-8rem" }, // Sixth image
             ]
           : [
-              { top: "33.33%", left: "-5rem" },   // First image
-              { top: "70%", left: "-5rem" },      // Second image
-              { top: "50%", left: "-1rem" },      // Third image
-              { top: "33.33%", right: "-5rem" },  // Fourth image
-              { top: "70%", right: "-5rem" },     // Fifth image
-              { top: "50%", right: "-1rem" },     // Sixth image
+              { top: "33.33%", left: "-4rem" },   // First image
+              { top: "68%", left: "-4rem" },      // Second image
+              { top: "55%", left: "-1rem" },      // Third image
+              { top: "33.33%", right: "-4rem" },  // Fourth image
+              { top: "68%", right: "-4rem" },     // Fifth image
+              { top: "45%", right: "-1rem" },     // Sixth image
             ];
 
         // Animate all small images simultaneously
@@ -312,29 +330,29 @@ export default function Intro() {
         />
         <div ref={circleTextRef} className="px-6 opacity-0">
           <div className="w-62.5 h-[70vh] mt-24 flex items-center justify-center relative">
-            <div ref={circularRef} className="circular flex flex-col gap-4 text-[clamp(1.4rem,3.2vw,2.6rem)] font-semibold">
+            <div ref={circularRef} className="circular border-3 p-5 flex flex-col gap-4 text-[clamp(1.4rem,3.2vw,2.6rem)] font-semibold">
               <div className="flex items-center gap-3 pb-2">
-                <FaPaperPlane className="circle-text-icon text-[1.3em] lg:text-[1em] p-1.5" />
+                <FaPaperPlane className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
                 <span className="text-xl">Send</span>
               </div>
               <div className="flex items-center gap-3 pb-2">
-                <FaInbox className="circle-text-icon text-[1.3em] lg:text-[1em] p-1.5" />
+                <FaInbox className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
                 <span className="text-xl">Receive</span>
               </div>
               <div className="flex items-center gap-3 pb-2">
-                <FaCreditCard className="circle-text-icon text-[1.3em] lg:text-[1em] p-1.5" />
+                <FaCreditCard className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
                 <span className="text-xl">Pay</span>
               </div>
               <div className="flex items-center gap-3 pb-2">
-                <FaPiggyBank className="circle-text-icon text-[1.3em] lg:text-[1em] p-1.5" />
+                <FaPiggyBank className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
                 <span className="text-xl">Deposit</span>
               </div>
               <div className="flex items-center gap-3 pb-2">
-                <FaPlusCircle className="circle-text-icon text-[1.3em] lg:text-[1em] p-1.5" />
+                <FaPlusCircle className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
                 <span className="text-xl">Top-up</span>
               </div>
               <div className="flex items-center gap-3">
-                <FaExchangeAlt className="circle-text-icon text-[1.3em] lg:text-[1em] p-1.5" />
+                <FaExchangeAlt className="circle-text-icon text-[1.3em] lg:text-[0.7em] p-1.5 lg:p-1 md:p-3" />
                 <span className="text-xl">Convert</span>
               </div>
             </div>

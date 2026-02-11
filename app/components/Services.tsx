@@ -132,12 +132,12 @@ export default function Services() {
               </div>
 
               {/* Right side: Image */}
-              <div className="relative w-75  lg:w-75 h-75 lg:h-75 shrink-0 max-[900px]:w-full max-[900px]:h-[270px]">
+              <div className="relative  lg:w-75  lg:h-75 shrink-0 max-[900px]:w-full max-[900px]:h-65 max-[900px]:my-6">
                 <Image
                   src={image}
                   alt="Swahi"
                   fill
-                  className="height-full w-auto object-right"
+                  className="h-auto w-full"
                   priority
                 />
               </div>
