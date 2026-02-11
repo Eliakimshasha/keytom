@@ -167,28 +167,28 @@ export default function Comparison() {
               className="comparison-feature grid grid-cols-[1.25fr_1.2fr_1.35fr_0.8fr] border-b border-[#d8dff4] last:border-b-0"
             >
               <div className="px-5 py-5 flex flex-col gap-1">
-                <span className="text-[1.05rem] font-semibold text-[#3657ba] leading-tight">
+                <span className="text-[0.9rem] max-[900px]:text-[1.05rem] font-semibold text-[#3657ba] leading-tight">
                   {feature.name}
                 </span>
               </div>
 
               <div className="px-5 py-5 flex items-center gap-3 bg-[#e8ebf7]">
                 {getIcon(feature.keytom.status)}
-                <span className="text-[0.95rem] text-[#4a4a4a] leading-snug">
+                <span className="text-[0.8rem] max-[900px]:text-[1.05rem]  text-[#4a4a4a] leading-snug">
                   {feature.keytom.note}
                 </span>
               </div>
 
               <div className="px-5 py-5 flex items-center gap-3">
                 {getIcon(feature.others.status)}
-                <span className="text-[0.95rem] text-[#4a4a4a] leading-snug">
+                <span className="text-[0.8rem] max-[900px]:text-[1.05rem] text-[#4a4a4a] leading-snug">
                   {feature.others.note}
                 </span>
               </div>
 
               <div className="px-5 py-5 flex items-center gap-3">
                 {getIcon(feature.otc.status)}
-                <span className="text-[0.95rem] text-[#4a4a4a] leading-snug">
+                <span className="text-[0.8rem] max-[900px]:text-[1.05rem] text-[#4a4a4a] leading-snug">
                   {feature.otc.note}
                 </span>
               </div>

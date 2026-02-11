@@ -25,7 +25,8 @@ export default function NavBar() {
 
   useEffect(() => {
     const updateLogoTone = () => {
-      const headerHeight = headerRef.current?.getBoundingClientRect().height ?? 0;
+      const headerHeight =
+        headerRef.current?.getBoundingClientRect().height ?? 0;
       const probeY = Math.min(window.innerHeight - 1, headerHeight + 1);
       const probeX = Math.min(window.innerWidth - 1, 40);
       const el = document.elementFromPoint(probeX, probeY);
@@ -90,12 +91,7 @@ export default function NavBar() {
   bg-white/5 backdrop-blur-md
  `}
         >
-          <Image
-            src={logo}
-            alt="Keytom logo"
-            priority
-            className="h-5 w-auto"
-          />
+          <Image src={logo} alt="Keytom logo" priority className="h-5 w-auto" />
         </div>
 
         {/* Desktop Navigation */}
@@ -154,7 +150,9 @@ export default function NavBar() {
       {/* Mobile Menu */}
       <div
         className={`md:hidden fixed inset-0 z-40 transition-opacity duration-300 ${
-          isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          isMobileMenuOpen
+            ? "opacity-100 pointer-events-auto"
+            : "opacity-0 pointer-events-none"
         }`}
       >
         <div
@@ -194,7 +192,7 @@ export default function NavBar() {
                   <a
                     key={item}
                     href={`#${item.toLowerCase()}`}
-                    className="text-[1.3rem] font-semibold tracking-tight hover:text-[#2f3f8f] transition-colors"
+                    className="text-[1.3rem] max-[900px]:text-[1rem] font-semibold tracking-tight hover:text-[#2f3f8f] transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {item}
@@ -207,7 +205,6 @@ export default function NavBar() {
               <button className="w-full px-6 py-3 bg-[#38488B] text-white rounded-xs font-semibold text-sm tracking-[0.2em] ">
                 Open account
               </button>
-              
             </div>
           </div>
         </div>

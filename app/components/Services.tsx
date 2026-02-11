@@ -174,7 +174,7 @@ export default function Services() {
                   {index + 1}
                 </span>
                 {activeIndex === index && (
-                  <span className="text-[0.9rem] tracking-[0.02em]">
+                  <span className="text-[0.9rem] max-[900px]:text-[0.7rem] tracking-[0.02em]">
                     {service.label}
                   </span>
                 )}
@@ -182,26 +182,26 @@ export default function Services() {
             ))}
           </div>
 
-         <div className="flex flex-wrap gap-2">
-                       <button className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start">
-                         <span className="absolute left-[4px] top-1/2 -translate-y-1/2 text-[1.15rem] opacity-95">
-                           <FaApple />
-                         </span>
-                         <span className="text-[0.5rem] font-medium opacity-80">
-                           Download on the
-                         </span>
-                         App Store
-                       </button>
-                       <button className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start">
-                         <span className="absolute left-[4px] top-1/2 -translate-y-1/2 text-[1.15rem] opacity-95">
-                           <FaGooglePlay />
-                         </span>
-                         <span className="text-[0.5rem] font-medium opacity-80">
-                           Get it on
-                         </span>
-                         Google Play
-                       </button>
-                     </div>
+          <div className="flex flex-wrap gap-2">
+            <button className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start">
+              <span className="absolute left-[4px] top-1/2 -translate-y-1/2 text-[1.15rem] opacity-95">
+                <FaApple />
+              </span>
+              <span className="text-[0.5rem] font-medium opacity-80">
+                Download on the
+              </span>
+              App Store
+            </button>
+            <button className="relative border border-white/70 rounded-1 px-2 py-1 pl-6 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start">
+              <span className="absolute left-[4px] top-1/2 -translate-y-1/2 text-[1.15rem] opacity-95">
+                <FaGooglePlay />
+              </span>
+              <span className="text-[0.5rem] font-medium opacity-80">
+                Get it on
+              </span>
+              Google Play
+            </button>
+          </div>
         </div>
       </div>
     </section>
