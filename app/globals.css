@@ -405,6 +405,12 @@ h1, h2, h3, h4, h5, h6, p, span, a, button {
   background-clip: text;
   color: transparent;
 }
+
+@media (max-width: 900px) {
+  .intro-headline {
+    font-size: clamp(1.6rem, 4vw + 0.4rem, 2rem);
+  }
+}
 .intro-headline2 {
   background: linear-gradient(110deg, rgba(47, 107, 255, 0.8), rgba(247, 169, 137, 0.85) 45%, rgba(122, 92, 255, 0.75) 85%);
   -webkit-background-clip: text;

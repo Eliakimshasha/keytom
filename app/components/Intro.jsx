@@ -121,7 +121,7 @@ export default function Intro() {
         headline,
         {
           autoAlpha: 0,
-          duration: 1,
+          duration: 0.5,
         },
         1,
       );
@@ -411,11 +411,11 @@ export default function Intro() {
       </div>
       <div
         ref={containerRef}
-        className="container mx-auto px-6 min-h-screen flex items-center justify-center py-28"
+        className="container mx-auto px-6 max-[900px]:px-1  min-h-screen flex items-center justify-center py-28"
       >
         <p
           ref={headlineRef}
-          className="intro-headline text-center max-w-2xl z-20 relative"
+          className="intro-headline text-center lg:max-w-2xl max-[900px]:text-6 z-20 relative"
         >
           A next-generation digital financial institution built for people and
           businesses who move fast and think global.
