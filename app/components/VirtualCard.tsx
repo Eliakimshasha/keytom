@@ -195,13 +195,13 @@ export default function VirtualCard() {
       <div className="container mx-auto px-6">
         <h2
           ref={titleRef}
-          className="text-[#3a57b5] relative z-50 font-semibold max-[900px]:text-[clamp(2rem,4vw,3.2rem)] text-[clamp(2.6rem,4.6vw,4.8rem)] mb-8"
+          className="text-[#3a57b5] relative z-50 font-semibold max-[900px]:text-[clamp(2rem,4vw,2rem)] text-[clamp(2.6rem,4.6vw,4.8rem)] mb-8"
         >
           Keytom Virtual
         </h2>
 
         <div className="grid grid-cols-[1.05fr_1fr] gap-12 items-start max-[900px]:grid-cols-1 max-[900px]:gap-0">
-          <div className="flex items-center justify-center  min-h-[420px] sticky top-20 max-[900px]:static max-[900px]:min-h-[180px] max-[900px]:max-h-[200px] max-[900px]:mb-0">
+          <div className="flex items-center justify-center  min-h-105 sticky top-20 max-[900px]:static max-[900px]:min-h-[180px] max-[900px]:max-h-[200px] max-[900px]:mb-0">
             <div
               ref={cardStackRef}
               className="relative w-[min(90%,460px)] h-[320px] max-[900px]:w-[min(100%,340px)] max-[900px]:h-[240px]"
@@ -218,7 +218,7 @@ export default function VirtualCard() {
                 <img
                   src="/assets/images/card1.jpeg"
                   alt="Keytom card front"
-                  className="w-full lg:min-w-[460px] z-40 rounded-[18px]  absolute lg:-top-9 lg:-left-9 md:-top-9 md:-left-9"
+                  className="w-full lg:min-w-115 max-[900px]:h-47.5 z-40 rounded-[1px]  absolute lg:-top-9 lg:-left-9 md:-top-9 md:-left-9"
                   style={{
                     backfaceVisibility: "hidden",
                     
@@ -227,7 +227,7 @@ export default function VirtualCard() {
                 <img
                   src="/assets/images/card2.jpeg"
                   alt="Keytom card back"
-                  className="w-full lg:min-w-[460px] z-40 -rotate-5 rounded-[18px]  absolute lg:-top-9 lg:-left-9 md:-top-9 md:-left-9"
+                  className="w-full lg:min-w-115 z-40 max-[900px]:h-47.5  -rotate-5 rounded-[1px]  absolute lg:-top-9 lg:-left-9 md:-top-9 md:-left-9"
                   style={{
                     backfaceVisibility: "hidden",
                     transform: "rotateY(180deg)",
@@ -246,17 +246,17 @@ export default function VirtualCard() {
                 key={index}
                 className="vc-item py-4 border-b border-[#b9c3ff95] last:border-b-0"
               >
-                <div className="vc-header flex items-center gap-4">
-                  <div className="inline-flex items-center gap-2 lg:px-4 px-3 lg:py-1 py-[2px] rounded-full border border-[#b9c4ff] text-[#3a57b5] font-semibold text-[0.95rem] lg:min-w-[56px] justify-center">
-                    <span className="lg:w-2 lg:h-2 w-1 h-1 rounded-full bg-[#3a57b5]" />
+                <div className="vc-header flex items-center lg:gap-4 md:gap-4 gap-2">
+                  <div className="inline-flex items-center gap-2 lg:px-4 px-3 lg:py-1 py-0 rounded-full border border-[#b9c4ff] text-[#3a57b5] font-semibold text-[0.95rem] lg:min-w-[56px] justify-center">
+                    <span className="lg:w-2 lg:h-2 md:h-2 md:w-2 w-1 h-1 rounded-full bg-[#3a57b5]" />
                     <span>{feature.number}</span>
                   </div>
-                  <h3 className="text-[1.4rem] max-[900px]:text-[1.2rem] font-semibold text-[#3a57b5]">
+                  <h3 className="text-[1.4rem] max-[900px]:text-[1rem] font-semibold text-[#3a57b5]">
                     {feature.title}
                   </h3>
                 </div>
 
-                <p className="vc-desc lg:ml-[72px] ml-[60px] mt-2 lg:text-[0.98rem] text-[0.8rem] leading-snug text-[#4b5fc0]">
+                <p className="vc-desc lg:ml-18 ml-13 mt-2 lg:text-[0.98rem] text-[0.8rem] leading-snug text-[#4b5fc0]">
                   {feature.description}
                 </p>
               </div>

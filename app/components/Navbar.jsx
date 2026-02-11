@@ -5,6 +5,8 @@ import gsap from "gsap";
 import { Menu, X } from "lucide-react";
 import { HiOutlineBars2 } from "react-icons/hi2";
 import { MdOutlineLogout } from "react-icons/md";
+import Image from "next/image";
+import logo from "../../public/assets/images/logo.png";
 
 import { Select } from "antd";
 
@@ -81,14 +83,19 @@ export default function NavBar() {
       <nav className=" mx-auto px-6 max-[768px]:px-2 py-4 flex items-center justify-between">
         {/* Logo */}
         <div
-          className={`text-2xl font-bold ${
+          className={`text-lg font-semibold ${
             isLogoLight ? "text-white" : "text-[#374992]"
           } 
-  rounded-full max-[768px]:px-3 px-7 py-1 tracking-tight
+  rounded-xs max-[768px]:px-3 px-7 py-1 tracking-tight
   bg-white/5 backdrop-blur-md
  `}
         >
-          keytom
+          <Image
+            src={logo}
+            alt="Keytom logo"
+            priority
+            className="h-5 w-auto"
+          />
         </div>
 
         {/* Desktop Navigation */}
@@ -161,7 +168,14 @@ export default function NavBar() {
         >
           <div className="px-6 pt-6 pb-10 h-full flex flex-col">
             <div className="flex items-center justify-between">
-              <div className="text-2xl font-bold tracking-tight">keytom</div>
+              <div className="flex items-center">
+                <Image
+                  src={logo}
+                  alt="Keytom logo"
+                  priority
+                  className="h-7 w-auto"
+                />
+              </div>
               <button
                 className="w-10 h-10 rounded-full border border-[#d7dcf5] flex items-center justify-center"
                 onClick={() => setIsMobileMenuOpen(false)}
