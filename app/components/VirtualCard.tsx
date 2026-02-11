@@ -195,7 +195,7 @@ export default function VirtualCard() {
       <div className="container mx-auto px-6">
         <h2
           ref={titleRef}
-          className="text-[#3a57b5] font-semibold max-[900px]:text-[clamp(2rem,4vw,3.2rem)] text-[clamp(2.6rem,4.6vw,4.8rem)] mb-8"
+          className="text-[#3a57b5] relative z-50 font-semibold max-[900px]:text-[clamp(2rem,4vw,3.2rem)] text-[clamp(2.6rem,4.6vw,4.8rem)] mb-8"
         >
           Keytom Virtual
         </h2>
@@ -218,15 +218,16 @@ export default function VirtualCard() {
                 <img
                   src="/assets/images/card1.jpeg"
                   alt="Keytom card front"
-                  className="w-full lg:min-w-[460px] rounded-[18px]  absolute lg:-top-9 lg:-left-9 md:-top-9 md:-left-9"
+                  className="w-full lg:min-w-[460px] z-40 rounded-[18px]  absolute lg:-top-9 lg:-left-9 md:-top-9 md:-left-9"
                   style={{
                     backfaceVisibility: "hidden",
+                    
                   }}
                 />
                 <img
                   src="/assets/images/card2.jpeg"
                   alt="Keytom card back"
-                  className="w-full lg:min-w-[460px] rounded-[18px]  absolute lg:-top-9 lg:-left-9 md:-top-9 md:-left-9"
+                  className="w-full lg:min-w-[460px] z-40 -rotate-5 rounded-[18px]  absolute lg:-top-9 lg:-left-9 md:-top-9 md:-left-9"
                   style={{
                     backfaceVisibility: "hidden",
                     transform: "rotateY(180deg)",

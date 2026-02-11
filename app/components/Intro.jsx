@@ -29,6 +29,10 @@ export default function Intro() {
   const circleRef = useRef(null);
   const circleTextRef = useRef(null);
   const circleGradientRef = useRef(null);
+  const mainImageRef = useRef(null);
+  const smallImagesRef = useRef([]);
+  const circularRef = useRef(null);
+  const illustrationRef = useRef(null);
 
   useEffect(() => {
     const cards = cardsRef.current;
@@ -39,12 +43,18 @@ export default function Intro() {
 
     const mm = gsap.matchMedia();
 
-    const buildTimeline = (endValue) => {
+    const buildTimeline = (endValue, isDesktop) => {
       // Start with cards visible at their initial positions
       gsap.set(cards, { autoAlpha: 1 });
       gsap.set(circleRef.current, { width: 0, height: 0, opacity: 0 });
       gsap.set(circleTextRef.current, { opacity: 0, y: 20 });
       gsap.set(circleGradientRef.current, { opacity: 0 });
+      
+      // Set initial state for illustration elements
+      gsap.set(mainImageRef.current, { opacity: 0 });
+      gsap.set(smallImagesRef.current, { opacity: 0 });
+      gsap.set(circularRef.current, { opacity: 1 });
+      gsap.set(illustrationRef.current, { opacity: 0 });
 
       const iconEls = circleTextRef.current
         ? gsap.utils.toArray(
@@ -193,14 +203,91 @@ export default function Intro() {
         );
       }
 
+      // Fade out circular class after gradient color change
+      if (circularRef.current) {
+        tl.to(
+          circularRef.current,
+          {
+            opacity: 0,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "+=0.3",
+        );
+      }
+
+      // Fade in illustration at the same time circular fades out
+      if (illustrationRef.current) {
+        tl.to(
+          illustrationRef.current,
+          {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "<",
+        );
+      }
+
+      // Animate main image (phone) first
+      if (mainImageRef.current) {
+        tl.to(
+          mainImageRef.current,
+          {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+          },
+          "+=0.2",
+        );
+      }
+
+      // Animate all small images at the same time to their final positions (after main image)
+      if (smallImagesRef.current.length === 6) {
+        // Define final positions for desktop and mobile
+        const finalPositions = isDesktop
+          ? [
+              { top: "50%", left: "-9rem" },      // First image
+              { top: "20%", left: "-16rem" },     // Second image
+              { top: "80%", left: "-16rem" }, // Third image
+              { top: "80%", right: "-16rem" },  // Fourth image
+              { top: "20%", right: "-16rem" },    // Fifth image
+              { bottom: "-1rem", right: "-9rem" }, // Sixth image
+            ]
+          : [
+              { top: "33.33%", left: "-5rem" },   // First image
+              { top: "70%", left: "-5rem" },      // Second image
+              { top: "50%", left: "-1rem" },      // Third image
+              { top: "33.33%", right: "-5rem" },  // Fourth image
+              { top: "70%", right: "-5rem" },     // Fifth image
+              { top: "50%", right: "-1rem" },     // Sixth image
+            ];
+
+        // Animate all small images simultaneously
+        smallImagesRef.current.forEach((img, index) => {
+          if (img) {
+            tl.to(
+              img,
+              {
+                ...finalPositions[index],
+                opacity: 1,
+                duration: 1,
+                ease: "power2.out",
+              },
+              index === 0 ? "+=0.2" : "<", // First small image starts after a delay, rest start at same time
+            );
+          }
+        });
+      }
+
       return () => {
         tl.scrollTrigger?.kill();
         tl.kill();
       };
     };
 
-    mm.add("(min-width: 901px)", () => buildTimeline("+=3000"));
-    mm.add("(max-width: 900px)", () => buildTimeline("+=1800"));
+    mm.add("(min-width: 901px)", () => buildTimeline("+=4500", true));
+    mm.add("(max-width: 900px)", () => buildTimeline("+=3000", false));
 
     return () => {
       mm.revert();
@@ -217,34 +304,32 @@ export default function Intro() {
       <div className="intro-noise" />
       <div
         ref={circleRef}
-        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#3c56ab] z-20 flex items-center justify-center text-white overflow-hidden pointer-events-none w-0 h-0 opacity-0"
+        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#e6c28b] z-20 flex items-center justify-center text-white overflow-hidden pointer-events-none w-0 h-0 opacity-0"
       >
         <div
           ref={circleGradientRef}
           className="absolute inset-0 bg-[linear-gradient(180deg,#9d7ba3_0%,#b58cab_45%,#d4a9a1_100%)] opacity-0"
         />
-        {/* <div ref={circleTextRef} className="text-center px-6 opacity-0"> */}
         <div ref={circleTextRef} className="px-6 opacity-0">
-          {/* <div className="w-[250px]  border-4 border-white/50 h-[70vh] mt-24 flex items-center justify-center relative"> */}
-          <div className="w-[250px]   h-[70vh] mt-24 flex items-center justify-center relative">
-            <div className="flex flex-col hidden gap-4 text-[clamp(1.4rem,3.2vw,2.6rem)] font-semibold">
-              <div className="flex items-center gap-3  pb-2">
+          <div className="w-62.5 h-[70vh] mt-24 flex items-center justify-center relative">
+            <div ref={circularRef} className="circular flex flex-col gap-4 text-[clamp(1.4rem,3.2vw,2.6rem)] font-semibold">
+              <div className="flex items-center gap-3 pb-2">
                 <FaPaperPlane className="circle-text-icon text-[1.3em] lg:text-[1em] p-1.5" />
                 <span className="text-xl">Send</span>
               </div>
-              <div className="flex items-center gap-3   pb-2">
+              <div className="flex items-center gap-3 pb-2">
                 <FaInbox className="circle-text-icon text-[1.3em] lg:text-[1em] p-1.5" />
                 <span className="text-xl">Receive</span>
               </div>
-              <div className="flex items-center gap-3   pb-2">
+              <div className="flex items-center gap-3 pb-2">
                 <FaCreditCard className="circle-text-icon text-[1.3em] lg:text-[1em] p-1.5" />
                 <span className="text-xl">Pay</span>
               </div>
-              <div className="flex items-center gap-3   pb-2">
+              <div className="flex items-center gap-3 pb-2">
                 <FaPiggyBank className="circle-text-icon text-[1.3em] lg:text-[1em] p-1.5" />
                 <span className="text-xl">Deposit</span>
               </div>
-              <div className="flex items-center gap-3   pb-2">
+              <div className="flex items-center gap-3 pb-2">
                 <FaPlusCircle className="circle-text-icon text-[1.3em] lg:text-[1em] p-1.5" />
                 <span className="text-xl">Top-up</span>
               </div>
@@ -253,30 +338,54 @@ export default function Intro() {
                 <span className="text-xl">Convert</span>
               </div>
             </div>
-            <div className="relative">
-              {/* <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 "> */}
-              <div className="absolute top-1/2 w-36 h-36 bg-white/10 px-2 -translate-y-1/2 -left-36">
-                <Image src={card} />
+            <div ref={illustrationRef} className="absolute inset-0 flex items-center justify-center illustration opacity-0">
+              <div
+                ref={(el) => (smallImagesRef.current[0] = el)}
+                className="absolute z-30 top-1/5 -left-46 lg:top-1/2 md:top-1/2 lg:w-36 lg:h-36 md:w-36 md:h-36 h-24 w-28 px-2 -translate-y-1/2 lg:left-6 md:left-6"
+              >
+                <Image src={card} alt="Card" />
               </div>
 
-              <div className="absolute top-1/5 w-36 h-36 bg-white/10 px-2 -translate-y-1/2 -left-[18rem]">
-                <Image src={card} />
-              </div>
-              <div className="absolute -bottom-10 w-36 h-36 bg-white/10 px-2 -translate-y-1/2 -left-[18rem]">
-                <Image src={card} />
-              </div>
-              <div className="absolute top-1/2 w-36 h-36 bg-white/10 px-2 -translate-y-1/2 -right-36">
-                <Image src={card} />
+              <div
+                ref={(el) => (smallImagesRef.current[1] = el)}
+                className="absolute z-30 lg:top-1/2 top-[80%] md:top-1/2 -left-46 lg:w-36 lg:h-36 md:w-36 md:h-36 h-24 w-28 px-2 -translate-y-1/2 lg:left-6 md:left-6"
+              >
+                <Image src={card} alt="Card" />
               </div>
 
-              <div className="absolute top-1/5 w-36 h-36 bg-white/10 px-2 -translate-y-1/2 -right-[18rem]">
-                <Image src={card} />
+              <div
+                ref={(el) => (smallImagesRef.current[2] = el)}
+                className="absolute z-30 top-1/2 lg:bottom-10 md:bottom-10 lg:w-36 lg:h-36 md:w-36 md:h-36 h-24 w-28 px-2 -translate-y-1/2 lg:left-6 md:left-6 -left-46"
+              >
+                <Image src={card} alt="Card" />
               </div>
-              <div className="absolute -bottom-10 w-36 h-36 bg-white/10 px-2 -translate-y-1/2 -right-[18rem]">
-                <Image src={card} />
+
+              <div
+                ref={(el) => (smallImagesRef.current[3] = el)}
+                className="absolute z-30 lg:top-1/2 md:top-1/2 top-1/4 lg:w-36 lg:h-36 md:w-36 md:h-36 h-24 w-28 px-2 -translate-y-1/2 lg:right-6 md:right-6 -right-46"
+              >
+                <Image src={card} alt="Card" />
               </div>
-              <div className="main-image">
-                <Image src={phone} />
+
+              <div
+                ref={(el) => (smallImagesRef.current[4] = el)}
+                className="absolute z-30 lg:top-1/2 md:top-1/2 top-[80%] lg:w-36 lg:h-36 md:w-36 md:h-36 h-24 w-28 px-2 -translate-y-1/2 lg:right-6 md:right-6 -right-46"
+              >
+                <Image src={card} alt="Card" />
+              </div>
+
+              <div
+                ref={(el) => (smallImagesRef.current[5] = el)}
+                className="absolute z-30 lg:bottom-4 md:bottom-4 top-1/2 lg:w-36 lg:h-36 md:w-36 md:h-36 h-24 w-28 px-2 -translate-y-1/2 lg:right-6 md:right-6 -right-46"
+              >
+                <Image src={card} alt="Card" />
+              </div>
+
+              <div
+                ref={mainImageRef}
+                className="main-image lg:relative md:relative max-[900px]:h-[60vh] lg:z-40 md:z-40"
+              >
+                <Image src={phone} className="h-full w-auto" alt="Phone" />
               </div>
             </div>
           </div>
@@ -284,7 +393,7 @@ export default function Intro() {
       </div>
       <div
         ref={containerRef}
-        className="container mx-auto px-6 min-h-screen flex items-center justify-center py-28 "
+        className="container mx-auto px-6 min-h-screen flex items-center justify-center py-28"
       >
         <p
           ref={headlineRef}
