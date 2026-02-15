@@ -160,9 +160,9 @@ export default function BuiltFor() {
                 </div>
 
                 <div className="absolute right-0 bottom-0 w-[210px] h-[180px] pointer-events-none max-[900px]:static max-[900px]:w-full max-[900px]:h-[120px] max-[900px]:mt-3">
-                  <span className="absolute w-[140px] h-[100px]  bg-[linear-gradient(140deg,#f7e3c6,#d6b1b7)] shadow-[0_16px_30px_rgba(143,98,113,0.3)] rotate-[-120deg] right-9 shadow-sm bottom-9" />
-                  <span className="absolute w-[170px] h-[100px]  bg-[linear-gradient(140deg,#f7e3c6,#d6b1b7)] shadow-[0_16px_30px_rgba(143,98,113,0.3)] rotate-[-110deg] shadow-sm -right-4 bottom-0" />
-                  <span className="absolute w-[140px] h-[100px]  bg-[linear-gradient(140deg,#f7e3c6,#AA7D85)] shadow-[0_16px_30px_rgb(143, 98, 113)] rotate-[-95deg] -right-12 bottom-0 shadow-sm opacity-100" />
+                  <span className="absolute w-[140px] h-[100px]  bg-[linear-gradient(140deg,#f7e3c6,#d6b1b7)] shadow-[0_16px_30px_rgba(143,98,113,0.3)] rotate-[-120deg] max-[900px]:rotate-[-120deg] right-9 max-[900px]:-right-5 shadow-sm bottom-9 max-[900px]:bottom-8" />
+                  <span className="absolute w-[170px] h-[100px]  bg-[linear-gradient(140deg,#f7e3c6,#d6b1b7)] shadow-[0_16px_30px_rgba(143,98,113,0.3)] rotate-[-110deg] max-[900px]:rotate-[-100deg] shadow-sm -right-4 max-[900px]:-right-12 bottom-0" />
+                  <span className="absolute w-[140px] h-[100px]  bg-[linear-gradient(140deg,#f7e3c6,#AA7D85)] shadow-[0_16px_30px_rgb(143, 98, 113)] rotate-[-95deg] -right-12 bottom-0  shadow-sm opacity-100" />
                 </div>
 
                 <button className="mt-auto self-start bg-[#f9f2e9] text-[#3a59b8] px-4 py-2 rounded-1 uppercase text-[0.8rem] font-semibold inline-flex items-center gap-2">
