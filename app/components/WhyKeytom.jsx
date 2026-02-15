@@ -18,69 +18,146 @@ export default function WhyKeytom() {
 
   useGSAP(
     () => {
-      gsap.set(titleRef.current, { opacity: "1" });
-      gsap.set(cardOneRef.current, { bottom: "-120px" });
-      gsap.set(cardTwoRef.current, { bottom: "-120px" });
-      gsap.set(cardThreeRef.current, { bottom: "-120px" });
-      gsap.set(cardFourRef.current, { bottom: "-120px" });
+      const mm = gsap.matchMedia();
 
-      const timeline = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top top",
-          end: "+=1000",
-          scrub: true,
-          pin: true,
-        },
+      mm.add("(min-width: 768px)", () => {
+        gsap.set(titleRef.current, { opacity: "1" });
+        gsap.set(
+          [
+            cardOneRef.current,
+            cardTwoRef.current,
+            cardThreeRef.current,
+            cardFourRef.current,
+          ],
+          { bottom: "-120px", top: "auto" },
+        );
+
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "+=1000",
+            scrub: true,
+            pin: true,
+            anticipatePin: 1,
+          },
+        });
+
+        timeline.to(
+          cardOneRef.current,
+          {
+            top: "-80px",
+            duration: 2,
+          },
+          "-=1",
+        );
+
+        timeline.to(
+          titleRef.current,
+          {
+            opacity: "0",
+            duration: 7,
+          },
+          "-=1",
+        );
+        timeline.to(
+          cardTwoRef.current,
+          {
+            top: "-80px",
+            duration: 2,
+          },
+          "-=7",
+        );
+
+        timeline.to(
+          cardThreeRef.current,
+          {
+            top: "-80px",
+            duration: 2,
+          },
+          "-=6",
+        );
+
+        timeline.to(
+          cardFourRef.current,
+          {
+            top: "-80px",
+            duration: 2,
+          },
+          "-=5",
+        );
+
+        return () => {
+          timeline.scrollTrigger?.kill();
+          timeline.kill();
+        };
       });
 
-      timeline.to(
-        cardOneRef.current,
-        {
-          top: "-80px",
-          duration: 2,
-        },
+      mm.add("(max-width: 767px)", () => {
+        const section = sectionRef.current;
+        const track = trackRef.current;
+        if (!section || !track) return;
 
-        "-=1",
-      );
+        gsap.set(titleRef.current, { opacity: "1" });
+        gsap.set(
+          [
+            cardOneRef.current,
+            cardTwoRef.current,
+            cardThreeRef.current,
+            cardFourRef.current,
+          ],
+          { clearProps: "top,bottom" },
+        );
 
-      timeline.to(
-        titleRef.current,
-        {
-          opacity: "0",
-          duration: 7,
-        },
-        "-=1",
-      );
-      timeline.to(
-        cardTwoRef.current,
-        {
-          top: "-80px",
-          duration: 2,
-        },
+        const slider = track.parentElement;
+        if (!slider) return;
 
-        "-=7",
-      );
+        const getScrollAmount = () => {
+          const amount = track.scrollWidth - slider.clientWidth;
+          return Math.max(0, amount);
+        };
 
-      timeline.to(
-        cardThreeRef.current,
-        {
-          top: "-80px",
-          duration: 2,
-        },
+        if (getScrollAmount() <= 0) return;
 
-        "-=6",
-      );
+        const moveTween = gsap.to(track, {
+          x: () => `-${getScrollAmount()}px`,
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: () => `+=${getScrollAmount()}px`,
+            scrub: true,
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
 
-      timeline.to(
-        cardFourRef.current,
-        {
-          top: "-80px",
-          duration: 2,
-        },
+        const handleLoad = () => ScrollTrigger.refresh();
 
-        "-=5",
-      );
+        const resizeObserver = new ResizeObserver(() => {
+          ScrollTrigger.refresh();
+        });
+
+        resizeObserver.observe(track);
+        resizeObserver.observe(slider);
+
+        if (document.readyState === "complete") {
+          handleLoad();
+        } else {
+          window.addEventListener("load", handleLoad);
+        }
+
+        return () => {
+          window.removeEventListener("load", handleLoad);
+          resizeObserver.disconnect();
+          moveTween.scrollTrigger?.kill();
+          moveTween.kill();
+        };
+      });
+
+      return () => mm.revert();
     },
     { scope: sectionRef },
   );
