@@ -113,7 +113,7 @@ export default function WhyKeytom() {
         if (!slider) return;
 
         const getScrollAmount = () => {
-          const amount = track.scrollWidth - slider.clientWidth;
+          const amount = track.scrollWidth - slider.clientWidth +20;
           return Math.max(0, amount);
         };
 
@@ -171,33 +171,20 @@ export default function WhyKeytom() {
         <img
           src="/assets/images/star1.svg"
           alt=""
-          className="absolute w-5 h-5 opacity-60 left-[4%] top-[12%]"
+          className="absolute w-5 h-5 opacity-60 left-[1%] top-[30%]"
         />
+      
+       
         <img
           src="/assets/images/star1.svg"
           alt=""
-          className="absolute w-5 h-5 opacity-60 left-[22%] top-[10%]"
-        />
-        <img
-          src="/assets/images/star1.svg"
-          alt=""
-          className="absolute w-5 h-5 opacity-60 left-[48%] top-[14%]"
-        />
-        <img
-          src="/assets/images/star1.svg"
-          alt=""
-          className="absolute w-5 h-5 opacity-60 left-[72%] top-[11%]"
-        />
-        <img
-          src="/assets/images/star1.svg"
-          alt=""
-          className="absolute w-5 h-5 opacity-60 left-[94%] top-[13%]"
+          className="absolute w-5 h-5 opacity-60 right-[1%] top-[30%]"
         />
       </div>
 
       <div
         ref={titleRef}
-        className="text-center text-[clamp(3rem,11vw,10rem)] font-semibold tracking-[-0.02em] text-white/35 pointer-events-none select-none"
+        className="text-center text-[clamp(3rem,11vw,10rem)] font-semibold tracking-[-0.02em] text-white/35 max-[900px]:text-white/60 max-[900px]:text-4xl pointer-events-none select-none"
       >
         Why Keytom?
       </div>
