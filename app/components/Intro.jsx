@@ -76,7 +76,7 @@ export default function Intro() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: "top top",
+          start: "top 1%",
           end: endValue,
           scrub: 1,
           pin: true,
@@ -424,12 +424,12 @@ export default function Intro() {
         {/* Cards */}
         {[...Array(6)].map((_, i) => {
           const initialPositions = [
-            { top: "260px", left: "-210px" },
+            { top: "260px", left: "-240px" },
             { top: "-280px", right: "-10px" },
             { bottom: "-260px", left: "5px" },
             { top: "-280px", left: "70px" },
             { bottom: "-270px", right: "-100px" },
-            { top: "300px", right: "-220px" },
+            { top: "300px", right: "-240px" },
           ];
 
           const cardData = [
@@ -465,7 +465,7 @@ export default function Intro() {
             <div
               key={i}
               ref={(el) => (cardsRef.current[i] = el)}
-              className={`intro-card absolute w-36 h-42 rounded-none overflow-hidden shadow-sm ${i === 1 ? "max-[768px]:hidden" : ""}`}
+              className={`intro-card absolute max-[900px]:w-42 max-[900px]:h-42 w-64 h-64 rounded-none overflow-hidden shadow-sm ${i === 1 ? "max-[768px]:hidden" : ""}`}
               style={{
                 ...initialPositions[i],
                 zIndex: zIndex,
