@@ -6,6 +6,7 @@ import { TbArrowsExchange2 } from "react-icons/tb";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import image from "../../public/assets/images/swahi1.png";
 import Image from "next/image";
+import { useGSAP } from "@gsap/react";
 import {
   FaExchangeAlt,
   FaWallet,
@@ -58,7 +59,7 @@ export default function Services() {
   const cardRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(1);
 
-  useEffect(() => {
+  useGSAP(() => {
     const ctx = gsap.context(() => {
       gsap.from(titleRef.current, {
         scrollTrigger: {
@@ -73,7 +74,7 @@ export default function Services() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, { scope: sectionRef });
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -83,14 +84,14 @@ export default function Services() {
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!cardRef.current) return;
     gsap.fromTo(
       cardRef.current,
       { opacity: 0, y: 20 },
       { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
     );
-  }, [activeIndex]);
+  }, { dependencies: [activeIndex], scope: cardRef });
 
   const activeService = services[activeIndex];
   return (

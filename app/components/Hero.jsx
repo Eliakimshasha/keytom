@@ -1,10 +1,11 @@
 'use client'
 
-import { useLayoutEffect, useRef } from 'react'
+import { useRef } from 'react'
 import gsap from 'gsap'
 import { ArrowRight } from 'lucide-react'
 import start from '../../public/assets/images/star1.svg'
 import Image from 'next/image'
+import { useGSAP } from '@gsap/react'
 
 export default function Hero() {
   const heroRef = useRef(null)
@@ -17,7 +18,7 @@ export default function Hero() {
   const redLineRef = useRef(null)
   const blueLineRef = useRef(null)
 
-  useLayoutEffect(() => {
+  useGSAP(() => {
     const ctx = gsap.context(() => {
       // Master timeline for sequential animations
       const masterTl = gsap.timeline({ delay: 0.3 })
@@ -98,7 +99,7 @@ export default function Hero() {
     }, heroRef)
 
     return () => ctx.revert()
-  }, [])
+  }, { scope: heroRef })
 
   return (
     <section ref={heroRef} className="hero-pin min-h-screen mesh-gradient overflow-hidden max-[768px]:flex max-[768px]:items-center pt-16 max-[768px]:pt-0">

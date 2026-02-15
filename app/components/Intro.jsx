@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import {
   FaCcVisa,
   FaBitcoin,
@@ -34,7 +35,7 @@ export default function Intro() {
   const circularRef = useRef(null);
   const illustrationRef = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     const cards = cardsRef.current;
     const headline = headlineRef.current;
     const section = sectionRef.current;
@@ -76,7 +77,7 @@ export default function Intro() {
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: section,
-          start: "top 1%",
+          start: "top top",
           end: endValue,
           scrub: 1,
           pin: true,
@@ -310,7 +311,7 @@ export default function Intro() {
     return () => {
       mm.revert();
     };
-  }, []);
+  }, { scope: sectionRef });
 
   return (
     <section

@@ -1,8 +1,9 @@
 ﻿"use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { IoCheckmark, IoClose, IoWarning } from "react-icons/io5";
 import { IoArrowForwardCircleOutline } from "react-icons/io5";
 
@@ -77,7 +78,7 @@ export default function Comparison() {
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const tableRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
 
     const ctx = gsap.context(() => {
@@ -106,7 +107,7 @@ export default function Comparison() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, { scope: sectionRef });
 
   const getIcon = (status: Status) => {
     switch (status) {

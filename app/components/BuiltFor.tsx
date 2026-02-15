@@ -1,8 +1,9 @@
 ﻿"use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import { IoIosArrowRoundForward } from "react-icons/io";
 
@@ -10,7 +11,7 @@ export default function BuiltFor() {
   const sectionRef = useRef(null);
   const [activeTab, setActiveTab] = useState("individuals");
 
-  useEffect(() => {
+  useGSAP(() => {
     const ctx = gsap.context(() => {
       gsap.from(".builtfor-card", {
         scrollTrigger: {
@@ -26,7 +27,7 @@ export default function BuiltFor() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [activeTab]);
+  }, { dependencies: [activeTab], scope: sectionRef });
 
   const cardBase =
     "builtfor-card relative overflow-hidden rounded-[3px] p-6 text-white shadow-[0_20px_40px_rgba(148,109,132,0.25)] max-[900px]:p-5 " +

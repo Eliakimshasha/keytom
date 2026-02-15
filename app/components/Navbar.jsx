@@ -7,6 +7,7 @@ import { HiOutlineBars2 } from "react-icons/hi2";
 import { MdOutlineLogout } from "react-icons/md";
 import Image from "next/image";
 import logo from "../../public/assets/images/logo.png";
+import { useGSAP } from "@gsap/react";
 
 import { Select } from "antd";
 
@@ -43,6 +44,13 @@ export default function NavBar() {
     window.addEventListener("resize", updateLogoTone);
     updateLogoTone();
 
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", updateLogoTone);
+    };
+  }, []);
+
+  useGSAP(() => {
     const headerEl = headerRef.current;
     let tween;
 
@@ -69,10 +77,8 @@ export default function NavBar() {
       if (tween) {
         tween.kill();
       }
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("resize", updateLogoTone);
     };
-  }, []);
+  }, { scope: headerRef });
 
   const navItems = ["PERSONAL", "BUSINESS", "CARDS", "FAQ"];
 

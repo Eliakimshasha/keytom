@@ -1,8 +1,9 @@
 ﻿"use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import { FaChevronDown, FaArrowRight } from "react-icons/fa";
 import { FaApple, FaGooglePlay } from "react-icons/fa";
 import { MdOutlineLogout } from "react-icons/md";
@@ -15,7 +16,7 @@ import { FaXTwitter } from "react-icons/fa6";
 export default function Footer() {
   const footerRef = useRef(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     const ctx = gsap.context(() => {
       gsap.from(footerRef.current, {
         scrollTrigger: {
@@ -30,7 +31,7 @@ export default function Footer() {
     }, footerRef);
 
     return () => ctx.revert();
-  }, []);
+  }, { scope: footerRef });
 
   return (
     <footer

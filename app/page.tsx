@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import Header from "../app/components/Navbar";
 import Hero from "../app/components/Hero";
 import Services from "../app/components/Services";
@@ -23,7 +24,7 @@ export default function Home() {
   const heroPinRef = useRef<HTMLDivElement>(null);
   const introRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     const heroPinEl = heroPinRef.current;
     const introEl = introRef.current;
 
@@ -52,7 +53,7 @@ export default function Home() {
       mm.revert();
       ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
     };
-  }, []);
+  }, { scope: mainRef });
 
   return (
     <main ref={mainRef} className="overflow-x-hidden">

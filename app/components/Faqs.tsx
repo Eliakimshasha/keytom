@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
 import star from "../../public/assets/images/star1.svg";
+import { useGSAP } from "@gsap/react";
 
 type FAQItem = { q: string; a: string };
 type FAQSections = Record<string, FAQItem[]>;
@@ -73,7 +74,7 @@ export default function FAQ() {
   const [openItems, setOpenItems] = useState<number[]>([]);
   const activeData = (faqData[activeTab] ?? faqData.individuals) as FAQSections;
 
-  useEffect(() => {
+  useGSAP(() => {
     const ctx = gsap.context(() => {
       gsap.from(".faq-title", {
         scrollTrigger: {
@@ -88,7 +89,7 @@ export default function FAQ() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, []);
+  }, { scope: sectionRef });
 
   useEffect(() => {
     const categories = Object.keys(activeData);

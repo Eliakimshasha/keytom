@@ -1,8 +1,9 @@
 ﻿"use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 const features: Array<{ number: string; title: string; description: string }> =
   [
@@ -45,7 +46,7 @@ export default function VirtualCard() {
   const cardFlipRef = useRef<HTMLDivElement | null>(null);
   const featuresRef = useRef<HTMLDivElement | null>(null);
 
-  useEffect(() => {
+  useGSAP(() => {
     gsap.registerPlugin(ScrollTrigger);
     const mm = gsap.matchMedia();
 
@@ -188,7 +189,7 @@ export default function VirtualCard() {
       ctx.revert();
       mm.revert();
     };
-  }, []);
+  }, { scope: sectionRef });
 
   return (
     <section ref={sectionRef} className=" py-28 min-h-screen max-[900px]:py-20">

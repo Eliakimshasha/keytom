@@ -16,28 +16,74 @@ export default function WhyKeytom() {
   const cardThreeRef = useRef(null);
   const cardFourRef = useRef(null);
 
-  useGSAP(() => {
-    gsap.set(titleRef.current, { opacity: "1" });
-    gsap.set(cardOneRef.current, { bottom: "-120px" });
-    gsap.set(cardTwoRef.current, { bottom: "-120px" });
-    gsap.set(cardThreeRef.current, { bottom: "-120px" });
-    gsap.set(cardFourRef.current, { bottom: "-120px" });
+  useGSAP(
+    () => {
+      gsap.set(titleRef.current, { opacity: "1" });
+      gsap.set(cardOneRef.current, { bottom: "-120px" });
+      gsap.set(cardTwoRef.current, { bottom: "-120px" });
+      gsap.set(cardThreeRef.current, { bottom: "-120px" });
+      gsap.set(cardFourRef.current, { bottom: "-120px" });
 
-    const timeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: sectionRef.current,
-        start: "top top",
-        end: "+=2000",
-        scrub: true,
-        pin: true,
-      },
-    });
+      const timeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top top",
+          end: "+=1000",
+          scrub: true,
+          pin: true,
+        },
+      });
 
-    timeline.to(titleRef.current, {
-      top: "0",
-      duration: 1,
-    });
-  });
+      timeline.to(
+        cardOneRef.current,
+        {
+          top: "-80px",
+          duration: 2,
+        },
+
+        "-=1",
+      );
+
+      timeline.to(
+        titleRef.current,
+        {
+          opacity: "0",
+          duration: 7,
+        },
+        "-=1",
+      );
+      timeline.to(
+        cardTwoRef.current,
+        {
+          top: "-80px",
+          duration: 2,
+        },
+
+        "-=7",
+      );
+
+      timeline.to(
+        cardThreeRef.current,
+        {
+          top: "-80px",
+          duration: 2,
+        },
+
+        "-=6",
+      );
+
+      timeline.to(
+        cardFourRef.current,
+        {
+          top: "-80px",
+          duration: 2,
+        },
+
+        "-=5",
+      );
+    },
+    { scope: sectionRef },
+  );
 
   return (
     <section
@@ -89,7 +135,7 @@ export default function WhyKeytom() {
               >
                 <div
                   ref={cardOneRef}
-                  className="reason-card md:absolute md:left-0  lg:left-4  bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)] max-[767px]:flex-none max-[767px]:w-[76vw] sm:max-[767px]:w-[60vw] md:w-[260px] lg:w-[280px]"
+                  className="reason-card md:absolute md:left-0  lg:left-4  bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px]  max-h-[400px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)] max-[767px]:flex-none max-[767px]:w-[76vw] sm:max-[767px]:w-[60vw] md:w-[260px] lg:w-[280px]"
                 >
                   <div>
                     <h3 className="text-[30px] font-bold text-[#b07f8d] leading-none mb-1">
@@ -108,7 +154,7 @@ export default function WhyKeytom() {
 
                 <div
                   ref={cardTwoRef}
-                  className="reason-card md:absolute md:left-[25%]  lg:left-[26%]  bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)] max-[767px]:flex-none max-[767px]:w-[76vw] sm:max-[767px]:w-[60vw] md:w-[260px] lg:w-[280px]"
+                  className="reason-card md:absolute md:left-[25%]  lg:left-[26%]  bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px]  max-h-[400px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)] max-[767px]:flex-none max-[767px]:w-[76vw] sm:max-[767px]:w-[60vw] md:w-[260px] lg:w-[280px]"
                 >
                   <div>
                     <h3 className="text-[30px] font-bold text-[#b07f8d] leading-none mb-1">
@@ -142,7 +188,7 @@ export default function WhyKeytom() {
 
                 <div
                   ref={cardThreeRef}
-                  className="reason-card md:absolute md:right-[25%]  lg:right-[26%]  bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)] max-[767px]:flex-none max-[767px]:w-[76vw] sm:max-[767px]:w-[60vw] md:w-[260px] lg:w-[280px]"
+                  className="reason-card md:absolute md:right-[25%]  lg:right-[26%]  bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px]  max-h-[400px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)] max-[767px]:flex-none max-[767px]:w-[76vw] sm:max-[767px]:w-[60vw] md:w-[260px] lg:w-[280px]"
                 >
                   <div>
                     <h3 className="text-[30px] font-bold text-[#b07f8d] leading-none mb-1">
@@ -162,7 +208,7 @@ export default function WhyKeytom() {
 
                 <div
                   ref={cardFourRef}
-                  className="reason-card md:absolute md:right-0  lg:right-4  bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)] max-[767px]:flex-none max-[767px]:w-[76vw] sm:max-[767px]:w-[60vw] md:w-[260px] lg:w-[280px]"
+                  className="reason-card md:absolute md:right-0  lg:right-4  bg-[rgba(253,249,242,0.9)] border border-white/70 rounded-[3px] p-6 min-h-[320px]  max-h-[400px] flex flex-col gap-4 shadow-[0_20px_50px_rgba(159,118,129,0.2)] max-[767px]:flex-none max-[767px]:w-[76vw] sm:max-[767px]:w-[60vw] md:w-[260px] lg:w-[280px]"
                 >
                   <div>
                     <h3 className="text-[30px] font-bold text-[#b07f8d] leading-none mb-1">
