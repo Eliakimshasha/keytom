@@ -171,14 +171,14 @@ export default function WhyKeytom() {
         <img
           src="/assets/images/star1.svg"
           alt=""
-          className="absolute w-5 h-5 opacity-60 left-[1%] top-[30%]"
+          className="absolute w-5 h-5 opacity-60 left-[1%] top-[26%]"
         />
       
        
         <img
           src="/assets/images/star1.svg"
           alt=""
-          className="absolute w-5 h-5 opacity-60 right-[1%] top-[30%]"
+          className="absolute w-5 h-5 opacity-60 right-[1%] top-[26%]"
         />
       </div>
 
