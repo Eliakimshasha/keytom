@@ -221,6 +221,7 @@ export function CardsContent() {
               pin: true,
               pinSpacing: true,
               scrub: 1,
+              anticipatePin: 1,
               onEnter: () => moveCardToFlip(),
               onEnterBack: () => moveCardToFlip(),
               onLeave: () => {
@@ -348,11 +349,12 @@ export function CardsContent() {
           const timeline = gsap.timeline({
             scrollTrigger: {
               trigger: CardSectionRef.current,
-              start: "top 0%",
+              start: "top top",
               end: `+=${scrollDistance}`,
               pin: true,
               pinSpacing: true,
               scrub: 1,
+              anticipatePin: 1,
               invalidateOnRefresh: true,
               onUpdate: (self) => {
                 const movementThreshold =
@@ -446,6 +448,11 @@ export function CardsContent() {
           }
           if (isMobile && physicalContainerRef.current) {
             gsap.set(physicalContainerRef.current, {
+              left: 0,
+              top: 0,
+              xPercent: 0,
+              yPercent: 0,
+              transformOrigin: "center center",
               width: "100%",
               height: "100%",
             });
@@ -585,6 +592,10 @@ export function CardsContent() {
             timeline.to(
               physicalContainerRef.current,
               {
+                left: "50%",
+                top: "50%",
+                xPercent: -50,
+                yPercent: -50,
                 width: 400,
                 height: 250,
                 duration: containerShrinkDuration,
@@ -941,7 +952,7 @@ export function CardsContent() {
 
         <div
           ref={CardSectionRef}
-          className="h-screen bg-[url('/assets/images/bg.png')] bg-cover relative bg-center bg-fixed"
+          className="h-screen bg-[url('/assets/images/bg.png')] bg-cover relative bg-center"
           style={{ perspective: "1200px" }}
         >
           {/* <div className="w-[400px] h-[250px] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500"> */}
@@ -949,7 +960,7 @@ export function CardsContent() {
           <div
             // not outside this div. just for small screen
             ref={physicalContainerRef}
-            className="w-full h-full bg-blue-600 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 relative"
+            className="w-full h-full bg-blue-600 absolute inset-0"
             style={{ transformStyle: "preserve-3d" }}
           >
             {/* the below image of card1 is demo image  */}
