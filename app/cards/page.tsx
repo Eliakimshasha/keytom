@@ -510,16 +510,31 @@ export function CardsContent() {
       <div className="relative">
         {/* Hero Section */}
         <div
-          className="mx-auto flex h-[50vh] pt-16 items-center justify-center px-6"
+          className="mx-auto flex h-[50vh] max-[900px]:h-[65vh]  pt-16 max-[900px]:pt-24 lg:items-center md:items-center justify-center px-6"
           style={{
             backgroundImage:
               "radial-gradient(70% 70% at 62% 58%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 35%, rgba(255,255,255,0) 60%), " +
               "linear-gradient(180deg, #c79aa7 0%, #d7b1ab 40%, #f3e3a7 100%)",
           }}
         >
+          <div className="lg:hidden md:hidden text-center">
+            <h1 className="text-[2.5rem] text-white header leading-[0.9]">
+              Keytom card
+            </h1>
+            <p className="mt-5 small-text  text-[0.8rem] text-lighter leading-relaxed text-white/85">
+              From everyday moments to travels abroad, use your Keytom Card with
+              ease — funded through assets you convert within the Keytom.
+            </p>
+            <button className="mt-6 small-btn inline-flex items-center gap-3 rounded-[3px] bg-[#3c4b86] px-5 py-3 text-[0.85rem] font-semibold uppercase tracking-[0] text-white shadow-sm">
+              Get started today
+              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-white/70 text-[0.7rem]">
+                ↗
+              </span>
+            </button>
+          </div>
           <div
             ref={topCardContainerRef}
-            className="fixed top-20 z-50 w-[min(70vw,360px)]"
+            className="fixed lg:top-20 max-[900px]:top-[43%] z-50 w-[min(70vw,360px)]"
           >
             <img
               ref={topCardRef}
@@ -531,24 +546,50 @@ export function CardsContent() {
         </div>
 
         <div
-          className="mx-auto flex h-[50vh] relative z-10 items-end px-6 pb-12 text-white"
+          className="mx-auto flex h-[50vh] max-[900px]:h-[38vh] relative z-10 items-end px-6 lg:pb-12 md:pb-12 text-white"
           style={{
             backgroundImage:
-              "linear-gradient(180deg, #d1a4ad 0%, #9a82b1 40%, #3b4b98 100%)",
+              "linear-gradient(180deg, #d1a4ad 0%, #9a82b1 40%, #0527D3 100%)",
           }}
         >
           <div
             ref={shadowCardRef}
-            className="absolute left-1/2 transform -translate-x-1/2 rotate-[180deg] top-4 w-[min(70vw,360px)]"
+            className="absolute  left-1/2  transform -translate-x-1/2  top-4 w-[min(70vw,360px)]"
           >
             <img
               src="/assets/images/card1.jpeg"
               alt="Keytom card"
-              className="w-full rounded-[3px]"
+              className="w-full rounded-[3px] rotate-[180deg]"
             />
+
+            <div className="lg:max-w-60 lg:hidden md:hidden absolute -bottom-24 md:max-w-60 small-btn text-left max-[900px]:text-center">
+              <p className="text-[0.98rem] leading-relaxed text-white/85">
+                A convenient app to manage your card and accounts.
+              </p>
+              <div className="mt-5 flex justify-end gap-2 max-[900px]:justify-start">
+                <button className="relative border border-white/80 rounded-1 px-3 py-2 pl-8 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start">
+                  <span className="absolute left-[8px] top-1/2 -translate-y-1/2 text-[1.1rem] opacity-95">
+                    <FaApple />
+                  </span>
+                  <span className="text-[0.5rem] font-medium opacity-80">
+                    Download on the
+                  </span>
+                  App Store
+                </button>
+                <button className="relative border border-white/80 rounded-1 px-3 py-2 pl-8 bg-transparent text-white font-semibold text-[0.7rem] leading-[1.1] flex flex-col items-start">
+                  <span className="absolute left-[8px] top-1/2 -translate-y-1/2 text-[1.1rem] opacity-95">
+                    <FaGooglePlay />
+                  </span>
+                  <span className="text-[0.5rem] font-medium opacity-80">
+                    Get it on
+                  </span>
+                  Google Play
+                </button>
+              </div>
+            </div>
           </div>
-          <div className="mx-auto flex w-full max-w-[1200px] items-end justify-between gap-10 max-[900px]:flex-col max-[900px]:items-start">
-            <div className="max-w-[320px]">
+          <div className="mx-auto flex w-full  max-w-[1200px] items-end justify-between gap-10 max-[900px]:flex-col max-[900px]:items-start">
+            <div className="max-w-[320px] max-[900px]:hidden">
               <h1 className="text-[3.6rem] font-light leading-[0.9]">
                 Keytom
                 <br />
@@ -566,7 +607,7 @@ export function CardsContent() {
               </button>
             </div>
 
-            <div className="max-w-[240px] text-left max-[900px]:text-left">
+            <div className="lg:max-w-60 max-[900px]:hidden md:max-w-60 small-btn text-left max-[900px]:text-center">
               <p className="text-[0.98rem] leading-relaxed text-white/85">
                 A convenient app to manage your card and accounts.
               </p>
