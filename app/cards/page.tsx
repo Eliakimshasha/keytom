@@ -510,7 +510,7 @@ export function CardsContent() {
       <div className="relative">
         {/* Hero Section */}
         <div
-          className="mx-auto flex h-[50vh] max-[900px]:h-[68vh]  pt-16 max-[900px]:pt-24 lg:items-center md:items-center justify-center px-6"
+          className="mx-auto flex h-[50vh] max-[900px]:h-[66vh]  pt-16 max-[900px]:pt-24 lg:items-center md:items-center justify-center px-6"
           style={{
             backgroundImage:
               "radial-gradient(70% 70% at 62% 58%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 35%, rgba(255,255,255,0) 60%), " +
