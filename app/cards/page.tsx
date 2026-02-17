@@ -312,7 +312,7 @@ export function CardsContent() {
           const itemInDuration = 0.6;
           const descInDuration = 0.4;
           const totalDuration = (items2.length - 1) * itemStep + itemInDuration;
-          const extraDuration = isMobile ? 0.8 : 0;
+          const extraDuration = isMobile ? 1.4 : 0;
           const scrollDistance =
             (moveDuration + totalDuration + extraDuration) * stepPx;
 
@@ -320,10 +320,8 @@ export function CardsContent() {
             if (!physicalImageRef.current || !CardSectionRef.current) {
               return 0;
             }
-            const imageRect =
-              physicalImageRef.current.getBoundingClientRect();
-            const sectionRect =
-              CardSectionRef.current.getBoundingClientRect();
+            const imageRect = physicalImageRef.current.getBoundingClientRect();
+            const sectionRect = CardSectionRef.current.getBoundingClientRect();
             const imageCenter = imageRect.top + imageRect.height / 2;
             const sectionCenter = sectionRect.top + sectionRect.height / 2;
             return sectionCenter - imageCenter;
@@ -401,6 +399,7 @@ export function CardsContent() {
               opacity: 0,
               y: 80,
               scale: 0.98,
+              
             });
           }
 
@@ -520,8 +519,8 @@ export function CardsContent() {
                 opacity: 1,
                 y: () => getPhysicalImageCenterOffset(),
                 scale: 1,
-                duration: 0.7,
-                ease: "power3.out",
+                duration: 1.6,
+                ease: "none",
               },
               mobileRevealStart,
             );
@@ -758,8 +757,12 @@ export function CardsContent() {
           ref={CardSectionRef}
           className="h-screen bg-[url('/assets/images/bg.png')] bg-cover relative bg-center bg-fixed"
         >
-          <div className="w-full h-full absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 "
-          style={{background:"[linear-gradient(180deg,#9d7ba3_0%,#b58cab_45%,#d4a9a1_100%)]"}}
+          <div
+            className="w-full h-full absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 "
+            style={{
+              background:
+                "[linear-gradient(180deg,#9d7ba3_0%,#b58cab_45%,#d4a9a1_100%)]",
+            }}
           >
             {/* <div className="w-[400px] h-[250px] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500"> */}
             {/* the below image of card1 is demo image  */}
@@ -770,7 +773,7 @@ export function CardsContent() {
               className="w-[120px] h-[80px] z-40 max-[900px]:hidden  rounded-[1px] absolute top-34 left-[37%]"
             />
 
-{/* image for large screen  */}
+            {/* image for large screen  */}
             <img
               src="/assets/images/card3.png"
               alt="Keytom card back"
@@ -778,7 +781,7 @@ export function CardsContent() {
             />
 
             {/* image for small/mobile screen  */}
-            <div className=" ">
+            <div className=" bg-red-900">
               <img
                 ref={physicalImageRef}
                 src="/assets/images/card3.png"
