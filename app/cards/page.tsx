@@ -724,20 +724,37 @@ export function CardsContent() {
               ref={demoCardRef}
               src="/assets/images/card1.jpeg"
               alt="Keytom card back"
-              className="w-[120px] h-[80px] z-40   rounded-[1px] absolute top-34 left-[37%]"
+              className="w-[120px] h-[80px] z-40 max-[900px]:hidden  rounded-[1px] absolute top-34 left-[37%]"
             />
 
+{/* image for large screen  */}
             <img
               src="/assets/images/card3.png"
               alt="Keytom card back"
-              className="w-full z-1 max-[900px]:h-47.5  rounded-[1px] absolute bottom-0 right-[10%]"
+              className="w-full z-1  max-[900px]:hidden rounded-[1px] absolute bottom-0 right-[10%]"
             />
+
+            {/* image for small/mobile screen  */}
+           <div className=" ">
+             <img
+              src="/assets/images/card3.png"
+              alt="Keytom card back"
+              className="w-full z-1  lg:hidden md:hidden rounded-[1px] absolute bottom-0 right-[10%]"
+            />
+           </div>
 
             {/* Features2 List */}
             <div
               ref={features2Ref}
-              className="overflow-hidden w-[35%] float-right z-50 mt-36 flex-1 relative max-[900px]:overflow-visible"
+              className="overflow-hidden w-[35%] max-[900px]:w-full max-[900px]:px-4 lg:float-right md:float-right z-50 mt-36 max-[900px]:mt-24 flex-1 relative max-[900px]:overflow-visible"
             >
+              <div
+                ref={physicalTitleRef}
+                className="lg:hidden mb-9 md:hidden text-3xl text-center"
+              >
+                <h1 className="text-white">PHYSICAL CARDS</h1>
+                <h1 className="text-white/30">(COMING SOON...)</h1>
+              </div>
               {features2.map((feature, index) => (
                 <div
                   key={index}
@@ -762,7 +779,7 @@ export function CardsContent() {
 
             <div
               ref={physicalTitleRef}
-              className="absolute bottom-10 left-5 text-4xl "
+              className="absolute max-[900px]:hidden bottom-10 left-5 text-4xl "
             >
               <h1 className="text-white">PHYSICAL CARDS</h1>
               <h1 className="text-white/30">(COMING SOON...)</h1>
