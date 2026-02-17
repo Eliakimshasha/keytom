@@ -549,7 +549,7 @@ export function CardsContent() {
           className="mx-auto flex h-[50vh] max-[900px]:h-[38vh] relative z-10 items-end px-6 lg:pb-12 md:pb-12 text-white"
           style={{
             backgroundImage:
-              "linear-gradient(180deg, #d1a4ad 0%, #9a82b1 40%, #0527D3 100%)",
+              "linear-gradient(180deg, #d1a4ad 0%, #9a82b1 40%, #041B8B 100%)",
           }}
         >
           <div
