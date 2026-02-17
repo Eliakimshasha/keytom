@@ -717,7 +717,9 @@ export function CardsContent() {
           ref={CardSectionRef}
           className="h-screen bg-[url('/assets/images/bg.png')] bg-cover relative bg-center bg-fixed"
         >
-          <div className="w-full h-full absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500">
+          <div className="w-full h-full absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 "
+          style={{background:"[linear-gradient(180deg,#9d7ba3_0%,#b58cab_45%,#d4a9a1_100%)]"}}
+          >
             {/* <div className="w-[400px] h-[250px] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500"> */}
             {/* the below image of card1 is demo image  */}
             <img
@@ -758,7 +760,7 @@ export function CardsContent() {
               {features2.map((feature, index) => (
                 <div
                   key={index}
-                  className="vc-item-2 py-4 border-b border-[#ffffff] last:border-b-0"
+                  className="vc-item-2 py-4 border-b border-[#ffffff] max-[900px]:border-[#ffffff]/50 last:border-b-0"
                 >
                   <div className="vc-header flex items-center lg:gap-4 md:gap-4 gap-2">
                     <div className="inline-flex items-center gap-2 lg:px-4 px-3 lg:py-1 py-0 rounded-full border border-[#ffffff] text-[#ffffff] font-semibold text-[0.8rem] lg:min-w-[56px] justify-center">
