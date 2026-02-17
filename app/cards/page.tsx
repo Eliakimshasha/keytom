@@ -86,6 +86,7 @@ export function CardsContent() {
   const CardSectionRef = useRef<HTMLDivElement | null>(null);
   const demoCardRef = useRef<HTMLImageElement | null>(null);
   const physicalImageRef = useRef<HTMLImageElement | null>(null);
+  const physicalContainerRef = useRef<HTMLDivElement | null>(null);
   const physicalTitleRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(
@@ -312,7 +313,11 @@ export function CardsContent() {
           const itemInDuration = 0.6;
           const descInDuration = 0.4;
           const totalDuration = (items2.length - 1) * itemStep + itemInDuration;
-          const extraDuration = isMobile ? 1 : 0;
+          const imageRevealDuration = 1.6;
+          const containerShrinkDuration = 1.6;
+          const extraDuration = isMobile
+            ? imageRevealDuration + containerShrinkDuration + 0.2
+            : 0;
           const scrollDistance =
             (moveDuration + totalDuration + extraDuration) * stepPx;
 
@@ -399,7 +404,12 @@ export function CardsContent() {
               opacity: 0,
               y: 80,
               scale: 0.98,
-              
+            });
+          }
+          if (isMobile && physicalContainerRef.current) {
+            gsap.set(physicalContainerRef.current, {
+              width: "100%",
+              height: "100%",
             });
           }
 
@@ -511,6 +521,7 @@ export function CardsContent() {
           });
 
           const mobileRevealStart = moveDuration + totalDuration + 0.05;
+          const mobileShrinkStart = mobileRevealStart + imageRevealDuration;
 
           if (isMobile && physicalImageRef.current) {
             timeline.to(
@@ -519,7 +530,7 @@ export function CardsContent() {
                 opacity: 1,
                 y: () => getPhysicalImageCenterOffset(),
                 scale: 1,
-                duration: 1.6,
+                duration: imageRevealDuration,
                 ease: "none",
               },
               mobileRevealStart,
@@ -531,6 +542,19 @@ export function CardsContent() {
             { opacity: 0, duration: 0.5 },
             mobileRevealStart,
           );
+
+          if (isMobile && physicalContainerRef.current) {
+            timeline.to(
+              physicalContainerRef.current,
+              {
+                width: 400,
+                height: 250,
+                duration: containerShrinkDuration,
+                ease: "none",
+              },
+              mobileShrinkStart,
+            );
+          }
 
           return () => {
             timeline.scrollTrigger?.kill();
@@ -681,7 +705,10 @@ export function CardsContent() {
             </div>
           </div>
         </div>
-
+        {/* style={{
+              background:
+                "[linear-gradient(180deg,#9d7ba3_0%,#b58cab_45%,#d4a9a1_100%)]",
+            }} */}
         {/* Virtual Card Section */}
         <section
           ref={virtualSectionRef}
@@ -757,14 +784,13 @@ export function CardsContent() {
           ref={CardSectionRef}
           className="h-screen bg-[url('/assets/images/bg.png')] bg-cover relative bg-center bg-fixed"
         >
+          {/* <div className="w-[400px] h-[250px] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500"> */}
+
           <div
-            className="w-full h-full absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 "
-            style={{
-              background:
-                "[linear-gradient(180deg,#9d7ba3_0%,#b58cab_45%,#d4a9a1_100%)]",
-            }}
+            // not outside this div. just for small screen
+            ref={physicalContainerRef}
+            className="w-full h-full bg-blue-600 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-[900px]:overflow-hidden"
           >
-            {/* <div className="w-[400px] h-[250px] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500"> */}
             {/* the below image of card1 is demo image  */}
             <img
               ref={demoCardRef}
