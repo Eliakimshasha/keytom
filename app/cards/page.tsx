@@ -596,8 +596,8 @@ export function CardsContent() {
                 top: "50%",
                 xPercent: -50,
                 yPercent: -50,
-                width: 400,
-                height: 250,
+                width: "97%",
+                height: 200,
                 duration: containerShrinkDuration,
                 ease: "none",
               },
@@ -624,7 +624,7 @@ export function CardsContent() {
               timeline.fromTo(
                 physicalContainerRef.current,
                 { rotateY: 0 },
-                { rotateY: 360, duration: rotateDuration, ease: "none" },
+                { rotateY: 180, duration: rotateDuration, ease: "none" },
                 mobileRotateStart,
               );
             }
