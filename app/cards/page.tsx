@@ -85,8 +85,15 @@ export function CardsContent() {
   const card2Ref = useRef<HTMLImageElement | null>(null);
   const CardSectionRef = useRef<HTMLDivElement | null>(null);
   const demoCardRef = useRef<HTMLImageElement | null>(null);
-  const physicalImageRef = useRef<HTMLImageElement | null>(null);
+  const physicalImageRef = useRef<HTMLDivElement | null>(null);
   const physicalContainerRef = useRef<HTMLDivElement | null>(null);
+  const physicalCardFrontRef = useRef<HTMLImageElement | null>(null);
+  const physicalCardBackRef = useRef<HTMLImageElement | null>(null);
+  const smallImg1Ref = useRef<HTMLImageElement | null>(null);
+  const smallImg2Ref = useRef<HTMLImageElement | null>(null);
+  const smallImg3Ref = useRef<HTMLImageElement | null>(null);
+  const smallImg4Ref = useRef<HTMLImageElement | null>(null);
+  const smallImg5Ref = useRef<HTMLImageElement | null>(null);
   const physicalTitleRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(
@@ -315,8 +322,14 @@ export function CardsContent() {
           const totalDuration = (items2.length - 1) * itemStep + itemInDuration;
           const imageRevealDuration = 1.6;
           const containerShrinkDuration = 1.6;
+          const rotateDuration = 1;
+          const scatterDuration = 1;
           const extraDuration = isMobile
-            ? imageRevealDuration + containerShrinkDuration + 0.2
+            ? imageRevealDuration +
+              containerShrinkDuration +
+              rotateDuration +
+              scatterDuration +
+              0.4
             : 0;
           const scrollDistance =
             (moveDuration + totalDuration + extraDuration) * stepPx;
@@ -399,12 +412,37 @@ export function CardsContent() {
 
           gsap.set(items2, { opacity: 0, y: 300 });
 
+          const smallImages = [
+            smallImg1Ref.current,
+            smallImg2Ref.current,
+            smallImg3Ref.current,
+            smallImg4Ref.current,
+            smallImg5Ref.current,
+          ].filter(Boolean) as HTMLImageElement[];
+
           if (isMobile && physicalImageRef.current) {
             gsap.set(physicalImageRef.current, {
               opacity: 0,
               y: 80,
               scale: 0.98,
             });
+          }
+          if (isMobile) {
+            if (physicalCardFrontRef.current) {
+              gsap.set(physicalCardFrontRef.current, { rotateY: 0 });
+            }
+            if (physicalCardBackRef.current) {
+              gsap.set(physicalCardBackRef.current, { rotateY: 180 });
+            }
+            if (smallImages.length) {
+              gsap.set(smallImages, {
+                width: "100%",
+                height: "100%",
+                top: 0,
+                left: 0,
+                opacity: 0,
+              });
+            }
           }
           if (isMobile && physicalContainerRef.current) {
             gsap.set(physicalContainerRef.current, {
@@ -565,6 +603,116 @@ export function CardsContent() {
               },
               mobileShrinkStart,
             );
+          }
+
+          const mobileRotateStart = mobileShrinkStart + containerShrinkDuration + 0.05;
+          const mobileScatterStart = mobileRotateStart + rotateDuration;
+
+          if (isMobile) {
+            if (physicalContainerRef.current) {
+              timeline.fromTo(
+                physicalContainerRef.current,
+                { rotateY: 0 },
+                { rotateY: 360, duration: rotateDuration, ease: "none" },
+                mobileRotateStart,
+              );
+            }
+
+            if (smallImages.length) {
+              timeline.to(
+                smallImages,
+                { opacity: 1, duration: 0.3 },
+                mobileScatterStart,
+              );
+            }
+
+            if (physicalCardBackRef.current) {
+              timeline.to(
+                physicalCardBackRef.current,
+                {
+                  width: 100,
+                  height: 100,
+                  top: "120%",
+                  left: "60%",
+                  xPercent: -50,
+                  yPercent: -50,
+                  duration: scatterDuration,
+                  ease: "none",
+                },
+                mobileScatterStart,
+              );
+            }
+
+            if (smallImg1Ref.current) {
+              timeline.to(
+                smallImg1Ref.current,
+                {
+                  width: 100,
+                  height: 100,
+                  top: "-100px",
+                  left: "5%",
+                  duration: scatterDuration,
+                  ease: "none",
+                },
+                mobileScatterStart,
+              );
+            }
+            if (smallImg2Ref.current) {
+              timeline.to(
+                smallImg2Ref.current,
+                {
+                  width: 100,
+                  height: 100,
+                  top: "30px",
+                  left: "13%",
+                  duration: scatterDuration,
+                  ease: "none",
+                },
+                mobileScatterStart,
+              );
+            }
+            if (smallImg3Ref.current) {
+              timeline.to(
+                smallImg3Ref.current,
+                {
+                  width: 100,
+                  height: 100,
+                  top: "-60px",
+                  left: "33%",
+                  duration: scatterDuration,
+                  ease: "none",
+                },
+                mobileScatterStart,
+              );
+            }
+            if (smallImg4Ref.current) {
+              timeline.to(
+                smallImg4Ref.current,
+                {
+                  width: 100,
+                  height: 100,
+                  top: "80%",
+                  left: "70%",
+                  duration: scatterDuration,
+                  ease: "none",
+                },
+                mobileScatterStart,
+              );
+            }
+            if (smallImg5Ref.current) {
+              timeline.to(
+                smallImg5Ref.current,
+                {
+                  width: 100,
+                  height: 100,
+                  top: "130%",
+                  left: "15%",
+                  duration: scatterDuration,
+                  ease: "none",
+                },
+                mobileScatterStart,
+              );
+            }
           }
 
           return () => {
@@ -794,13 +942,15 @@ export function CardsContent() {
         <div
           ref={CardSectionRef}
           className="h-screen bg-[url('/assets/images/bg.png')] bg-cover relative bg-center bg-fixed"
+          style={{ perspective: "1200px" }}
         >
           {/* <div className="w-[400px] h-[250px] absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-500"> */}
 
           <div
             // not outside this div. just for small screen
             ref={physicalContainerRef}
-            className="w-full h-full bg-blue-600 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 max-[900px]:overflow-hidden"
+            className="w-full h-full bg-blue-600 absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 relative"
+            style={{ transformStyle: "preserve-3d" }}
           >
             {/* the below image of card1 is demo image  */}
             <img
@@ -818,13 +968,63 @@ export function CardsContent() {
             />
 
             {/* image for small/mobile screen  */}
-            <div className="">
-              <img
+            <div
+              className="lg:hidden md:hidden absolute inset-0"
+              style={{ perspective: "1000px" }}
+            >
+              <div
                 ref={physicalImageRef}
-                src="/assets/images/card3.png"
-                alt="Keytom card back"
-                className="w-full h-full z-1 lg:hidden md:hidden rounded-[1px] absolute inset-0 object-contain object-bottom"
-              />
+                className="absolute inset-0 z-20"
+                style={{ transformStyle: "preserve-3d" }}
+              >
+                <img
+                  ref={smallImg1Ref}
+                  src="/assets/images/card1.jpeg"
+                  alt="Keytom card small 1"
+                  className="absolute left-0 top-0 h-full w-full z-30 rounded-[1px] object-contain object-bottom"
+                />
+                <img
+                  ref={smallImg2Ref}
+                  src="/assets/images/card3.png"
+                  alt="Keytom card small 2"
+                  className="absolute left-0 top-0 h-full w-full z-30 rounded-[1px] object-contain object-bottom"
+                />
+                <img
+                  ref={smallImg3Ref}
+                  src="/assets/images/card1.jpeg"
+                  alt="Keytom card small 3"
+                  className="absolute left-0 top-0 h-full w-full z-30 rounded-[1px] object-contain object-bottom"
+                />
+                <img
+                  ref={smallImg4Ref}
+                  src="/assets/images/card3.png"
+                  alt="Keytom card small 4"
+                  className="absolute left-0 top-0 h-full w-full z-30 rounded-[1px] object-contain object-bottom"
+                />
+                <img
+                  ref={smallImg5Ref}
+                  src="/assets/images/card1.jpeg"
+                  alt="Keytom card small 5"
+                  className="absolute left-0 top-0 h-full w-full z-30 rounded-[1px] object-contain object-bottom"
+                />
+                <img
+                  ref={physicalCardFrontRef}
+                  src="/assets/images/card3.png"
+                  alt="Keytom card front"
+                  className="absolute left-0 top-0 h-full w-full z-40 rounded-[1px] object-contain object-bottom"
+                  style={{ backfaceVisibility: "hidden" }}
+                />
+                <img
+                  ref={physicalCardBackRef}
+                  src="/assets/images/card1.jpeg"
+                  alt="Keytom card back"
+                  className="absolute left-0 top-0 h-full w-full z-40 rounded-[1px] object-contain object-bottom"
+                  style={{
+                    backfaceVisibility: "hidden",
+                    transform: "rotateY(180deg)",
+                  }}
+                />
+              </div>
             </div>
 
             {/* Features2 List */}
