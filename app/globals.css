@@ -403,6 +403,11 @@ h1, h2, h3, h4, h5, h6, p, span, a, button {
 
 }
 
+.navtext{
+    font-weight: 100 !important;
+
+}
+
 .intro-headline {
   max-width: 1000px;
   margin: 0 auto;
