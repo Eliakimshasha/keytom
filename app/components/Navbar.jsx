@@ -149,7 +149,7 @@ export default function NavBar() {
             OPEN ACCOUNT
           </button>
           <div
-            className="px-3 py-[9px] bg-[#47474784] rounded-xs"
+            className="px-3 py-2 bg-[#47474784] rounded-xs"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             <HiOutlineBars2 className="text-white" />
