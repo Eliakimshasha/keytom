@@ -201,7 +201,7 @@ export default function NavBar() {
                 {navItems.map((item) => (
                   <a
                     key={item}
-                    href={`#${item.toLowerCase()}`}
+                    href={`${item.toLowerCase()}`}
                     className="text-[1.3rem] max-[900px]:text-[1rem] font-semibold tracking-tight hover:text-[#2f3f8f] transition-colors"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
