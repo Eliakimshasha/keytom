@@ -312,7 +312,7 @@ export function CardsContent() {
           const itemInDuration = 0.6;
           const descInDuration = 0.4;
           const totalDuration = (items2.length - 1) * itemStep + itemInDuration;
-          const extraDuration = isMobile ? 1.4 : 0;
+          const extraDuration = isMobile ? 1 : 0;
           const scrollDistance =
             (moveDuration + totalDuration + extraDuration) * stepPx;
 
@@ -781,7 +781,7 @@ export function CardsContent() {
             />
 
             {/* image for small/mobile screen  */}
-            <div className=" bg-red-900">
+            <div className="">
               <img
                 ref={physicalImageRef}
                 src="/assets/images/card3.png"
