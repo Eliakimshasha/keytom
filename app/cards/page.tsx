@@ -85,6 +85,7 @@ export function CardsContent() {
   const card2Ref = useRef<HTMLImageElement | null>(null);
   const CardSectionRef = useRef<HTMLDivElement | null>(null);
   const demoCardRef = useRef<HTMLImageElement | null>(null);
+  const physicalImageRef = useRef<HTMLImageElement | null>(null);
   const physicalTitleRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(
@@ -305,12 +306,15 @@ export function CardsContent() {
         );
 
         const buildPhysicalTimeline = (stepPx: number) => {
+          const isMobile = window.matchMedia("(max-width: 900px)").matches;
           const moveDuration = 0.8;
           const itemStep = 1;
           const itemInDuration = 0.6;
           const descInDuration = 0.4;
           const totalDuration = (items2.length - 1) * itemStep + itemInDuration;
-          const scrollDistance = (moveDuration + totalDuration) * stepPx;
+          const extraDuration = isMobile ? 0.8 : 0;
+          const scrollDistance =
+            (moveDuration + totalDuration + extraDuration) * stepPx;
 
           const timeline = gsap.timeline({
             scrollTrigger: {
@@ -378,6 +382,14 @@ export function CardsContent() {
           });
 
           gsap.set(items2, { opacity: 0, y: 300 });
+
+          if (isMobile && physicalImageRef.current) {
+            gsap.set(physicalImageRef.current, {
+              opacity: 0,
+              y: 60,
+              scale: 0.98,
+            });
+          }
 
           timeline.to(
             topCardContainerRef.current,
@@ -486,10 +498,24 @@ export function CardsContent() {
             }
           });
 
+          if (isMobile && physicalImageRef.current) {
+            timeline.to(
+              physicalImageRef.current,
+              {
+                opacity: 1,
+                y: 0,
+                scale: 1,
+                duration: 0.6,
+                ease: "power3.out",
+              },
+              moveDuration + totalDuration + 0.05,
+            );
+          }
+
           timeline.to(
             [features2Ref.current, physicalTitleRef.current],
             { opacity: 0, duration: 0.4 },
-            moveDuration + totalDuration + 0.1,
+            moveDuration + totalDuration + (isMobile ? 0.7 : 0.1),
           );
 
           return () => {
@@ -737,13 +763,14 @@ export function CardsContent() {
             />
 
             {/* image for small/mobile screen  */}
-           <div className=" ">
-             <img
-              src="/assets/images/card3.png"
-              alt="Keytom card back"
-              className="w-full z-1  lg:hidden md:hidden rounded-[1px] absolute bottom-0 right-[10%]"
-            />
-           </div>
+            <div className=" ">
+              <img
+                ref={physicalImageRef}
+                src="/assets/images/card3.png"
+                alt="Keytom card back"
+                className="w-full z-1 lg:hidden md:hidden rounded-[1px] absolute bottom-0 left-0 right-0"
+              />
+            </div>
 
             {/* Features2 List */}
             <div
