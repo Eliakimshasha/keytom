@@ -9,7 +9,7 @@ import { GiTireIronCross } from "react-icons/gi";
 function Contact() {
   return (
     <section className="bg-white text-[#3a57b5]">
-      <div className="mx-auto max-w-300 px-6 h-[80vh] max-[900px]:h-[60vh]  pt-20 max-[900px]:pb-6 lg:py-24">
+      <div className="mx-auto max-w-300 px-6 h-[80vh] max-[900px]:h-[68vh]  pt-20 max-[900px]:pt-32 max-[900px]:pb-6 lg:py-24">
         <div className="">
           <div >
             <h1 className="intro-heady text-[clamp(2.4rem,5vw,4.2rem)]  -tracking-[0.07em] font-lighter leading-[0.9]">
