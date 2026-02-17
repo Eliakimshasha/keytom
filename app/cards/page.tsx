@@ -316,6 +316,19 @@ export function CardsContent() {
           const scrollDistance =
             (moveDuration + totalDuration + extraDuration) * stepPx;
 
+          const getPhysicalImageCenterOffset = () => {
+            if (!physicalImageRef.current || !CardSectionRef.current) {
+              return 0;
+            }
+            const imageRect =
+              physicalImageRef.current.getBoundingClientRect();
+            const sectionRect =
+              CardSectionRef.current.getBoundingClientRect();
+            const imageCenter = imageRect.top + imageRect.height / 2;
+            const sectionCenter = sectionRect.top + sectionRect.height / 2;
+            return sectionCenter - imageCenter;
+          };
+
           const timeline = gsap.timeline({
             scrollTrigger: {
               trigger: CardSectionRef.current,
@@ -386,7 +399,7 @@ export function CardsContent() {
           if (isMobile && physicalImageRef.current) {
             gsap.set(physicalImageRef.current, {
               opacity: 0,
-              y: 60,
+              y: 80,
               scale: 0.98,
             });
           }
@@ -498,24 +511,26 @@ export function CardsContent() {
             }
           });
 
+          const mobileRevealStart = moveDuration + totalDuration + 0.05;
+
           if (isMobile && physicalImageRef.current) {
             timeline.to(
               physicalImageRef.current,
               {
                 opacity: 1,
-                y: 0,
+                y: () => getPhysicalImageCenterOffset(),
                 scale: 1,
-                duration: 0.6,
+                duration: 0.7,
                 ease: "power3.out",
               },
-              moveDuration + totalDuration + 0.05,
+              mobileRevealStart,
             );
           }
 
           timeline.to(
             [features2Ref.current, physicalTitleRef.current],
-            { opacity: 0, duration: 0.4 },
-            moveDuration + totalDuration + (isMobile ? 0.7 : 0.1),
+            { opacity: 0, duration: 0.5 },
+            mobileRevealStart,
           );
 
           return () => {
