@@ -648,7 +648,7 @@ export function CardsContent() {
           className="py-28 min-h-screen max-[900px]:py-20"
         >
           <div className="container mx-auto px-6">
-            <h2 className="text-[#3a57b5] relative z-50 font-semibold max-[900px]:text-[clamp(2rem,4vw,2rem)] text-[clamp(2.6rem,4.6vw,4.8rem)] mb-8">
+            <h2 className="text-[#3a57b5] relative max-[900px]:leading-8 keytom-heading z-50 font-semibold max-[900px]:text-[clamp(2rem,4vw,2rem)] text-[clamp(2.6rem,4.6vw,4.8rem)] mb-8">
               Keytom
               <br />
               Virtual Card
@@ -691,9 +691,9 @@ export function CardsContent() {
                 {features.map((feature, index) => (
                   <div
                     key={index}
-                    className="vc-item py-4 border-b border-[#b9c3ff95] last:border-b-0"
+                    className="vc-item py-4 border-b keytom-heading border-[#b9c3ff95] last:border-b-0"
                   >
-                    <div className="vc-header flex items-center lg:gap-4 md:gap-4 gap-2">
+                    <div className="vc-header flex keytom-heading items-center lg:gap-4 md:gap-4 gap-2">
                       <div className="inline-flex items-center gap-2 lg:px-4 px-3 lg:py-1 py-0 rounded-full border border-[#b9c4ff] text-[#3a57b5] font-semibold text-[0.8rem] lg:min-w-[56px] justify-center">
                         <span className="lg:w-2 lg:h-2 md:h-2 md:w-2 w-1 h-1 rounded-full bg-[#3a57b5]" />
                         <span>{feature.number}</span>

@@ -535,6 +535,9 @@ h1, h2, h3, h4, h5, h6, p, span, a, button {
 }
 
 @media (max-width: 900px) {
+  .keytom-heading{
+    font-weight: 400;
+  }
   .footer-lower__top {
     flex-direction: column;
     align-items: flex-start;
