@@ -555,6 +555,17 @@ export function CardsContent() {
               mobileShrinkStart,
             );
           }
+          if (isMobile && physicalImageRef.current) {
+            timeline.to(
+              physicalImageRef.current,
+              {
+                y: 0,
+                duration: containerShrinkDuration,
+                ease: "none",
+              },
+              mobileShrinkStart,
+            );
+          }
 
           return () => {
             timeline.scrollTrigger?.kill();
@@ -812,7 +823,7 @@ export function CardsContent() {
                 ref={physicalImageRef}
                 src="/assets/images/card3.png"
                 alt="Keytom card back"
-                className="w-full z-1 lg:hidden md:hidden rounded-[1px] absolute bottom-0 left-0 right-0"
+                className="w-full h-full z-1 lg:hidden md:hidden rounded-[1px] absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 object-contain"
               />
             </div>
 
