@@ -145,7 +145,7 @@ export default function NavBar() {
           {/* Mobile Menu Button */}
           {/* <MdOutlineLogout className="text-black" size={20} /> */}
 
-          <button className="px-6 navtext py-2 bg-[#38488B] text-white rounded-xs  text-sm hover:bg-opacity-90 transition-all duration-200 hover:scale-105">
+          <button className="px-4 navtext py-2 bg-[#38488B] text-white rounded-xs  text-xs hover:bg-opacity-90 transition-all duration-200 hover:scale-105">
             OPEN ACCOUNT
           </button>
           <div
