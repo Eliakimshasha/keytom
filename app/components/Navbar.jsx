@@ -9,7 +9,11 @@ import Image from "next/image";
 import logo from "../../public/assets/images/logo.png";
 import { useGSAP } from "@gsap/react";
 
-import { Select } from "antd";
+import dynamic from "next/dynamic";
+
+const Select = dynamic(() => import("antd").then((mod) => mod.Select), {
+  ssr: false,
+});
 
 const languageOptions = [
   { label: "EN", value: "en" },
@@ -80,7 +84,7 @@ export default function NavBar() {
     };
   }, { scope: headerRef });
 
-  const navItems = ["PERSONAL", "BUSINESS", "CARDS", "FAQ"];
+  const navItems = ["CONTACT", "BUSINESS", "CARDS", "FAQ"];
 
   return (
     <header
@@ -108,8 +112,8 @@ export default function NavBar() {
           {navItems.map((item, index) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
-              className="text-sm hover:text-gray-700 bg-white/10 rounded-xs px-4 py-2 backdrop-blur-md   text-[#38488B] transition-colors duration-200 font-medium tracking-wide"
+              href={`/${item.toLowerCase()}`}
+              className="text-sm hover:text-gray-700 bg-white/10 rounded-xs px-4 py-1 backdrop-blur-md   text-[#ffffff] transition-colors duration-200 font-light "
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {item}

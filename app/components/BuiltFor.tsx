@@ -30,7 +30,7 @@ export default function BuiltFor() {
   }, { dependencies: [activeTab], scope: sectionRef });
 
   const cardBase =
-    "builtfor-card relative overflow-hidden rounded-[3px] p-6 text-white shadow-[0_20px_40px_rgba(148,109,132,0.25)] max-[900px]:p-5 " +
+    "builtfor-card relative overflow-hidden rounded-[1px] p-6 text-white  max-[900px]:p-5 " +
     "bg-[linear-gradient(180deg,#9d7ba3_0%,#b58cab_45%,#d4a9a1_100%)]";
 
   return (

@@ -35,7 +35,6 @@ export default function Footer() {
 
   return (
     <footer
-      ref={footerRef}
       data-nav-theme="light"
       className="bg-[#3c56ab] text-white py-7 pb-10 max-[900px]:pt-0"
     >

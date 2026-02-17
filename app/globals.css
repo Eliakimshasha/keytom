@@ -393,6 +393,16 @@ h1, h2, h3, h4, h5, h6, p, span, a, button {
   background: radial-gradient(circle, rgba(122, 92, 255, 0.18), transparent 65%);
 }
 
+.intro-head{
+    font-weight: 400 !important;
+
+}
+
+.intro-heady{
+    font-weight: 500 !important;
+
+}
+
 .intro-headline {
   max-width: 1000px;
   margin: 0 auto;
