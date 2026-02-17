@@ -19,9 +19,9 @@ function Contact() {
             </h1>
           </div>
 
-          <div className="mt-6 hidden relative items-center gap-0 md:flex">
+          <div className="mt-6 flex relative items-center gap-0 md:flex">
             <span className="h-px flex-1 bg-[#cfd6ff]" />
-            <GiTireIronCross  className="h-4 w-4 rotate-[45deg] absolute -bottom-2 lg:left-1/3 lg:transform lg:-translate-x-1  bg-re-500" />
+            <GiTireIronCross  className="h-4 w-4 rotate-[45deg] text-[#cfd6ff] absolute -bottom-2 left-1/2 -translate-x-0.5 lg:left-1/3 transform lg:-translate-x-1  bg-re-500" />
             <span className="h-px flex-1 bg-[#cfd6ff]" />
           </div>
 
