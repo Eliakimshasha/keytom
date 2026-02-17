@@ -127,10 +127,12 @@ export function CardsContent() {
             return;
           }
 
+          const isMobile = window.matchMedia("(max-width: 900px)").matches;
+
           cardFlipRef.current.prepend(topCardRef.current);
           topCardRef.current.style.position = "absolute";
-          topCardRef.current.style.top = "7rem";
-          topCardRef.current.style.left = "-3px";
+          topCardRef.current.style.top = isMobile ? "0" : "7rem";
+          topCardRef.current.style.left = isMobile ? "0" : "-3px";
           topCardRef.current.style.width = "100%";
           topCardRef.current.style.backfaceVisibility = "hidden";
 
@@ -195,6 +197,7 @@ export function CardsContent() {
         );
 
         const buildTimeline = (stepPx: number) => {
+          const isMobile = window.matchMedia("(max-width: 900px)").matches;
           const itemStep = 1;
           const itemInDuration = 0.6;
           const descInDuration = 0.4;
@@ -211,7 +214,11 @@ export function CardsContent() {
               scrub: 1,
               onEnter: () => moveCardToFlip(),
               onEnterBack: () => moveCardToFlip(),
-              onLeave: () => moveCardToFixed(),
+              onLeave: () => {
+                if (!isMobile) {
+                  moveCardToFixed();
+                }
+              },
               onLeaveBack: () => moveCardToFixed(),
             },
           });
@@ -636,73 +643,75 @@ export function CardsContent() {
         </div>
 
         {/* Virtual Card Section */}
-        <div
+        <section
           ref={virtualSectionRef}
-          className="h-screen max-h-screen mx-auto px-12"
+          className="py-28 min-h-screen max-[900px]:py-20"
         >
-          <div className="flex justify-between">
-            <h1 className="flex-1 text-5xl mt-36 text-[#3a57b5]">
+          <div className="container mx-auto px-6">
+            <h2 className="text-[#3a57b5] relative z-50 font-semibold max-[900px]:text-[clamp(2rem,4vw,2rem)] text-[clamp(2.6rem,4.6vw,4.8rem)] mb-8">
               Keytom
               <br />
               Virtual Card
-            </h1>
+            </h2>
 
-            {/* Card Container */}
-            <div className="flex flex-1   items-center  justify-center h-64 min-h-105 max-[900px]:static max-[900px]:min-h-[180px] max-[900px]:max-h-[200px] max-[900px]:mb-0">
-              <div
-                className="relative w-[min(90%,460px)]  max-h-[320px] max-[900px]:w-[min(100%,340px)] max-[900px]:h-[240px]"
-                style={{ perspective: "1000px" }}
-              >
+            <div className="grid grid-cols-[1.05fr_1fr] gap-12 items-start max-[900px]:grid-cols-1 max-[900px]:gap-0">
+              {/* Card Container */}
+              <div className="flex items-center justify-center min-h-105 sticky top-20 max-[900px]:static max-[900px]:min-h-[180px] max-[900px]:max-h-[200px] max-[900px]:mb-0">
                 <div
-                  ref={cardFlipRef}
-                  className="relative w-[min(70vw,360px)] h-[320px] max-[900px]:h-[240px]"
-                  style={{
-                    transformStyle: "preserve-3d",
-                    willChange: "transform",
-                  }}
+                  className="relative w-[min(90%,460px)] h-[320px] max-[900px]:w-[min(100%,340px)] max-[900px]:h-[240px]"
+                  style={{ perspective: "1000px" }}
                 >
-                  <img
-                    ref={card2Ref}
-                    src="/assets/images/card1.jpeg"
-                    alt="Keytom card back"
-                    className="w-full z-40 max-[900px]:h-47.5 -rotate-5 rounded-[1px] absolute top-26 left-0"
+                  <div
+                    ref={cardFlipRef}
+                    className="relative w-full lg:h-full md:h-full h-fit"
                     style={{
-                      backfaceVisibility: "hidden",
-                      transform: "rotateY(180deg)",
+                      transformStyle: "preserve-3d",
+                      willChange: "transform",
                     }}
-                  />
+                  >
+                    <img
+                      ref={card2Ref}
+                      src="/assets/images/card1.jpeg"
+                      alt="Keytom card back"
+                      className="w-full z-40 max-[900px]:h-47.5 -rotate-5 rounded-[1px] absolute top-26 left-0 max-[900px]:top-0 max-[900px]:left-0"
+                      style={{
+                        backfaceVisibility: "hidden",
+                        transform: "rotateY(180deg)",
+                      }}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Features List */}
-            <div
-              ref={featuresRef}
-              className="overflow-hidden mt-36 flex-1 relative max-[900px]:overflow-visible"
-            >
-              {features.map((feature, index) => (
-                <div
-                  key={index}
-                  className="vc-item py-4 border-b border-[#b9c3ff95] last:border-b-0"
-                >
-                  <div className="vc-header flex items-center lg:gap-4 md:gap-4 gap-2">
-                    <div className="inline-flex items-center gap-2 lg:px-4 px-3 lg:py-1 py-0 rounded-full border border-[#b9c4ff] text-[#3a57b5] font-semibold text-[0.8rem] lg:min-w-[56px] justify-center">
-                      <span className="lg:w-2 lg:h-2 md:h-2 md:w-2 w-1 h-1 rounded-full bg-[#3a57b5]" />
-                      <span>{feature.number}</span>
+              {/* Features List */}
+              <div
+                ref={featuresRef}
+                className="overflow-hidden relative max-[900px]:overflow-visible"
+              >
+                {features.map((feature, index) => (
+                  <div
+                    key={index}
+                    className="vc-item py-4 border-b border-[#b9c3ff95] last:border-b-0"
+                  >
+                    <div className="vc-header flex items-center lg:gap-4 md:gap-4 gap-2">
+                      <div className="inline-flex items-center gap-2 lg:px-4 px-3 lg:py-1 py-0 rounded-full border border-[#b9c4ff] text-[#3a57b5] font-semibold text-[0.8rem] lg:min-w-[56px] justify-center">
+                        <span className="lg:w-2 lg:h-2 md:h-2 md:w-2 w-1 h-1 rounded-full bg-[#3a57b5]" />
+                        <span>{feature.number}</span>
+                      </div>
+                      <h3 className="text-[1rem] max-[900px]:text-[1rem] font-semibold text-[#3a57b5]">
+                        {feature.title}
+                      </h3>
                     </div>
-                    <h3 className="text-[1rem] max-[900px]:text-[1rem] font-semibold text-[#3a57b5]">
-                      {feature.title}
-                    </h3>
-                  </div>
 
-                  <p className="vc-desc lg:ml-18 ml-13 mt-2 lg:text-[0.7rem] text-[0.7rem] leading-snug text-[#4b5fc0]">
-                    {feature.description}
-                  </p>
-                </div>
-              ))}
+                    <p className="vc-desc lg:ml-18 ml-13 mt-2 lg:text-[0.7rem] text-[0.7rem] leading-snug text-[#4b5fc0]">
+                      {feature.description}
+                    </p>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        </section>
 
         <div
           ref={CardSectionRef}
